@@ -1,0 +1,74 @@
+version: '2.1'
+services:
+
+  base:
+    build:
+      context: ../..
+      dockerfile: ci/docker/Dockerfile.base
+    image: vinhvo:base
+
+  web:
+    build:
+      context: ../..
+      dockerfile: ci/docker/Dockerfile.local
+      args:
+        hostUID: 1000
+        hostGID: 1000
+    image: vinhvo-web
+    hostname: vinhvo-web
+    container_name: vinhvo-web
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      APP_ENV: local
+      PHP_IDE_CONFIG: serverName=vinhvo.docker
+      COMPOSER_HOME: /home/www/.composer
+    labels:
+      SERVICE_NAME: vinhvo-web
+      SERVICE_80_NAME: vinhvo-web
+      SERVICE_443_NAME: vinhvo-web
+    volumes:
+    - ../../:/home/www/app
+    - ~/.composer:/home/www/.composer
+
+  db:
+    image: mysql:5.7
+    hostname: vinhvo-db
+    container_name: vinhvo-db
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: vinhvo
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+    labels:
+      SERVICE_NAME: vinhvo-db
+      SERVICE_3306_NAME: vinhvo-db
+      SERVICE_33060_NAME: vinhvo-db
+    healthcheck:
+      test: "/usr/bin/mysql --user=user --password=secret --execute \"SHOW DATABASES;\""
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:alpine
+    container_name: vinhvo-redis
+    labels:
+      SERVICE_NAME: vinhvo-redis
+
+  mailcatcher:
+    image: tophfr/mailcatcher
+    container_name: vinhvo-mailcatcher
+    hostname: vinhvo-mail
+    ports: [25, 80]
+    labels:
+      SERVICE_NAME: vinhvo-mail
+      SERVICE_25_NAME: vinhvo-mail
+      SERVICE_80_NAME: vinhvo-mail
+
+networks:
+  default:
+    name:  vinhvo_default

@@ -1,0 +1,12 @@
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = vinhvo
+DNS.2 = vinhvo-web.service.docker
+DNS.3 = vinhvo-api.service.docker
+DNS.4 = vinhvo.lo
+DNS.5 = vinhvo.dev
+DNS.6 = vinhvo.local

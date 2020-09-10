@@ -1,0 +1,30 @@
+version: '2.1'
+
+services:
+
+  tests:
+    image: vinhvo-web
+    hostname: vinhvo-backend
+    container_name: vinhvo-backend-tests
+    entrypoint: tools/autotest.sh
+    depends_on:
+      - db
+    environment:
+      APP_ENV: testing
+      PHP_IDE_CONFIG: serverName=vinhvo.docker
+    volumes:
+      - ../../:/home/www/app/
+
+  db:
+    image: mysql:5.7
+    hostname: vinhvo-testdb
+    container_name: vinhvo-testdb
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: vinhvo
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+
+networks:
+  default:
+    name:  vinhvo_tests

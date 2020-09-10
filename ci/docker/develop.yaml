@@ -1,0 +1,36 @@
+version: '2'
+services:
+
+  backend:
+    image: registry.saritasa.com/vinhvo-backend:develop
+    hostname: vinhvo-dev
+    container_name: vinhvo-develop
+    mem_limit: 536870912
+    expose:
+    - 80
+    environment:
+    - APP_ENV=development
+    labels:
+      io.rancher.container.network: 'true'
+      io.rancher.container.pull_image: always
+      SERVICE_TAGS: traefik.frontend.rule=Host:vinhvo.saritasa-hosting.com,traefik.tags=app,traefik.web.loadbalancer=drr
+      SERVICE_NAME: vinhvo-backend-develop
+    stdin_open: true
+    tty: true
+
+#  mockserver:
+#    image: docker.saritasa.com/alpine-mockserver:0.6
+#    hostname: vinhvo-mockserver
+#    container_name: vinhvo-mockserver
+#    mem_limit: 536870912
+#    expose:
+#    - 8000
+#    environment:
+#    - SWAGGER_FILE_URL=https://apidocs.saritasa-hosting.com/vinhvo/develop/vinhvo-latest.yaml
+#    labels:
+#      io.rancher.container.network: 'true'
+#      io.rancher.container.pull_image: always
+#      SERVICE_TAGS: traefik.frontend.rule=Host:vinhvo-mockserver.saritasa-hosting.com,traefik.tags=app,traefik.web.loadbalancer=drr
+#      SERVICE_NAME: vinhvo-mockserver
+#    stdin_open: true
+#    tty: true
