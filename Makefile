@@ -45,16 +45,16 @@ test2:
 	docker-compose -f ci/docker/testing_local.yml -p vinhvo_tests down
 
 static:
-	yarn run development
+	ci/yarn run development
 
 watch:
-	yarn run watch
+	ci/yarn run watch
 
 lint:
-	yarn run lint
+	ci/yarn run lint
 
 lintfix:
-	yarn run lint:fix
+	ci/yarn run lint:fix
 
 swagger:
 	npx swagger-cli validate docs/API/index.yaml
