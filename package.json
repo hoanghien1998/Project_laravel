@@ -24,7 +24,10 @@
     "imports": "^1.0.0",
     "laravel-mix": "^4.0.7",
     "lodash": "^4.17.4",
-    "swagger-ui-dist": "^3.23.1"
+    "swagger-ui-dist": "^3.23.1",
+    "vue": "^2.6.12",
+    "vue-router": "^3.4.3",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

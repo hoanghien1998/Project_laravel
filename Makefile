@@ -62,3 +62,6 @@ swagger:
 
 ip:
 	docker inspect vinhvo-web | grep \"IPAddress\"
+
+ipdb:
+	docker inspect vinhvo-db | grep \"IPAddress\"

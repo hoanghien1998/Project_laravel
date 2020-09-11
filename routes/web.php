@@ -26,4 +26,3 @@ $router->namespace('App\\Http\\Controllers')->group(function() {
 $router->get('/swagger', SwaggerController::class."@index");
 $router->get('/apidocs', SwaggerController::class."@apidocs");
 $router->any('/', HomeController::class . '@index');
-

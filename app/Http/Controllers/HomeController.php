@@ -15,10 +15,9 @@ class HomeController extends BaseController
      * On Local and Dev environment, redirect to API documentation.
      * Otherwise (staging, production) redirect to frontend URL from config.
      *
-     * @return RedirectResponse
      */
-    public function index(): RedirectResponse
+    public function index()
     {
-        return redirect()->to(App::environment('local', 'development') ? 'apidocs' : config('app.url'));
+        return view('home/index');
     }
 }
