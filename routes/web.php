@@ -11,7 +11,7 @@
 |
 */
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SPAController;
 use App\Http\Controllers\SwaggerController;
 
 $router = app('router');
@@ -25,4 +25,4 @@ $router->namespace('App\\Http\\Controllers')->group(function() {
 
 $router->get('/swagger', SwaggerController::class."@index");
 $router->get('/apidocs', SwaggerController::class."@apidocs");
-$router->any('/', HomeController::class . '@index');
+$router->any('/{any}', SPAController::class.'@index')->where('any', '.*');

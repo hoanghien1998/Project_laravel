@@ -1,30 +1,37 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 
-Vue.use(VueRouter)
+import App from './views/App.vue';
+import Hello from './views/Hello.vue';
+import Home from './views/Home.vue';
 
-import App from './views/App'
-import Hello from './views/Hello'
-import Home from './views/Home'
+// Install BootstrapVue
+Vue.use(BootstrapVue);
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin);
+// Vue Router
+Vue.use(VueRouter);
 
 const router = new VueRouter({
-  mode: 'history',
+  mode:   'history',
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path:      '/',
+      name:      'home',
+      component: Home,
     },
     {
-      path: '/hello',
-      name: 'hello',
+      path:      '/hello',
+      name:      'hello',
       component: Hello,
     },
   ],
 });
 
+// eslint-disable-next-line no-unused-vars
 const app = new Vue({
-  el: '#app',
+  el:         '#app',
   components: { App },
   router,
 });

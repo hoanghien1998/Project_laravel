@@ -6,7 +6,7 @@ module.exports = {
   extends: [
     'plugin:vue/essential',
     'plugin:vue/recommended',
-    '@vue/eslint-config-airbnb',
+    'airbnb-base',
   ],
   rules: {
     'import/extensions': [ 'error', 'always', {

@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Exceptions\ApiExceptionHandler;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
