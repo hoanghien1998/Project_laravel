@@ -2,7 +2,8 @@
   <nav id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
-    <router-link to="/contact">Contact</router-link>
+    <router-link to="/auth">Login</router-link> |
+    <router-link to="/signup">Signup</router-link>
   </nav>
 </template>
 
