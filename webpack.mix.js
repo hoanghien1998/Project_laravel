@@ -18,6 +18,9 @@ const extendedConfig = {
   resolve: {
     extensions: [ '.js', '.vue', '.json', '.scss' ],
     modules:    [ appDir, 'node_modules' ],
+    alias:      {
+      '@': appDir,
+    },
   },
   module: {
     rules: [
@@ -45,4 +48,4 @@ if (!mix.inProduction()) {
   mix.sourceMaps();
 }
 
-// mix.webpackConfig(extendedConfig);
+mix.webpackConfig(extendedConfig);

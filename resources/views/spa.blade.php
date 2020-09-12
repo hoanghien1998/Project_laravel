@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Vue SPA</title>
+    <link media="all" type="text/css" rel="stylesheet" href="{{ mix('/assets/styles/app.css') }}">
 </head>
 <body>
 <noscript>
