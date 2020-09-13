@@ -1,34 +1,41 @@
 <template>
-  <div class="vue-template fixed-top d-flex align-items-center justify-content-center form-middle">
-    <form>
-      <h3>Sign Up</h3>
+  <div class="container fixed-top justify-content-center justify-form-middle">
+    <div class="d-flex justify-content-center h-100">
+      <div class="user_card signup-box">
+        <div class="d-flex justify-content-center">
+          <h2>Sign Up</h2>
+        </div>
 
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text"
-               class="form-control form-control-lg">
+        <div class="d-flex justify-content-center">
+          <form>
+            <b-form-group class="mb-3">
+              <label>Full Name</label>
+              <b-form-input placeholder="Full name"
+                            class="input_user"/>
+            </b-form-group>
+            <b-form-group class="mb-3">
+              <label>Email</label>
+              <b-form-input placeholder="Email"
+                            class="input_user"/>
+            </b-form-group>
+            <b-form-group class="mb-3">
+              <label>Password</label>
+              <b-form-input type="password"
+                            placeholder="Password"
+                            class="input_user"/>
+            </b-form-group>
+            <b-button variant="danger"
+                      class="mt-3">Signup</b-button>
+          </form>
+        </div>
+
+        <div class="mt-4">
+          <div class="d-flex justify-content-center links">
+            Already registered&nbsp;<router-link to="/auth">Sign in?</router-link>
+          </div>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label>Email address</label>
-        <input type="email"
-               class="form-control form-control-lg" >
-      </div>
-
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password"
-               class="form-control form-control-lg" >
-      </div>
-
-      <button type="submit"
-              class="btn btn-dark btn-lg btn-block">Sign Up</button>
-
-      <p class="forgot-password text-right">
-        Already registered
-        <router-link :to="{name: 'login'}">sign in?</router-link>
-      </p>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -39,3 +46,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.signup-box {
+  height: 430px;
+}
+</style>

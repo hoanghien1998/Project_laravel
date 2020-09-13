@@ -1,36 +1,65 @@
 <template>
-  <div class="vue-template fixed-top d-flex align-items-center justify-content-center form-middle">
-    <form>
-      <h3>Sign In</h3>
+  <div class="container fixed-top justify-content-center justify-form-middle">
+    <div class="d-flex justify-content-center h-100">
+      <div class="user_card">
+        <div class="d-flex justify-content-center">
+          <div class="brand_logo_container">
+            <img src="https://cdn.freebiesupply.com/logos/large/2x/pinterest-circle-logo-png-transparent.png"
+                 class="brand_logo"
+                 alt="Logo">
+          </div>
+        </div>
+        <div class="d-flex justify-content-center form_container">
+          <form>
+            <b-form-group class="mb-3">
+              <b-input-group>
+                <b-input-group-prepend>
+                  <span class="input-group-text">
+                    <font-awesome-icon icon="user" />
+                  </span>
+                </b-input-group-prepend>
+                <b-form-input placeholder="username"
+                              class="input_user"/>
+              </b-input-group>
+            </b-form-group>
+            <b-form-group class="mb-2">
+              <b-input-group>
+                <b-input-group-prepend>
+                  <span class="input-group-text">
+                    <font-awesome-icon icon="key" />
+                  </span>
+                </b-input-group-prepend>
+                <b-form-input type="password"
+                              placeholder="password"
+                              class="input_user"/>
+              </b-input-group>
+            </b-form-group>
+            <b-form-checkbox
+              id="checkbox-1"
+              name="checkbox-1"
+              value="accepted"
+              unchecked-value="not_accepted"
+            >
+              Remember me
+            </b-form-checkbox>
+            <b-button variant="danger"
+                      class="mt-3">Login</b-button>
+          </form>
+        </div>
 
-      <div class="form-group">
-        <label>Email address</label>
-        <input type="email"
-               class="form-control form-control-lg" >
+        <div class="mt-4">
+          <div class="d-flex justify-content-center links">
+            Don't have an account?
+            <router-link to="/signup"
+                         class="ml-2">Signup</router-link>
+          </div>
+          <div class="d-flex justify-content-center links">
+            <router-link to="/forgot-password"
+                         class="ml-2">Forgot your password?</router-link>
+          </div>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password"
-               class="form-control form-control-lg" >
-      </div>
-
-      <button type="submit"
-              class="btn btn-dark btn-lg btn-block">Sign In</button>
-
-      <p class="forgot-password text-right mt-2 mb-4">
-        <router-link to="/forgot-password">Forgot password ?</router-link>
-      </p>
-
-      <div class="social-icons">
-        <ul>
-          <li><a href="#"><i class="fa fa-google"/></a></li>
-          <li><a href="#"><i class="fa fa-facebook"/></a></li>
-          <li><a href="#"><i class="fa fa-twitter"/></a></li>
-        </ul>
-      </div>
-
-    </form>
+    </div>
   </div>
 </template>
 
@@ -41,3 +70,7 @@ export default {
   },
 };
 </script>
+
+<style>
+
+</style>

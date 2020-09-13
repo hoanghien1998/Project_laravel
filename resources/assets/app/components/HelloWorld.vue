@@ -1,58 +1,68 @@
 <template>
   <div class="hello">
     <h2 data-vel="subheader">{{ msg }}</h2>
-    <p>
-      For guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org"
-         target="_blank"
-         rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-             target="_blank"
-             rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-             target="_blank"
-             rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org"
-             target="_blank"
-             rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org"
-             target="_blank"
-             rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org"
-             target="_blank"
-             rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs"
-             target="_blank"
-             rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org"
-             target="_blank"
-             rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org"
-             target="_blank"
-             rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org"
-             target="_blank"
-             rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools"
-             target="_blank"
-             rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org"
-             target="_blank"
-             rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue"
-             target="_blank"
-             rel="noopener">awesome-vue</a></li>
-    </ul>
+    <b-alert show
+             dismissible
+             variant="default">
+      <span class="alert-icon"><i class="ni ni-like-2"/></span>
+      <span class="alert-text">
+        <strong>Default!</strong> This is a default alert—check it out!
+      </span>
+    </b-alert>
+
+    <b-alert show
+             dismissible
+             variant="primary">
+      <span class="alert-icon"><i class="ni ni-like-2"/></span>
+      <span class="alert-text">
+        <strong>Primary!</strong> This is a primary alert—check it out!
+      </span>
+    </b-alert>
+
+    <b-alert show
+             dismissible
+             variant="secondary">
+      <span class="alert-icon"><i class="ni ni-like-2"/></span>
+      <span class="alert-text">
+        <strong>Secondary!</strong> This is a secondary alert—check it out!
+      </span>
+    </b-alert>
+
+    <b-alert show
+             dismissible
+             variant="info">
+      <span class="alert-icon"><i class="ni ni-like-2"/></span>
+      <span class="alert-text">
+        <strong>Info!</strong> This is a info alert—check it out!
+      </span>
+    </b-alert>
+
+    <b-alert show
+             dismissible
+             variant="success">
+      <span class="alert-icon"><i class="ni ni-like-2"/></span>
+      <span class="alert-text">
+        <strong>Success!</strong> This is a success alert—check it out!
+      </span>
+    </b-alert>
+
+    <b-alert show
+             dismissible
+             variant="danger">
+      <span class="alert-icon"><i class="ni ni-like-2"/></span>
+      <span class="alert-text">
+        <strong>Danger!</strong> This is a danger alert—check it out!
+      </span>
+    </b-alert>
+
+    <b-alert show
+             dismissible
+             variant="warning">
+      <span class="alert-icon"><i class="ni ni-like-2"/></span>
+      <span class="alert-text">
+        <strong>Warning!</strong> This is a warning alert—check it out!
+      </span>
+    </b-alert>
   </div>
 </template>
 
