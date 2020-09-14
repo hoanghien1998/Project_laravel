@@ -1,5 +1,6 @@
 # Tools Specific files
 .idea/
+*.iml
 .phpstorm.meta.php
 _ide_helper.php
 .vscode/
