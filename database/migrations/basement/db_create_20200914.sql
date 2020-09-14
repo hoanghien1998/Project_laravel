@@ -9,7 +9,7 @@ SET FOREIGN_KEY_CHECKS=0;
 # -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `car_makes` (
-  `id` INT(10) UNSIGNED NOT NULL,
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -20,7 +20,7 @@ ENGINE = InnoDB;
 # -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `car_models` (
-  `id` INT(10) UNSIGNED NOT NULL,
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `make_id` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(255) NULL,
   `year_start` INT(10) UNSIGNED NOT NULL,
@@ -41,7 +41,7 @@ CREATE INDEX `fk_CarModels_1_idx` ON `car_models` (`make_id` ASC)
 # -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `car_trims` (
-  `id` INT(10) UNSIGNED NOT NULL,
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `model_id` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),

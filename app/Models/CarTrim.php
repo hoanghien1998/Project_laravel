@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $model_id
  * @property string $name
  *
- * @property CarModel $car_model
+ * @property CarModel $carModel
  * @property Collection|Listing[] $listings
  *
  * @package App\Models
@@ -31,13 +31,6 @@ class CarTrim extends Model
      * @var string
      */
     protected $table = 'car_trims';
-
-    /**
-     * Incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
 
     /**
      * Timestamp.

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\CarMake;
+use App\Models\CarModel;
 use App\Models\User;
 use Faker\Generator;
 use Illuminate\Database\Eloquent\Factory;
@@ -27,5 +29,20 @@ $factory->define(User::class, function (Generator $faker) {
         'email' => $faker->safeEmail,
         'password' => '123456',
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(CarMake::class, function (Generator $faker) {
+    return [
+        CarMake::NAME => $faker->name,
+    ];
+});
+
+$factory->define(CarModel::class, function (Generator $faker) {
+    $year = intval($faker->year);
+    return [
+        CarModel::NAME => $faker->name,
+        CarModel::YEAR_START => $year,
+        CarModel::YEAR_END => $year + random_int(1, 10),
     ];
 });

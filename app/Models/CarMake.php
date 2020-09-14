@@ -16,25 +16,22 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $id
  * @property string|null $name
  *
- * @property Collection|CarModel[] $car_models
+ * @property Collection|CarModel[] $carModels
  *
  * @package App\Models
  */
 class CarMake extends Model
 {
+    public const TABLE_NAME = 'car_makes';
+    public const ID = 'id';
+    public const NAME = 'name';
+
     /**
      * Table name.
      *
      * @var string
      */
-    protected $table = 'car_makes';
-
-    /**
-     * Incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
+    protected $table = self::TABLE_NAME;
 
     /**
      * Timestamp.
@@ -49,7 +46,7 @@ class CarMake extends Model
      * @var string[]
      */
     protected $casts = [
-        'id' => 'int',
+        self::ID => 'int',
     ];
 
     /**
@@ -58,7 +55,7 @@ class CarMake extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        self::NAME,
     ];
 
     /**
@@ -68,6 +65,6 @@ class CarMake extends Model
      */
     public function carModels(): HasMany
     {
-        return $this->hasMany(CarModel::class, 'make_id');
+        return $this->hasMany(CarModel::class, CarModel::MAKE_ID);
     }
 }

@@ -20,27 +20,27 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $year_start
  * @property int|null $year_end
  *
- * @property CarMake $car_make
- * @property Collection|CarTrim[] $car_trims
+ * @property CarMake $carMake
+ * @property Collection|CarTrim[] $carTrims
  * @property Collection|Listing[] $listings
  *
  * @package App\Models
  */
 class CarModel extends Model
 {
+    public const TABLE_NAME = 'car_models';
+    public const ID = 'id';
+    public const MAKE_ID = 'make_id';
+    public const NAME = 'name';
+    public const YEAR_START = 'year_start';
+    public const YEAR_END = 'year_end';
+
     /**
      * Table name.
      *
      * @var string
      */
-    protected $table = 'car_models';
-
-    /**
-     * Incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
+    protected $table = self::TABLE_NAME;
 
     /**
      * Timestamp.
@@ -55,10 +55,10 @@ class CarModel extends Model
      * @var string[]
      */
     protected $casts = [
-        'id' => 'int',
-        'make_id' => 'int',
-        'year_start' => 'int',
-        'year_end' => 'int',
+        self::ID => 'int',
+        self::MAKE_ID => 'int',
+        self::YEAR_START => 'int',
+        self::YEAR_END => 'int',
     ];
 
     /**
@@ -67,10 +67,10 @@ class CarModel extends Model
      * @var string[]
      */
     protected $fillable = [
-        'make_id',
-        'name',
-        'year_start',
-        'year_end',
+        self::MAKE_ID,
+        self::NAME,
+        self::YEAR_START,
+        self::YEAR_END,
     ];
 
     /**
@@ -80,7 +80,7 @@ class CarModel extends Model
      */
     public function carMake(): BelongsTo
     {
-        return $this->belongsTo(CarMake::class, 'make_id');
+        return $this->belongsTo(CarMake::class, self::MAKE_ID);
     }
 
     /**

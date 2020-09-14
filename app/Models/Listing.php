@@ -24,8 +24,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  *
- * @property CarModel $car_model
- * @property CarTrim $car_trim
+ * @property CarModel $carModel
+ * @property CarTrim $carTrim
  * @property Collection|Document[] $documents
  *
  * @package App\Models
