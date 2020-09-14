@@ -156,6 +156,7 @@ return [
         App\Providers\HorizonServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Reliese\Coders\CodersServiceProvider::class,
     ],
 
     /*
