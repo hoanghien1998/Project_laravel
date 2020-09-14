@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Media
- * 
+ *
  * @property int $id
  * @property string|null $thumbnail
  * @property string $full
@@ -22,19 +22,40 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Media extends Model
 {
-	protected $table = 'medias';
-	public $timestamps = false;
+    /**
+     * Table name.
+     *
+     * @var string
+     */
+    protected $table = 'medias';
 
-	protected $casts = [
-		'sequence' => 'int',
-		'mediable_id' => 'int'
-	];
+    /**
+     * Timestamp.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
-	protected $fillable = [
-		'thumbnail',
-		'full',
-		'sequence',
-		'mediable_id',
-		'mediable_type'
-	];
+    /**
+     * Casted fields.
+     *
+     * @var string[]
+     */
+    protected $casts = [
+        'sequence' => 'int',
+        'mediable_id' => 'int',
+    ];
+
+    /**
+     * Fill able fields.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'thumbnail',
+        'full',
+        'sequence',
+        'mediable_id',
+        'mediable_type',
+    ];
 }

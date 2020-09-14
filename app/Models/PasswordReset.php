@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class PasswordReset
- * 
+ *
  * @property string $email
  * @property string $token
  * @property Carbon|null $created_at
@@ -20,16 +20,43 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PasswordReset extends Model
 {
-	protected $table = 'password_resets';
-	public $incrementing = false;
-	public $timestamps = false;
+    /**
+     * Table name.
+     *
+     * @var string
+     */
+    protected $table = 'password_resets';
 
-	protected $hidden = [
-		'token'
-	];
+    /**
+     * Incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
 
-	protected $fillable = [
-		'email',
-		'token'
-	];
+    /**
+     * Timestamp.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * Hidden fields.
+     *
+     * @var string[]
+     */
+    protected $hidden = [
+        'token',
+    ];
+
+    /**
+     * Fill able fields.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'email',
+        'token',
+    ];
 }

@@ -8,16 +8,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class CarModel
- * 
+ *
  * @property int $id
  * @property int $make_id
  * @property string|null $name
  * @property int $year_start
  * @property int|null $year_end
- * 
+ *
  * @property CarMake $car_make
  * @property Collection|CarTrim[] $car_trims
  * @property Collection|Listing[] $listings
@@ -26,36 +28,78 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CarModel extends Model
 {
-	protected $table = 'car_models';
-	public $incrementing = false;
-	public $timestamps = false;
+    /**
+     * Table name.
+     *
+     * @var string
+     */
+    protected $table = 'car_models';
 
-	protected $casts = [
-		'id' => 'int',
-		'make_id' => 'int',
-		'year_start' => 'int',
-		'year_end' => 'int'
-	];
+    /**
+     * Incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
 
-	protected $fillable = [
-		'make_id',
-		'name',
-		'year_start',
-		'year_end'
-	];
+    /**
+     * Timestamp.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
-	public function car_make()
-	{
-		return $this->belongsTo(CarMake::class, 'make_id');
-	}
+    /**
+     * Casted fields.
+     *
+     * @var string[]
+     */
+    protected $casts = [
+        'id' => 'int',
+        'make_id' => 'int',
+        'year_start' => 'int',
+        'year_end' => 'int',
+    ];
 
-	public function car_trims()
-	{
-		return $this->hasMany(CarTrim::class, 'model_id');
-	}
+    /**
+     * Fill able fields.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'make_id',
+        'name',
+        'year_start',
+        'year_end',
+    ];
 
-	public function listings()
-	{
-		return $this->hasMany(Listing::class);
-	}
+    /**
+     * Get Car make.
+     *
+     * @return BelongsTo
+     */
+    public function carMake(): BelongsTo
+    {
+        return $this->belongsTo(CarMake::class, 'make_id');
+    }
+
+    /**
+     * Get all Car trims.
+     *
+     * @return HasMany
+     */
+    public function carTrims(): HasMany
+    {
+        return $this->hasMany(CarTrim::class, 'model_id');
+    }
+
+    /**
+     * Get all listings.
+     *
+     * @return HasMany
+     */
+    public function listings(): HasMany
+    {
+        return $this->hasMany(Listing::class, 'model_id');
+    }
 }

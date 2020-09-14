@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Comment
- * 
+ *
  * @property int $id
  * @property string|null $object_name
  * @property int|null $object_id
@@ -23,15 +23,30 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Comment extends Model
 {
-	protected $table = 'comments';
+    /**
+     * Table name.
+     *
+     * @var string
+     */
+    protected $table = 'comments';
 
-	protected $casts = [
-		'object_id' => 'int'
-	];
+    /**
+     * Casted fields.
+     *
+     * @var string[]
+     */
+    protected $casts = [
+        'object_id' => 'int',
+    ];
 
-	protected $fillable = [
-		'object_name',
-		'object_id',
-		'message'
-	];
+    /**
+     * Fill able fields.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'object_name',
+        'object_id',
+        'message',
+    ];
 }

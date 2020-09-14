@@ -9,7 +9,7 @@ class DBUtils
      *
      * @param string $fileName Sql filename to parse
      *
-     * @return array Sql queries
+     * @return array|string[] Sql queries
      */
     public static function parseMultiSqlFile(string $fileName): array
     {
