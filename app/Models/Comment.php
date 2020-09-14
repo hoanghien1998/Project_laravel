@@ -13,33 +13,25 @@ use Illuminate\Database\Eloquent\Model;
  * Class Comment
  * 
  * @property int $id
- * @property string|null $objectName
- * @property int|null $objectId
+ * @property string|null $object_name
+ * @property int|null $object_id
  * @property string $message
- * @property Carbon $createdAt
- * @property Carbon $updatedAt
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  *
  * @package App\Models
  */
 class Comment extends Model
 {
 	protected $table = 'comments';
-	public $timestamps = false;
 
 	protected $casts = [
-		'objectId' => 'int'
-	];
-
-	protected $dates = [
-		'createdAt',
-		'updatedAt'
+		'object_id' => 'int'
 	];
 
 	protected $fillable = [
-		'objectName',
-		'objectId',
-		'message',
-		'createdAt',
-		'updatedAt'
+		'object_name',
+		'object_id',
+		'message'
 	];
 }

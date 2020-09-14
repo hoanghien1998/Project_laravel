@@ -13,11 +13,11 @@ use Illuminate\Database\Eloquent\Model;
  * Class Document
  * 
  * @property int $id
- * @property int|null $listingId
+ * @property int|null $listing_id
  * @property string $group
  * @property int|null $sequence
- * @property Carbon $createdAt
- * @property Carbon $updatedAt
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * 
  * @property Listing $listing
  *
@@ -26,28 +26,20 @@ use Illuminate\Database\Eloquent\Model;
 class Document extends Model
 {
 	protected $table = 'documents';
-	public $timestamps = false;
 
 	protected $casts = [
-		'listingId' => 'int',
+		'listing_id' => 'int',
 		'sequence' => 'int'
 	];
 
-	protected $dates = [
-		'createdAt',
-		'updatedAt'
-	];
-
 	protected $fillable = [
-		'listingId',
+		'listing_id',
 		'group',
-		'sequence',
-		'createdAt',
-		'updatedAt'
+		'sequence'
 	];
 
 	public function listing()
 	{
-		return $this->belongsTo(Listing::class, 'listingId');
+		return $this->belongsTo(Listing::class);
 	}
 }

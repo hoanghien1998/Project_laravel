@@ -9,18 +9,19 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Listing
- * 
+ *
  * @property int $id
- * @property int $carModelId
- * @property int $carTrimId
+ * @property int $car_model_id
+ * @property int $car_trim_id
  * @property int $year
- * @property Carbon $createdAt
- * @property Carbon $updatedAt
- * @property Carbon|null $deletedAt
- * 
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon|null $deleted_at
+ *
  * @property CarModel $car_model
  * @property CarTrim $car_trim
  * @property Collection|Document[] $documents
@@ -29,42 +30,33 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Listing extends Model
 {
+	use SoftDeletes;
 	protected $table = 'listings';
-	public $timestamps = false;
 
 	protected $casts = [
-		'carModelId' => 'int',
-		'carTrimId' => 'int',
+		'car_model_id' => 'int',
+		'car_trim_id' => 'int',
 		'year' => 'int'
 	];
 
-	protected $dates = [
-		'createdAt',
-		'updatedAt',
-		'deletedAt'
-	];
-
 	protected $fillable = [
-		'carModelId',
-		'carTrimId',
-		'year',
-		'createdAt',
-		'updatedAt',
-		'deletedAt'
+		'car_model_id',
+		'car_trim_id',
+		'year'
 	];
 
 	public function car_model()
 	{
-		return $this->belongsTo(CarModel::class, 'carModelId');
+		return $this->belongsTo(CarModel::class);
 	}
 
 	public function car_trim()
 	{
-		return $this->belongsTo(CarTrim::class, 'carTrimId');
+		return $this->belongsTo(CarTrim::class);
 	}
 
 	public function documents()
 	{
-		return $this->hasMany(Document::class, 'listingId');
+		return $this->hasMany(Document::class);
 	}
 }

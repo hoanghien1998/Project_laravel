@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class CarTrim
  * 
  * @property int $id
- * @property int $modelId
+ * @property int $model_id
  * @property string $name
  * 
  * @property CarModel $car_model
@@ -29,21 +29,21 @@ class CarTrim extends Model
 
 	protected $casts = [
 		'id' => 'int',
-		'modelId' => 'int'
+		'model_id' => 'int'
 	];
 
 	protected $fillable = [
-		'modelId',
+		'model_id',
 		'name'
 	];
 
 	public function car_model()
 	{
-		return $this->belongsTo(CarModel::class, 'modelId');
+		return $this->belongsTo(CarModel::class, 'model_id');
 	}
 
 	public function listings()
 	{
-		return $this->hasMany(Listing::class, 'carTrimId');
+		return $this->hasMany(Listing::class);
 	}
 }

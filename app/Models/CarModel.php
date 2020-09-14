@@ -13,10 +13,10 @@ use Illuminate\Database\Eloquent\Model;
  * Class CarModel
  * 
  * @property int $id
- * @property int $makeId
+ * @property int $make_id
  * @property string|null $name
- * @property int $yearStart
- * @property int|null $yearEnd
+ * @property int $year_start
+ * @property int|null $year_end
  * 
  * @property CarMake $car_make
  * @property Collection|CarTrim[] $car_trims
@@ -32,30 +32,30 @@ class CarModel extends Model
 
 	protected $casts = [
 		'id' => 'int',
-		'makeId' => 'int',
-		'yearStart' => 'int',
-		'yearEnd' => 'int'
+		'make_id' => 'int',
+		'year_start' => 'int',
+		'year_end' => 'int'
 	];
 
 	protected $fillable = [
-		'makeId',
+		'make_id',
 		'name',
-		'yearStart',
-		'yearEnd'
+		'year_start',
+		'year_end'
 	];
 
 	public function car_make()
 	{
-		return $this->belongsTo(CarMake::class, 'makeId');
+		return $this->belongsTo(CarMake::class, 'make_id');
 	}
 
 	public function car_trims()
 	{
-		return $this->hasMany(CarTrim::class, 'modelId');
+		return $this->hasMany(CarTrim::class, 'model_id');
 	}
 
 	public function listings()
 	{
-		return $this->hasMany(Listing::class, 'carModelId');
+		return $this->hasMany(Listing::class);
 	}
 }
