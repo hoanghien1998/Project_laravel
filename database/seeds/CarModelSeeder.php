@@ -15,17 +15,11 @@ class CarModelSeeder extends Seeder
      */
     public function run()
     {
-        $base_number = $this->number;
         $carMakes = CarMake::get();
         foreach ($carMakes as $carMake) {
-            $this->number = $base_number;
-            do {
-                $carModelFactory = factory(CarModel::class);
-                $carModelFactory->create([
-                    CarModel::MAKE_ID => $carMake->id,
-                ]);
-                $this->number--;
-            } while ($this->number > 0);
+            factory(CarModel::class, $this->number)->create([
+                CarModel::MAKE_ID => $carMake->id,
+            ]);
         }
     }
 }

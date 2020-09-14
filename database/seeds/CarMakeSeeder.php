@@ -13,10 +13,6 @@ class CarMakeSeeder extends Seeder
      */
     public function run()
     {
-        do {
-            $carMakeFactory = factory(CarMake::class);
-            $carMakeFactory->create();
-            $this->number--;
-        } while ($this->number > 0);
+        factory(CarMake::class, $this->number)->create();
     }
 }
