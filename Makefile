@@ -32,13 +32,13 @@ root:
 	docker-compose -f ci/docker/local.yaml -p vinhvo exec web bash
 
 cs:
-	php vendor/bin/phpcs --parallel=4
+	docker exec -it -w /home/www/app vinhvo-web php vendor/bin/phpcs --parallel=4
 
 csfix:
-	php vendor/bin/phpcbf --parallel=4
+	docker exec -it -w /home/www/app vinhvo-web php vendor/bin/phpcbf --parallel=4
 
 test:
-	php vendor/bin/phpunit
+	docker exec -it -w /home/www/app vinhvo-web php vendor/bin/phpunit
 
 test2:
 	docker-compose -f ci/docker/testing_local.yml -p vinhvo_tests run --rm tests
