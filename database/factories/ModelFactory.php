@@ -2,6 +2,7 @@
 
 use App\Models\CarMake;
 use App\Models\CarModel;
+use App\Models\CarTrim;
 use App\Models\User;
 use Faker\Generator;
 use Illuminate\Database\Eloquent\Factory;
@@ -44,5 +45,12 @@ $factory->define(CarModel::class, function (Generator $faker) {
         CarModel::NAME => $faker->name,
         CarModel::YEAR_START => $year,
         CarModel::YEAR_END => $year + random_int(1, 10),
+    ];
+});
+
+$factory->define(CarTrim::class, function (Generator $faker) {
+    return [
+        // TODO need to use another property ...
+        CarTrim::NAME => $faker->name,
     ];
 });

@@ -25,12 +25,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class CarTrim extends Model
 {
+    public const TABLE_NAME = 'car_trims';
+    public const ID = 'id';
+    public const MODEL_ID = 'model_id';
+    public const NAME = 'name';
+
     /**
      * Table name.
      *
      * @var string
      */
-    protected $table = 'car_trims';
+    protected $table = self::TABLE_NAME;
 
     /**
      * Timestamp.
@@ -45,8 +50,8 @@ class CarTrim extends Model
      * @var string[]
      */
     protected $casts = [
-        'id' => 'int',
-        'model_id' => 'int',
+        self::ID => 'int',
+        self::MODEL_ID => 'int',
     ];
 
     /**
@@ -55,8 +60,8 @@ class CarTrim extends Model
      * @var string[]
      */
     protected $fillable = [
-        'model_id',
-        'name',
+        self::MODEL_ID,
+        self::NAME,
     ];
 
     /**
@@ -66,7 +71,7 @@ class CarTrim extends Model
      */
     public function carModel(): BelongsTo
     {
-        return $this->belongsTo(CarModel::class, 'model_id');
+        return $this->belongsTo(CarModel::class, self::MODEL_ID);
     }
 
     /**

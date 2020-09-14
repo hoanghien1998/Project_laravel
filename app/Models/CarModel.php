@@ -90,7 +90,7 @@ class CarModel extends Model
      */
     public function carTrims(): HasMany
     {
-        return $this->hasMany(CarTrim::class, 'model_id');
+        return $this->hasMany(CarTrim::class, CarTrim::MODEL_ID);
     }
 
     /**
@@ -100,6 +100,6 @@ class CarModel extends Model
      */
     public function listings(): HasMany
     {
-        return $this->hasMany(Listing::class, 'model_id');
+        return $this->hasMany(Listing::class, CarTrim::MODEL_ID);
     }
 }

@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
          $this->call(CarMakeSeeder::class);
          $this->call(CarModelSeeder::class);
+         $this->call(CarTrimSeeder::class);
     }
 }
