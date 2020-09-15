@@ -81,8 +81,8 @@ CREATE TABLE `preferences` (
 # Add foreign key constraints                                            #
 # ---------------------------------------------------------------------- #
 
-ALTER TABLE `users` ADD CONSTRAINT `users_roles` 
-    FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
+ALTER TABLE `users` ADD CONSTRAINT `users_roles`
+    FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `preferences` ADD CONSTRAINT `preferences_users` 
+ALTER TABLE `preferences` ADD CONSTRAINT `preferences_users`
     FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

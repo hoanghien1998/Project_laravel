@@ -4,6 +4,7 @@ use App\Models\CarMake;
 use App\Models\CarModel;
 use App\Models\CarTrim;
 use App\Models\User;
+use Carbon\Carbon;
 use Faker\Generator;
 use Illuminate\Database\Eloquent\Factory;
 
@@ -24,12 +25,16 @@ use Illuminate\Database\Eloquent\Factory;
  * @var Factory $factory
  */
 $factory->define(User::class, function (Generator $faker) {
+    $gender = ['Male', 'Female'];
+
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->safeEmail,
-        'password' => '123456',
-        'remember_token' => str_random(10),
+        'password' => password_hash('123456', PASSWORD_DEFAULT),
+        'gender' => $gender[rand(0, 1)],
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
     ];
 });
 
@@ -50,7 +55,6 @@ $factory->define(CarModel::class, function (Generator $faker) {
 
 $factory->define(CarTrim::class, function (Generator $faker) {
     return [
-        // TODO need to use another property ...
         CarTrim::NAME => $faker->name,
     ];
 });

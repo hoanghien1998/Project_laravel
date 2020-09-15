@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 
 class CarModelSeeder extends Seeder
 {
-    public $number = 20;
+    public $max_per_make = 30;
 
     /**
      * Run the database seeds.
@@ -17,7 +17,9 @@ class CarModelSeeder extends Seeder
     {
         $carMakes = CarMake::get();
         foreach ($carMakes as $carMake) {
-            factory(CarModel::class, $this->number)->create([
+            $number = rand(10, $this->max_per_make);
+
+            factory(CarModel::class, $number)->create([
                 CarModel::MAKE_ID => $carMake->id,
             ]);
         }
