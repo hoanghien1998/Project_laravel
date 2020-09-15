@@ -21,10 +21,12 @@ class ListingSeeder extends Seeder
         $users = $this->getUsers();
 
         while ($users->count() > 0) {
+            dump("Process batch size " . $users->count());
+
             /** @var User $user */
             foreach ($users as $user) {
                 $number = rand(10, $this->max_per_user);
-                dump("Generate {$number} listings for {$user->first_name} <{$user->email}>");
+                dump("    Generate {$number} listings for {$user->id} {$user->first_name} <{$user->email}>");
 
                 do {
                     /** @var CarTrim $carTrim */
@@ -47,13 +49,16 @@ class ListingSeeder extends Seeder
     /**
      * Get Users.
      *
+     * @param int $limit Collection size
+     *
      * @return Collection
      */
-    private function getUsers(): Collection
+    private function getUsers($limit = 100): Collection
     {
         return User::query()
             ->whereDoesntHave(Listing::TABLE_NAME)
             ->orderByDesc(User::CREATED_AT)
+            ->limit($limit)
             ->get();
     }
 }
