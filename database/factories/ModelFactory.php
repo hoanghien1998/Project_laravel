@@ -3,6 +3,7 @@
 use App\Models\CarMake;
 use App\Models\CarModel;
 use App\Models\CarTrim;
+use App\Models\Listing;
 use App\Models\User;
 use Carbon\Carbon;
 use Faker\Generator;
@@ -56,5 +57,13 @@ $factory->define(CarModel::class, function (Generator $faker) {
 $factory->define(CarTrim::class, function (Generator $faker) {
     return [
         CarTrim::NAME => $faker->name,
+    ];
+});
+
+$factory->define(Listing::class, function (Generator $faker) {
+    return [
+        Listing::YEAR => $faker->year,
+        Listing::CREATED_AT => Carbon::now(),
+        Listing::UPDATED_AT => Carbon::now(),
     ];
 });

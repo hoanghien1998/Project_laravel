@@ -100,6 +100,6 @@ class CarModel extends Model
      */
     public function listings(): HasMany
     {
-        return $this->hasMany(Listing::class, CarTrim::MODEL_ID);
+        return $this->hasMany(Listing::class, 'car_model_id');
     }
 }

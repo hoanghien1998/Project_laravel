@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Saritasa\Database\Eloquent\Models\User as BaseUserModel;
 use Saritasa\Enums\Gender;
@@ -24,6 +26,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property Carbon $created_at Date when user was created
  * @property Carbon $updated_at Date when user was last time updated
  * @property Carbon|null $deleted_at Date when user was deleted
+ *
+ * @property Collection|Listing[] $listings Listing
  */
 class User extends BaseUserModel implements JWTSubject
 {
@@ -63,5 +67,15 @@ class User extends BaseUserModel implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
+    }
+
+    /**
+     * Get listings.
+     *
+     * @return HasMany
+     */
+    public function listings(): HasMany
+    {
+        return $this->hasMany(Listing::class, Listing::CREATED_BY);
     }
 }
