@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
-    public $number = 2000;
+    public $number = 10000;
 
     /**
      * Run the database seeds.
