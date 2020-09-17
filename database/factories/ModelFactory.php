@@ -32,7 +32,6 @@ $factory->define(User::class, function (Generator $faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
-        'password' => password_hash('123456', PASSWORD_DEFAULT),
         'gender' => $gender[rand(0, 1)],
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
