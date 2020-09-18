@@ -113,6 +113,6 @@ class Listing extends Model
      */
     public function documents(): HasMany
     {
-        return $this->hasMany(Document::class, 'listing_id');
+        return $this->hasMany(Document::class, Document::LISTING_ID);
     }
 }

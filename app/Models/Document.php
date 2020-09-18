@@ -26,12 +26,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Document extends Model
 {
+    public const TABLE_NAME = 'documents';
+    public const ID = 'id';
+    public const LISTING_ID = 'listing_id';
+    public const GROUP = 'group';
+    public const SEQUENCE = 'sequence';
+    public const THUMBNAIL = 'thumbnail';
+    public const FULL = 'full';
+    public const CREATED_AT = 'created_at';
+    public const UPDATED_AT = 'updated_at';
+
     /**
      * Table name.
      *
      * @var string
      */
-    protected $table = 'documents';
+    protected $table = self::TABLE_NAME;
 
     /**
      * Casted fields.
@@ -39,8 +49,8 @@ class Document extends Model
      * @var string[]
      */
     protected $casts = [
-        'listing_id' => 'int',
-        'sequence' => 'int',
+        self::LISTING_ID => 'int',
+        self::SEQUENCE => 'int',
     ];
 
     /**
@@ -49,9 +59,11 @@ class Document extends Model
      * @var string[]
      */
     protected $fillable = [
-        'listing_id',
-        'group',
-        'sequence',
+        self::LISTING_ID ,
+        self::GROUP,
+        self::SEQUENCE,
+        self::FULL,
+        self::THUMBNAIL,
     ];
 
     /**
@@ -61,6 +73,6 @@ class Document extends Model
      */
     public function listing(): BelongsTo
     {
-        return $this->belongsTo(Listing::class, 'listing_id');
+        return $this->belongsTo(Listing::class, self::LISTING_ID);
     }
 }

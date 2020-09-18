@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\CarModel;
 use App\Models\CarTrim;
 use App\Models\Listing;
 use App\Models\User;
@@ -21,12 +20,12 @@ class ListingSeeder extends Seeder
         $users = $this->getUsers();
 
         while ($users->count() > 0) {
-            dump("Process batch size " . $users->count());
+            $this->command->info("Process batch size " . $users->count());
 
-            /** @var User $user */
-            foreach ($users as $user) {
+            /* @var User $user */
+            $users->each(function($user) {
                 $number = rand(10, $this->max_per_user);
-                dump("    Generate {$number} listings for {$user->id} {$user->first_name} <{$user->email}>");
+                $this->command->info("    Generate {$number} listings for {$user->id} {$user->first_name} <{$user->email}>");
 
                 do {
                     /** @var CarTrim $carTrim */
@@ -40,7 +39,7 @@ class ListingSeeder extends Seeder
                     ]);
                     $number--;
                 } while($number > 0);
-            }
+            });
 
             $users = $this->getUsers();
         }

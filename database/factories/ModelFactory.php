@@ -3,6 +3,7 @@
 use App\Models\CarMake;
 use App\Models\CarModel;
 use App\Models\CarTrim;
+use App\Models\Document;
 use App\Models\Listing;
 use App\Models\User;
 use Carbon\Carbon;
@@ -64,5 +65,14 @@ $factory->define(Listing::class, function (Generator $faker) {
         Listing::YEAR => $faker->year,
         Listing::CREATED_AT => Carbon::now(),
         Listing::UPDATED_AT => Carbon::now(),
+    ];
+});
+
+$factory->define(Document::class, function (Generator $faker) {
+    return [
+        Document::GROUP => 'image',
+        Document::SEQUENCE => 1,
+        Document::CREATED_AT => Carbon::now(),
+        Document::UPDATED_AT => Carbon::now(),
     ];
 });
