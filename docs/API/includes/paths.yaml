@@ -17,6 +17,8 @@
   $ref: 'paths/users/me_facebook.yaml'
 /users/me/instagram:
   $ref: 'paths/users/me_instagram.yaml'
+/users/password:
+  $ref: 'paths/users/password.yaml'
 
 /notifications:
   $ref: 'paths/notifications/notifications.yaml'
@@ -29,3 +31,10 @@
   $ref: 'paths/settings/payments.yaml'
 /settings/device:
   $ref: 'paths/settings/device.yaml'
+
+/cars/makes:
+  $ref: 'paths/cars/makes.yaml'
+
+/cars/models:
+  $ref: 'paths/cars/models.yaml'
+

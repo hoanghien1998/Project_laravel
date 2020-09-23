@@ -48,3 +48,9 @@ PaymentSettings:
 
 Address:
   $ref: 'definitions/Address.yaml'
+
+CarMakesList:
+  $ref: 'definitions/lists/CarMakesList.yaml'
+
+CarModelsList:
+  $ref: 'definitions/lists/CarModelsList.yaml'

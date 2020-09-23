@@ -1,3 +1,22 @@
+CarMakes
+	List CarMake
+CarModels
+	Search By Car Make
+CarTrims
+	Search by Car Model
+Listings
+	Add listing
+	Update listing
+	View listing
+	Search listing by Car Mode/Trim
+Documents
+	Upload file
+	Delete file
+	Search by Listing & type.
+Comments
+	Add comment for
+	List comment
+
 # Synopsis
 This is backend on **PHP / [Laravel 6.x](https://laravel.com/docs/6.x)**
 for [vinhvo](https://crm.saritasa.com/projects/general.aspx?ProjectID=???) project

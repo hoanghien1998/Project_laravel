@@ -1,0 +1,42 @@
+type: object
+description: Car model
+required:
+  - id
+  - make_id
+  - name
+  - year_start
+  - year_end
+properties:
+
+  id:
+    $ref: 'utils/Identifier.yaml'
+
+  make_id:
+    $ref: 'utils/Identifier.yaml'
+
+  name:
+    type: string
+    description: car make name
+    maxLength: 500
+    example: 'Corola Altis'
+    x-nullable: true
+    x-chance-type: fixed
+    x-type-value: null
+
+  year_start:
+    type: integer
+    description: Year start
+    minimum: 1900
+    example: 2018
+    x-type-options:
+      min: 1900
+      max: 2020
+
+  year_end:
+    type: integer
+    description: Year start
+    minimum: 1900
+    example: 2020
+    x-type-options:
+      min: 1900
+      max: 2020

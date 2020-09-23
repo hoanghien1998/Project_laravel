@@ -60,3 +60,11 @@ TwitterLogin:
         type: string
         description: Access token secret (required for some networks)
         example: kjhdiou1niujh9187234y78123
+
+MakeID:
+  description: Make ID
+  name: make_id
+  in: query
+  type: integer
+  allowEmptyValue: true
+  default: 241
