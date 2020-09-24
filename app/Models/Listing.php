@@ -40,6 +40,7 @@ class Listing extends Model
     public const CAR_MODEL_ID = 'car_model_id';
     public const CAR_TRIM_ID = 'car_trim_id';
     public const YEAR = 'year';
+    public const PRICE = 'price';
     public const CREATED_AT = 'created_at';
     public const CREATED_BY = 'created_by';
     public const UPDATED_AT = 'updated_at';
@@ -61,6 +62,7 @@ class Listing extends Model
         self::CAR_MODEL_ID => 'int',
         self::CAR_TRIM_ID => 'int',
         self::YEAR => 'int',
+        self::PRICE => 'int',
         self::CREATED_BY => 'int',
     ];
 
@@ -73,6 +75,7 @@ class Listing extends Model
         self::CAR_MODEL_ID,
         self::CAR_TRIM_ID,
         self::YEAR,
+        self::PRICE,
         self::CREATED_BY,
     ];
 

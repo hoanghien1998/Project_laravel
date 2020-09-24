@@ -65,6 +65,7 @@ $factory->define(Listing::class, function (Generator $faker) {
         Listing::YEAR => $faker->year,
         Listing::CREATED_AT => Carbon::now(),
         Listing::UPDATED_AT => Carbon::now(),
+        Listing::PRICE => $faker->numberBetween(100, 100000)
     ];
 });
 
