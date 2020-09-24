@@ -68,3 +68,11 @@ MakeID:
   type: integer
   allowEmptyValue: true
   default: 241
+
+ModelID:
+  description: Model ID
+  name: model_id
+  in: query
+  type: integer
+  allowEmptyValue: true
+  default: 15

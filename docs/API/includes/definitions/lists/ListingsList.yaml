@@ -1,9 +1,9 @@
 type: object
-description: Paginated list of car model
+description: Paginated list of listing
 properties:
   pagination:
     $ref: '../utils/PaginationInfo.yaml'
   results:
     type: array
     items:
-      $ref: '../CarModel.yaml'
+      $ref: '../Listing.yaml'

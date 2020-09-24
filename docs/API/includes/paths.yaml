@@ -34,7 +34,12 @@
 
 /cars/makes:
   $ref: 'paths/cars/makes.yaml'
-
 /cars/models:
   $ref: 'paths/cars/models.yaml'
+/cars/trims:
+  $ref: 'paths/cars/trims.yaml'
 
+/listings:
+  $ref: 'paths/listings/create_search.yaml'
+/listings/{id}:
+  $ref: 'paths/listings/get_update.yaml'

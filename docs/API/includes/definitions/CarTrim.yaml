@@ -1,0 +1,22 @@
+type: object
+description: Car model
+required:
+  - id
+  - model_id
+  - name
+properties:
+
+  id:
+    $ref: 'utils/Identifier.yaml'
+
+  model_id:
+    $ref: 'utils/Identifier.yaml'
+
+  name:
+    type: string
+    description: car make name
+    maxLength: 500
+    example: 'V2.0'
+    x-nullable: true
+    x-chance-type: fixed
+    x-type-value: null

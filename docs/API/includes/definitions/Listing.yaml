@@ -1,0 +1,28 @@
+type: object
+description: Model for listing
+required:
+- id
+- car_model_id
+- car_trim_id
+- year
+- price
+- created_by
+properties:
+
+  id:
+    $ref: 'utils/Identifier.yaml'
+
+  car_model_id:
+    $ref: 'utils/Identifier.yaml'
+
+  car_trim_id:
+    $ref: 'utils/Identifier.yaml'
+
+  year:
+    $ref: 'utils/Year.yaml'
+
+  price:
+    $ref: 'utils/Money.yaml'
+
+  created_by:
+    $ref: 'utils/Identifier.yaml'

@@ -54,3 +54,15 @@ CarMakesList:
 
 CarModelsList:
   $ref: 'definitions/lists/CarModelsList.yaml'
+
+CarTrimsList:
+  $ref: 'definitions/lists/CarTrimsList.yaml'
+
+CreateListing:
+  $ref: 'definitions/CreateListing.yaml'
+
+Listing:
+  $ref: 'definitions/Listing.yaml'
+
+ListingsList:
+  $ref: 'definitions/lists/ListingsList.yaml'
