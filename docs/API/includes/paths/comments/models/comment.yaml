@@ -1,0 +1,21 @@
+type: object
+description: Model for listing
+required:
+  - object_name
+  - object_id
+  - message
+properties:
+  object_name:
+    type: string
+    description: Object name [`listing`, `comment`]
+    example: 'listing'
+
+  object_id:
+    type: integer
+    description: Object Id
+    example: 5
+
+  message:
+    type: string
+    description: Comment content
+    example: 'Simple comment'

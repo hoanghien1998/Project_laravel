@@ -1,0 +1,5 @@
+- name: commentRequest
+  in: body
+  required: true
+  schema:
+    $ref: '../models/comment.yaml'

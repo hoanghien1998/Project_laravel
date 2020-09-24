@@ -1,0 +1,10 @@
+post:
+  tags: ['Uploads']
+  description: After you get signed URL, you must upload the file itself to S3, using that URL. You can reference that file, using second URL given in response.
+  summary: Get permission to upload file to AWS S3
+  operationId: uploadTemp
+  parameters:
+    $ref: './requests/request.yaml'
+  responses:
+    200:
+      $ref: './responses/response.yaml'

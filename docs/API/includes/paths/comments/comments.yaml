@@ -1,0 +1,38 @@
+post:
+  tags: ['Comments']
+  summary: Create comment
+  operationId: CreateComment
+  parameters:
+    $ref: './requests/add.yaml'
+
+  responses:
+    201:
+      description: 'Add comment successfully'
+
+    400:
+      $ref: '../../responses.yaml#/InputValidationError'
+  security: []
+
+get:
+  tags: ['Comments']
+  summary: 'Get paginated list of comments'
+  operationId: SearchCommentList
+  parameters:
+    - $ref: '../../parameters.yaml#/PageSize'
+    - $ref: '../../parameters.yaml#/Page'
+    - name: object_name
+      description: Object name
+      in: query
+      type: string
+
+  responses:
+    200:
+      description: Return list of comment successfully
+      schema:
+        $ref: './responses/list.yaml'
+    401:
+      $ref: '../../responses.yaml#/UserNotAuthorized'
+    default:
+      $ref: '../../responses.yaml#/APIErrorResponse'
+  security:
+    - AuthToken: []

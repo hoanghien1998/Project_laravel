@@ -1,0 +1,9 @@
+- name: uploadTempRequest
+  in: body
+  required: true
+  schema:
+    type: object
+    description: Name of file, that user wants to upload
+    example: {
+      'fileName': 'image.jpg'
+    }

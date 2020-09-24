@@ -1,0 +1,9 @@
+type: object
+description: Paginated list of listing
+properties:
+  pagination:
+    $ref: '../../../definitions/utils/PaginationInfo.yaml'
+  results:
+    type: array
+    items:
+      $ref: '../models/comment.yaml'
