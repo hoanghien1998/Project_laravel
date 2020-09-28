@@ -61,7 +61,5 @@ swagger:
 	npx swagger-cli bundle --type yaml --outfile public/swagger-ui/api.yaml docs/API/index.yaml
 
 ip:
-	docker inspect vinhvo-web | grep \"IPAddress\"
-
-ipdb:
-	docker inspect vinhvo-db | grep \"IPAddress\"
+	update_ip.sh vinhvo-web
+	update_ip.sh vinhvo-db
