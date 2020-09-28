@@ -1,0 +1,56 @@
+post:
+  tags: ['Authentication']
+  summary: Register new account, returns access token
+  operationId: Register
+  parameters:
+    - in: body
+      name: registerRequest
+      description: Registration Data
+      required: true
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          first_name:
+            type: string
+            description: First name
+            example: John
+          last_name:
+            type: string
+            description: Last name
+            example: Dannie
+          email:
+            type: string
+            description: Registered user email
+            example: user@mail.com
+          password:
+            type: string
+            description: User password
+            format: password
+            example: 123456
+          gender:
+            type: string
+            description: Enum string [`Male`, `Female`]
+            example: Male
+  responses:
+    200:
+      description: Successful register
+      schema:
+        $ref: '../../definitions.yaml#/AuthToken'
+    400:
+      $ref: '../../responses.yaml#/InputValidationError'
+    404:
+      description: The user already exist
+      schema:
+         $ref: '../../definitions.yaml#/ErrorMessage'
+      examples:
+        application/json:
+          {
+            message: 'The email already taken'
+          }
+    default:
+      $ref: '../../responses.yaml#/APIErrorResponse'
+  security: []
+
