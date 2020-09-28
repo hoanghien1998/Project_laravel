@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\Api\AuthController;
 use Dingo\Api\Routing\Router;
 use Saritasa\LaravelControllers\Api\ApiResourceRegistrar;
 use Saritasa\LaravelControllers\Api\JWTAuthApiController;
@@ -38,4 +39,10 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
 
         $registrar->delete('auth', JWTAuthApiController::class, 'logout');
     });
+
+    $registrar->post('/register', AuthController::class,'register');
 });
+
+
+
+
