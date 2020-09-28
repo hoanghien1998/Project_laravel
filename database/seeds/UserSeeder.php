@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         factory(User::class, $this->number)->create([
             User::ROLE_ID => 1,
-            User::PWD_FIELD => password_hash('123456', PASSWORD_DEFAULT),
+            User::PWD_FIELD => '123456',
         ]);
     }
 }
