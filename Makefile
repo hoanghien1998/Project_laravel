@@ -63,4 +63,3 @@ swagger:
 ip:
 	update_ip.sh vinhvo-web
 	update_ip.sh vinhvo-db
-
