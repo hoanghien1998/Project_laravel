@@ -8,6 +8,8 @@
   $ref: 'paths/auth/password.yaml'
 /auth/password/reset:
   $ref: 'paths/auth/password_reset.yaml'
+/register:
+  $ref: 'paths/auth/register.yaml'
 
 /users:
   $ref: 'paths/users/users.yaml'

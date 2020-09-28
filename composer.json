@@ -15,7 +15,9 @@
     "saritasa/dingo-api-custom": "^2.2",
     "saritasa/eloquent-custom": "^1.1",
     "saritasa/laravel-controllers": "^3.3",
+    "saritasa/laravel-fluent-validation": "^1.1",
     "saritasa/laravel-middleware": "^2.1",
+    "saritasa/laravel-notifications-api": "^1.2",
     "saritasa/roles-simple": "^1.0",
     "tymon/jwt-auth": "1.0.0-rc.5"
   },
