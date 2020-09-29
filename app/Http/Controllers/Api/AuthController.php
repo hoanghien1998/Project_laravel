@@ -7,9 +7,27 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Saritasa\Transformers\IDataTransformer;
+use Tymon\JWTAuth\JWTAuth;
 
 class AuthController extends BaseApiController
 {
+    /**
+     * Jwt auth service.
+     *
+     * @var JWTAuth
+     */
+    protected $jwtAuth;
+
+    /**
+     * Authenticate API Controller. Uses JWT authentication.
+     *
+     * @param JWTAuth $jwtAuth Jwt guard
+     */
+    public function __construct(JWTAuth $jwtAuth)
+    {
+        $this->jwtAuth = $jwtAuth;
+    }
     /**
      * Register a User.
      *
@@ -33,9 +51,12 @@ class AuthController extends BaseApiController
             ['email' => $request->email]
         ));
 
+        $credentials = $request->only('email', 'password');
+
+        $token = $this->jwtAuth->attempt($credentials);
+
         return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user,
-        ], 200);
+            "token" => $token
+        ], 404);
     }
 }
