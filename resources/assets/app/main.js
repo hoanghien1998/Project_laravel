@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import router from './router';
 import App from './App.vue';
+import { store } from './store';
 
 library.add(faUser);
 library.add(faKey);
@@ -19,11 +20,14 @@ Vue.use(IconsPlugin);
 // Vue Router
 Vue.use(VueRouter);
 
+
 Vue.config.productionTip = false;
+
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue({
   el:         '#app',
-  components: { App },
   router,
+  components: { App },
+  store,
 });
