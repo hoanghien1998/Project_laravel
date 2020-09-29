@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Saritasa\Database\Eloquent\Models\User as BaseUserModel;
@@ -27,7 +28,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property Carbon $updated_at Date when user was last time updated
  * @property Carbon|null $deleted_at Date when user was deleted
  *
- * @property Collection|Listing[] $listings Listing
+ * @property-read Collection|Listing[] $listings Listing
+ * @property-read Role $role Role
  */
 class User extends BaseUserModel implements JWTSubject
 {
@@ -35,13 +37,48 @@ class User extends BaseUserModel implements JWTSubject
 
     public const DEFAULT_AVATAR = 'images/avatar/default.png';
 
+    public const GENDER = 'gender';
+    public const AVATAR_URL = 'avatar_url';
+
+    /**
+     * The attributes that should be visible in arrays.
+     *
+     * @inheritdoc
+     */
+    protected $visible = [
+        self::ID,
+        self::EMAIL,
+        self::FIRST_NAME,
+        self::LAST_NAME,
+        self::CREATED_AT,
+        self::AVATAR_URL,
+        self::GENDER,
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @inheritdoc
+     */
+    protected $fillable = [
+        self::ID,
+        self::EMAIL,
+        self::PWD_FIELD,
+        self::FIRST_NAME,
+        self::LAST_NAME,
+        self::CREATED_AT,
+        self::ROLE_ID,
+        self::AVATAR_URL,
+        self::GENDER,
+    ];
+
     /**
      * Mapping of enum fields.
      *
      * @var mixed[]
      */
     protected $enums = [
-        'gender' => Gender::class,
+        self::GENDER => Gender::class,
     ];
 
     /**
@@ -50,7 +87,7 @@ class User extends BaseUserModel implements JWTSubject
      * @var mixed[]
      */
     protected $defaults = [
-        'avatar_url' => self::DEFAULT_AVATAR,
+        self::AVATAR_URL => self::DEFAULT_AVATAR,
     ];
 
     /**
@@ -77,5 +114,15 @@ class User extends BaseUserModel implements JWTSubject
     public function listings(): HasMany
     {
         return $this->hasMany(Listing::class, Listing::CREATED_BY);
+    }
+
+    /**
+     * Relation with the model Role.
+     *
+     * @return BelongsTo
+     */
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class, User::ROLE_ID);
     }
 }
