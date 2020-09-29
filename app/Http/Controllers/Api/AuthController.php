@@ -37,26 +37,12 @@ class AuthController extends BaseApiController
      */
     public function register(RegisterRequest $request)
     {
-        $v = Validator::make($request->all(), [
-            'email' => 'required|string|email|max:100|unique:users'
-        ]);
-        if ($v->fails()) {
-            return response()->json([
-                "message" => "The email already taken"
-            ], 404);
-        }
-
-        $user = User::create(array_merge(
-            $request->validated(),
-            ['email' => $request->email]
-        ));
+        User::create($request->validated());
 
         $credentials = $request->only('email', 'password');
 
-        $token = $this->jwtAuth->attempt($credentials);
-
         return response()->json([
-            "token" => $token
+            "token" => $this->jwtAuth->attempt($credentials)
         ], 404);
     }
 }

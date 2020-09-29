@@ -41,15 +41,6 @@ post:
         $ref: '../../definitions.yaml#/AuthToken'
     400:
       $ref: '../../responses.yaml#/InputValidationError'
-    404:
-      description: The user already exist
-      schema:
-         $ref: '../../definitions.yaml#/ErrorMessage'
-      examples:
-        application/json:
-          {
-            message: 'The email already taken'
-          }
     default:
       $ref: '../../responses.yaml#/APIErrorResponse'
   security: []
