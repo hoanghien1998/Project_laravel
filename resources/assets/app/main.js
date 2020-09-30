@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import router from './router';
 import App from './App.vue';
+import { store } from './store/store';
 
 library.add(faUser);
 library.add(faKey);
@@ -26,5 +27,6 @@ const app = new Vue({
   el:         '#app',
   components: { App },
   router,
+  store,
 });
 

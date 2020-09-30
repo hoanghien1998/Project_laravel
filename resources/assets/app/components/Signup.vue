@@ -5,9 +5,7 @@
         <div class="d-flex justify-content-center">
           <h2>Sign Up</h2>
         </div>
-
         <div class="d-flex justify-content-center">
-
           <form method="post"
                 @submit.prevent="register">
             <b-form-group class="mb-3">
@@ -64,7 +62,6 @@
             </b-button>
           </form>
         </div>
-
         <div class="mt-4">
           <div class="d-flex justify-content-center links">
             Already registered&nbsp;<router-link to="/auth">Sign in ?</router-link>
@@ -76,30 +73,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-
-class Errors {
-  constructor() {
-    this.errors = {};
-  }
-
-  get(field) {
-    console.log(this.errors[field]);
-    if (this.errors[field]) {
-      return this.errors[field];
-    }
-  }
-
-  record(errors) {
-    for (let i = 0; i < errors.length; i++) {
-      const field = Object.values(errors[i])[0];
-
-      // eslint-disable-next-line prefer-destructuring
-      this.errors[field] = Object.values(errors[i])[1][0];
-    }
-    console.log(this.errors);
-  }
-}
+// import axios from 'axios';
+import Errors from '../errors';
 
 export default {
   data() {
@@ -115,16 +90,20 @@ export default {
       isError: false,
     };
   },
+  computed: {
+    getToken() {
+      return this.$store.getters['users/getToken'];
+    }
+  },
   methods: {
     register() {
-      this.gender = this.datas.gender;
-      axios.post('/api/register', this.datas)
-        .then(res => {
-          console.log(res.data);
+      this.$store
+        .dispatch('users/createUser', this.datas)
+        .then(() => {
+          console.log('asdas');
         })
-        .catch(error => {
-          this.errors.record(error.response.data.errors);
-          this.isError = true;
+        .catch(() => {
+          this.errors = this.$store.getters['users/getError'];
         });
     },
   },
