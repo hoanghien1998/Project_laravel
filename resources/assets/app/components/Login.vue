@@ -9,14 +9,7 @@
                  alt="Logo">
           </div>
         </div>
-        <div v-if="loading">
-          <div class="spinner-border"
-               role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-        </div>
-        <div v-else
-             class="d-flex justify-content-center form_container">
+        <div class="d-flex justify-content-center form_container">
           <form autocomplete="off"
                 method="post"
                 @submit.prevent="login">
@@ -31,6 +24,7 @@
                               placeholder="user@example.com"
                               class="input_user"/>
               </b-input-group>
+              <strong>{{ errors.email[0] }}</strong>
             </b-form-group>
             <b-form-group class="mb-2">
               <b-input-group>
@@ -44,6 +38,7 @@
                               placeholder="password"
                               class="input_user"/>
               </b-input-group>
+              <strong>{{ errors.password[0] }}</strong>
             </b-form-group>
             <b-form-checkbox
               id="checkbox-1"
@@ -88,26 +83,11 @@ export default {
         email:    '',
         password: '',
       },
-      loading: true,
+      errors: {
+        email:    [],
+        password: [],
+      },
     };
-  },
-  mounted() {
-    if (this.$store.state.token !== '') {
-      axios.post('/api/checkToken', { token: this.$store.state.token })
-        .then(res => {
-          if (res) {
-            this.loading = false;
-            this.$router.push('/');
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          this.loading = false;
-          this.$store.commit('clearToken');
-        });
-    } else {
-      this.loading = false;
-    }
   },
   methods: {
     login() {
@@ -118,7 +98,14 @@ export default {
           this.$router.push('/');
         })
         .catch(err => {
-          console.log(err);
+          let e = [];
+          const self = this;
+
+          e = err.response.data.errors;
+          console.log(e);
+          Object.values(e).forEach(item => {
+            self.errors[item.field] = item.messages;
+          });
         });
     },
   },
@@ -126,5 +113,7 @@ export default {
 </script>
 
 <style>
-
+strong {
+  color: red;
+}
 </style>
