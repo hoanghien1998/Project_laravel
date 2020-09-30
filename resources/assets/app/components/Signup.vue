@@ -15,19 +15,27 @@
               <b-form-input v-model="datas.first_name"
                             placeholder="First name"
                             class="input_user"/>
-              <span>{{ errors.first_name[0] }}</span>
+              <span v-if="isError"
+                    class="text-danger"
+                    v-text="errors.get('first_name')"/>
             </b-form-group>
             <b-form-group class="mb-3">
               <label>Last Name</label>
               <b-form-input v-model="datas.last_name"
                             placeholder="Last name"
                             class="input_user"/>
+              <span v-if="isError"
+                    class="text-danger"
+                    v-text="errors.get('last_name')"/>
             </b-form-group>
             <b-form-group class="mb-3">
               <label>Email</label>
               <b-form-input v-model="datas.email"
                             placeholder="Email"
                             class="input_user"/>
+              <span v-if="isError"
+                    class="text-danger"
+                    v-text="errors.get('email')"/>
             </b-form-group>
             <b-form-group class="mb-3">
               <label>Password</label>
@@ -35,6 +43,9 @@
                             type="password"
                             placeholder="Password"
                             class="input_user"/>
+              <span v-if="isError"
+                    class="text-danger"
+                    v-text="errors.get('password')"/>
             </b-form-group>
             <b-form-group label="Gender">
               <b-form-radio v-model="datas.gender"
@@ -43,6 +54,9 @@
               <b-form-radio v-model="datas.gender"
                             value="Female">Female
               </b-form-radio>
+              <span v-if="isError"
+                    class="text-danger"
+                    v-text="errors.get('gender')"/>
             </b-form-group>
             <b-button variant="danger"
                       type="submit"
@@ -64,21 +78,28 @@
 <script>
 import axios from 'axios';
 
-// class Errors {
-//   constructor() {
-//     this.errors = {};
-//   }
-//
-//   get(field) {
-//     if (this.errors[field]) {
-//       return this.errors[field][0];
-//     }
-//   }
-//
-//   record(errors) {
-//     this.errors = errors.errors;
-//   }
-// }
+class Errors {
+  constructor() {
+    this.errors = {};
+  }
+
+  get(field) {
+    console.log(this.errors[field]);
+    if (this.errors[field]) {
+      return this.errors[field];
+    }
+  }
+
+  record(errors) {
+    for (let i = 0; i < errors.length; i++) {
+      const field = Object.values(errors[i])[0];
+
+      // eslint-disable-next-line prefer-destructuring
+      this.errors[field] = Object.values(errors[i])[1][0];
+    }
+    console.log(this.errors);
+  }
+}
 
 export default {
   data() {
@@ -90,13 +111,8 @@ export default {
         password:   '',
         gender:     '',
       },
-      errors: {
-        first_name: [],
-        last_name:  [],
-        email:      [],
-        password:   [],
-        gender:     [],
-      },
+      errors:  new Errors(),
+      isError: false,
     };
   },
   methods: {
@@ -107,20 +123,8 @@ export default {
           console.log(res.data);
         })
         .catch(error => {
-          let xx = [];
-          const self = this;
-          // xx.each(item => {
-
-          xx = error.response.data.errors;
-          console.log(xx);
-          Object.values(xx).forEach(item => {
-            self.errors[item.field] = item.messages;
-          });
-          // console.log(this.errors);
-
-          // const xxx = xx[0].messages[0];
-          // });
-          // debugger;
+          this.errors.record(error.response.data.errors);
+          this.isError = true;
         });
     },
   },
@@ -129,7 +133,7 @@ export default {
 
 <style>
 .signup-box {
-  height: 600px;
-  padding: 20px;
+  height: 700px;
+  padding: 50px;
 }
 </style>
