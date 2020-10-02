@@ -3,6 +3,7 @@ export default class Errors {
     this.errors = {};
   }
 
+  // eslint-disable-next-line consistent-return
   get(field) {
     if (this.errors[field]) {
       return this.errors[field];

@@ -93,18 +93,12 @@ export default {
   computed: {
     getToken() {
       return this.$store.getters['users/getToken'];
-    }
+    },
   },
   methods: {
     register() {
       this.$store
-        .dispatch('users/createUser', this.datas)
-        .then(() => {
-          console.log('asdas');
-        })
-        .catch(() => {
-          this.errors = this.$store.getters['users/getError'];
-        });
+        .dispatch('users/createUser', this.datas);
     },
   },
 };
