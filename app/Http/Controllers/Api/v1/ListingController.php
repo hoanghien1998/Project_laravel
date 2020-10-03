@@ -6,11 +6,11 @@ use App\Http\Requests\CreateListingRequest;
 use App\Http\Requests\PaginatedListingRequest;
 use App\Http\Transformers\ListingTransformer;
 use App\Services\ListingService;
-use Illuminate\Http\Request;
 use Saritasa\LaravelControllers\Api\BaseApiController;
 
 /**
  * Class ListingController Listing information of cars controller.
+ *
  * @package App\Http\Controllers\Api\v1
  */
 class ListingController extends BaseApiController
@@ -24,9 +24,11 @@ class ListingController extends BaseApiController
 
     /**
      * ListingController constructor.
+     *
      * @param ListingService $listingService Listing business-logic service.
      */
-    public function __construct(ListingService $listingService) {
+    public function __construct(ListingService $listingService)
+    {
         parent::__construct();
         $this->listingService = $listingService;
     }
@@ -38,10 +40,9 @@ class ListingController extends BaseApiController
         return $this->json($listing);
     }
 
-    public function paginatedListing()
+    public function paginatedListing(PaginatedListingRequest $request)
     {
-        $listing = $this->listingService->paginatedListing();
-        return $this->response->paginator($listing, new ListingTransformer);
+        $listing = $this->listingService->paginatedListing($request->getPaginateListingDto());
+        return $this->response->paginator($listing, new ListingTransformer());
     }
-
 }

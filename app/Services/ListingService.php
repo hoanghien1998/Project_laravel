@@ -34,20 +34,24 @@ class ListingService
 
     /**
      * ListingService constructor.
+     *
      * @param IRepositoryFactory $repositoryFactory Service factory
-     * @param ListingsRepository $listingsRepository
+     * @param ListingsRepository $listingsRepository listingsRepository
+     *
      * @throws BindingResolutionException
      * @throws RepositoryException
      */
     public function __construct(IRepositoryFactory $repositoryFactory, ListingsRepository $listingsRepository)
     {
         $this->repository = $repositoryFactory->getRepository(Listing::class);
+        $this->listingsRepository = $listingsRepository;
     }
 
     /**
      * Create user and fill user's profile.
      *
-     * @param CreateListingDto $createListingDto
+     * @param CreateListingDto $createListingDto Create listing dto
+     *
      * @return Listing
      *
      * @throws RepositoryException
@@ -62,12 +66,13 @@ class ListingService
     /**
      * Create user and fill user's profile.
      *
-     * @param PaginatedListingDto $paginatedListingDto
-     * @return Listing[]|Collection
+     * @param PaginatedListingDto $paginatedListingDto Paginated listing dto
      *
+     * @return Listing[]|Collection
      */
-    public function paginatedListing()
+    public function paginatedListing(PaginatedListingDto $paginatedListingDto)
     {
-        return $this->listingsRepository->getAllListings();
+        $per_page = $paginatedListingDto->per_page;
+        return $this->listingsRepository->getAllListings($per_page);
     }
 }

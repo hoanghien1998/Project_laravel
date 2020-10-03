@@ -6,7 +6,9 @@ use Saritasa\Dto;
 
 /**
  * Class CreateListingDto Data transfer object with user profile information.
+ *
  * @package App\Dto\Listings
+ *
  * @property int $per_page
  * @property int $page
  * @property int $make_id
@@ -46,5 +48,4 @@ class PaginatedListingDto extends Dto
      * @var int
      */
     public $model_id;
-
 }

@@ -6,7 +6,9 @@ use Saritasa\Dto;
 
 /**
  * Class CreateListingDto Data transfer object with user profile information.
+ *
  * @package App\Dto\Listings
+ *
  * @property int $car_model_id
  * @property int $car_trim_id
  * @property int $year
@@ -46,5 +48,4 @@ class CreateListingDto extends Dto
      * @var int
      */
     public $price;
-
 }

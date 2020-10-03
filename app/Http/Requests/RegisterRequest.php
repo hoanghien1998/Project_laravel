@@ -4,14 +4,19 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class RegisterRequest Validate register form
+ *
+ * @package App\Http\Requests
+ */
 class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
-     * @return bool
+     * @return boolean
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,7 +26,7 @@ class RegisterRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'email' => 'required|string|email|max:100|unique:users',

@@ -6,7 +6,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Saritasa\Transformers\BaseTransformer;
 
 /**
- * Transformer user login data.
+ * Transformer listing data.
  */
 class ListingTransformer extends BaseTransformer
 {
@@ -15,8 +15,13 @@ class ListingTransformer extends BaseTransformer
      */
     public function transform(Arrayable $model): array
     {
-        $data = parent::transform($model);
-
-        return $data;
+        return [
+            'id' => $model->id,
+            'car_model_id' => $model->car_model_id,
+            'car_trim_id' => $model->car_trim_id,
+            'year' => $model->year,
+            'price' => $model->price,
+            'created_by' => $model->created_by,
+        ];
     }
 }

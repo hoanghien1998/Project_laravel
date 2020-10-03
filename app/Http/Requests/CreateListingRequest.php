@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class ListingRequest Listing cars request.
+ *
  * @package App\Http\Requests
  */
 class CreateListingRequest extends FormRequest
@@ -14,9 +15,9 @@ class CreateListingRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      *
-     * @return bool
+     * @return boolean
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -26,7 +27,7 @@ class CreateListingRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             CreateListingDto::CAR_MODEL_ID => 'required|int|min:1',
@@ -50,5 +51,4 @@ class CreateListingRequest extends FormRequest
             CreateListingDto::PRICE,
         ]));
     }
-
 }

@@ -5,14 +5,19 @@ namespace App\Http\Requests;
 use App\Dto\Listings\PaginatedListingDto;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class PaginatedListingRequest Validate paginated listing request
+ *
+ * @package App\Http\Requests
+ */
 class PaginatedListingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
-     * @return bool
+     * @return boolean
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -22,24 +27,24 @@ class PaginatedListingRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            PaginatedListingDto::PER_PAGE => 'required|int|min:1',
-            PaginatedListingDto::PAGE => 'required|int|min:1',
-            PaginatedListingDto::MAKE_ID => 'required|int|min:1',
-            PaginatedListingDto::MODEL_ID => 'required|int|min:1',
+            PaginatedListingDto::PER_PAGE => 'int|min:1',
+            PaginatedListingDto::PAGE => 'int|min:1',
+            PaginatedListingDto::MAKE_ID => 'int|min:1',
+            PaginatedListingDto::MODEL_ID => 'int|min:1',
         ];
     }
 
     /**
      * Returns listing data from request.
      *
-     * @return CreateListingDto
+     * @return PaginatedListingDto
      */
-    public function getCreateListingDto(): CreateListingDto
+    public function getPaginateListingDto(): PaginatedListingDto
     {
-        return new CreateListingDto($this->only([
+        return new PaginatedListingDto($this->only([
             PaginatedListingDto::PER_PAGE,
             PaginatedListingDto::PAGE,
             PaginatedListingDto::MAKE_ID,

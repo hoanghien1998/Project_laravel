@@ -5,9 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Saritasa\Transformers\IDataTransformer;
 use Tymon\JWTAuth\JWTAuth;
 
 class AuthController extends BaseApiController
@@ -35,14 +32,14 @@ class AuthController extends BaseApiController
      *
      * @return JsonResponse
      */
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request): JsonResponse
     {
         User::create($request->validated());
 
         $credentials = $request->only('email', 'password');
 
         return response()->json([
-            "token" => $this->jwtAuth->attempt($credentials)
+            "token" => $this->jwtAuth->attempt($credentials),
         ], 404);
     }
 }

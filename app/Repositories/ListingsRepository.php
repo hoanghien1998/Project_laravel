@@ -14,6 +14,7 @@ class ListingsRepository extends Repository
 {
     /**
      * RolesRepository constructor.
+     *
      * @throws RepositoryException
      */
     public function __construct()
@@ -24,10 +25,12 @@ class ListingsRepository extends Repository
     /**
      * Get user by email or fail.
      *
+     * @param $perpage
+     *
      * @return Listing[]|Collection
      */
-    public function getAllListings()
+    public function getAllListings($perpage)
     {
-        return Listing::paginate(15);
+        return Listing::paginate($perpage);
     }
 }
