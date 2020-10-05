@@ -42,6 +42,8 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
 
         $registrar->post('/listings', ListingController::class,'createListing');
         $registrar->get('/listings', ListingController::class,'paginatedListing');
+        $registrar->get('/listings/{id}', ListingController::class,'getListing');
+        $registrar->put('/listings/{id}', ListingController::class,'updateListing');
     });
 
     $registrar->post('/register', AuthController::class,'register');

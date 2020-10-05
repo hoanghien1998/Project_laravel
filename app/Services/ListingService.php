@@ -3,11 +3,13 @@
 namespace App\Services;
 
 use App\Dto\Listings\CreateListingDto;
+use App\Dto\Listings\GetListingDto;
 use App\Dto\Listings\PaginatedListingDto;
 use App\Models\Listing;
 use App\Repositories\ListingsRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Saritasa\LaravelRepositories\Contracts\IRepository;
 use Saritasa\LaravelRepositories\Contracts\IRepositoryFactory;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
@@ -51,20 +53,25 @@ class ListingService
      * Create user and fill user's profile.
      *
      * @param CreateListingDto $createListingDto Create listing dto
-     *
-     * @return Listing
+     * @param $user_id
+     * return Model
      *
      * @throws RepositoryException
      */
-    public function listings(CreateListingDto $createListingDto): Listing
+    public function listings(CreateListingDto $createListingDto, $user_id)
     {
-        $data = $createListingDto->toArray();
+        $data_tmp = $createListingDto->toArray();
+
+        $data = array_merge(
+            $data_tmp,
+            ['created_by' => $user_id]
+        );
 
         return $this->repository->create(new Listing($data));
     }
 
     /**
-     * Create user and fill user's profile.
+     * Get listing pagination.
      *
      * @param PaginatedListingDto $paginatedListingDto Paginated listing dto
      *
@@ -74,5 +81,21 @@ class ListingService
     {
         $per_page = $paginatedListingDto->per_page;
         return $this->listingsRepository->getAllListings($per_page);
+    }
+
+    /**
+     * Get the specific listing.
+     *
+     * @param $id
+     * @return Listing[]|Collection
+     */
+    public function getListing($id)
+    {
+        return $this->listingsRepository->getListing($id);
+    }
+
+    public function updateListing(CreateListingDto $createListingDto, $id)
+    {
+        return $this->listingsRepository->updateListing($createListingDto, $id);
     }
 }
