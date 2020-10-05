@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\v1\CarController;
 use Dingo\Api\Routing\Router;
 use Saritasa\LaravelControllers\Api\ApiResourceRegistrar;
 use Saritasa\LaravelControllers\Api\JWTAuthApiController;
@@ -38,6 +39,7 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
         $registrar = new ApiResourceRegistrar($api);
 
         $registrar->delete('auth', JWTAuthApiController::class, 'logout');
+        $registrar->get('cars/makes', CarController::class, 'carMakes');
     });
 
     $registrar->post('/register', AuthController::class,'register');

@@ -3,13 +3,21 @@
 namespace App\Http\Requests;
 
 use App\Dto\Cars\CreateCarDto;
-
 /**
  * Class PaginationCarMakeRequest
  * @package App\Http\Requests
  */
 class PaginationCarMakeRequest extends Request
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,7 +33,7 @@ class PaginationCarMakeRequest extends Request
     }
 
     /**
-     * Returns user and profile data from request.
+     * Returns car makes data from request.
      *
      * @return CreateCarDto
      */
@@ -34,7 +42,6 @@ class PaginationCarMakeRequest extends Request
         return new CreateCarDto($this->only([
             CreateCarDto::PER_PAGE,
             CreateCarDto::PAGE,
-
         ]));
     }
 

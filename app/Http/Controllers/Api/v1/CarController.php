@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Requests\PaginationCarMakeRequest;
+use App\Http\Transformers\CarsTransformer;
 use App\Services\CarService;
+use Dingo\Api\Http\Response;
+use Illuminate\Http\Request;
 use Saritasa\LaravelControllers\Api\BaseApiController;
-use Tymon\JWTAuth\JWTAuth;
-use App\Models\CarMake;
 
 
+/**
+ * Class CarController
+ * @package App\Http\Controllers\Api\v1
+ */
 class CarController extends BaseApiController
 {
-    /**
-     * JWT Auth.
-     *
-     * @var JWTAuth
-     */
-    private $jwtAuth;
-
     /**
      * Cars business-logic service.
      * @var CarService
@@ -25,22 +24,23 @@ class CarController extends BaseApiController
 
     /**
      * CarController constructor.
-     * @param JWTAuth $jwtAuth
-     * @param CarService $carService
+     * @param CarService $carService Cars business-logic service.
      */
-    public function __construct(
-        JWTAuth $jwtAuth,
-        CarService $carService
-    ) {
+    public function __construct(CarService $carService)
+    {
         parent::__construct();
         $this->carService = $carService;
-        $this->jwtAuth = $jwtAuth;
     }
 
-    public function carMakes()
+    /**
+     * get all list cars makes
+     *
+     * @param PaginationCarMakeRequest $request
+     * @return Response
+     */
+    public function carMakes(PaginationCarMakeRequest $request): Response
     {
-        $carMake = CarMake::paginate(30);
-        return $this->response->paginator($carMake, 200);
+        $carMakes = $this->carService->carMakes($request->getCreateCarDto());
+        return $this->response->paginator($carMakes, new CarsTransformer());
     }
-
 }
