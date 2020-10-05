@@ -42,9 +42,13 @@ class PaginationCarMakeRequest extends Request
      */
     public function getCreateCarDto(): CreateCarDto
     {
-        return new CreateCarDto($this->only([
+        $param = $this->only([
             CreateCarDto::PER_PAGE,
             CreateCarDto::PAGE,
-        ]));
+        ]);
+        $param[CreateCarDto::PER_PAGE] = $param[CreateCarDto::PER_PAGE] ?? 30;
+        $param[CreateCarDto::PAGE] = $param[CreateCarDto::PAGE] ?? 1;
+
+        return new CreateCarDto($param);
     }
 }

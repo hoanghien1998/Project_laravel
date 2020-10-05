@@ -28,7 +28,7 @@ class CarsRepository extends Repository
      *
      * @return CarMake
      */
-    public function getAllCarMakes($per_page)
+    public function getAllCarMakes($per_page): CarMake
     {
         return CarMake::paginate($per_page);
     }
