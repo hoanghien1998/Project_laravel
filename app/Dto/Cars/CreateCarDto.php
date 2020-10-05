@@ -6,7 +6,9 @@ use Saritasa\Dto;
 
 /**
  * Class CreateCarDto Data transfer object with car make profile information
+ *
  * @package App\Dto\Cars
+ *
  * @property int $per_page
  * @property int $page
  */
@@ -17,12 +19,14 @@ class CreateCarDto extends Dto
 
     /**
      * Cars per page
+     *
      * @var integer
      */
     public $per_page;
 
     /**
      * Cars page
+     *
      * @var integer
      */
     public $page;

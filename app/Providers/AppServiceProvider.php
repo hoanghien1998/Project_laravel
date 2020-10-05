@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use App\Exceptions\ApiExceptionHandler;
+use App\Http\Transformers\BaseTransformer;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
-use App\Http\Transformers\BaseTransformer;
 
 /**
  * Provider with specific for this application settings.
@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->bind("League\\Fractal\\TransformerAbstract", BaseTransformer::class);
     }

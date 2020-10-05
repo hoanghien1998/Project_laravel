@@ -3,7 +3,9 @@
 
 namespace App\Http\Transformers;
 
-class BaseTransformer extends \Saritasa\Transformers\BaseTransformer
+use Saritasa\Transformers\BaseTransformer as SaritasaBaseTransformer;
+
+class BaseTransformer extends SaritasaBaseTransformer
 {
 
 }

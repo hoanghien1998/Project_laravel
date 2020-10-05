@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\CarMake;
-use Illuminate\Database\Eloquent\Collection;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
 use Saritasa\LaravelRepositories\Repositories\Repository;
 
@@ -14,6 +13,7 @@ class CarsRepository extends Repository
 {
     /**
      * RolesRepository constructor.
+     *
      * @throws RepositoryException
      */
     public function __construct()
@@ -24,10 +24,12 @@ class CarsRepository extends Repository
     /**
      * Get all carMakes
      *
-     * @return CarMake[]|Collection
+     * @param $per_page
+     *
+     * @return CarMake
      */
-    public function getAllCarMakes()
+    public function getAllCarMakes($per_page)
     {
-        return CarMake::paginate(15);
+        return CarMake::paginate($per_page);
     }
 }

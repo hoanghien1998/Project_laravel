@@ -3,15 +3,18 @@
 namespace App\Http\Requests;
 
 use App\Dto\Cars\CreateCarDto;
+
 /**
  * Class PaginationCarMakeRequest
+ *
  * @package App\Http\Requests
  */
 class PaginationCarMakeRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
-     * @return bool
+     *
+     * @return boolean
      */
     public function authorize(): bool
     {
@@ -44,5 +47,4 @@ class PaginationCarMakeRequest extends Request
             CreateCarDto::PAGE,
         ]));
     }
-
 }
