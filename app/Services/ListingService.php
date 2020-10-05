@@ -3,13 +3,11 @@
 namespace App\Services;
 
 use App\Dto\Listings\CreateListingDto;
-use App\Dto\Listings\GetListingDto;
 use App\Dto\Listings\PaginatedListingDto;
 use App\Models\Listing;
 use App\Repositories\ListingsRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Saritasa\LaravelRepositories\Contracts\IRepository;
 use Saritasa\LaravelRepositories\Contracts\IRepositoryFactory;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
@@ -56,9 +54,11 @@ class ListingService
      * @param $user_id
      * return Model
      *
+     * @return Listing
+     *
      * @throws RepositoryException
      */
-    public function listings(CreateListingDto $createListingDto, $user_id)
+    public function listings(CreateListingDto $createListingDto, $user_id): Listing
     {
         $data_tmp = $createListingDto->toArray();
 
@@ -87,14 +87,23 @@ class ListingService
      * Get the specific listing.
      *
      * @param $id
-     * @return Listing[]|Collection
+     *
+     * @return Listing
      */
-    public function getListing($id)
+    public function getListing($id): Listing
     {
         return $this->listingsRepository->getListing($id);
     }
 
-    public function updateListing(CreateListingDto $createListingDto, $id)
+    /**
+     * Update the specific listing
+     *
+     * @param CreateListingDto $createListingDto provide value to update listing
+     * @param $id int listing_id
+     *
+     * @return Listing
+     */
+    public function updateListing(CreateListingDto $createListingDto, $id): Listing
     {
         return $this->listingsRepository->updateListing($createListingDto, $id);
     }

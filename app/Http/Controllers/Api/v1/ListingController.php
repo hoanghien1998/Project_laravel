@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Requests\CreateListingRequest;
-use App\Http\Requests\GetListingRequest;
 use App\Http\Requests\PaginatedListingRequest;
 use App\Http\Transformers\ListingTransformer;
 use App\Services\ListingService;
@@ -52,7 +51,9 @@ class ListingController extends BaseApiController
      * Create new listing
      *
      * @param CreateListingRequest $request
+     *
      * @return Response
+     *
      * @throws RepositoryException
      */
     public function createListing(CreateListingRequest $request): Response
@@ -68,9 +69,10 @@ class ListingController extends BaseApiController
      * Get all listing pagination
      *
      * @param PaginatedListingRequest $request
+     *
      * @return Response
      */
-    public function paginatedListing(PaginatedListingRequest $request)
+    public function paginatedListing(PaginatedListingRequest $request): Response
     {
         $listings = $this->listingService->paginatedListing($request->getPaginateListingDto());
         return $this->response->paginator($listings, new ListingTransformer());
@@ -80,17 +82,19 @@ class ListingController extends BaseApiController
      * Get the specific listing
      *
      * @param $id
+     *
      * @return Response|JsonResponse
      */
     public function getListing($id)
     {
-        $validator = Validator::make(['id' => $id],
-        [
+        $validator = Validator::make(
+            ['id' => $id],
+            [
             'id' => 'required',
-        ]);
+            ]
+        );
 
-        if($validator->fails()){
-
+        if ($validator->fails()) {
             return response()->json($validator->messages(), 400);
         }
 
@@ -99,16 +103,23 @@ class ListingController extends BaseApiController
         return $this->json($listing, new ListingTransformer());
     }
 
-
+    /**
+     * Update the specific listing
+     *
+     * @param $id
+     * @param CreateListingRequest $request
+     * @return Response|JsonResponse
+     */
     public function updateListing($id, CreateListingRequest $request)
     {
-        $validator = Validator::make(['id' => $id],
-        [
+        $validator = Validator::make(
+            ['id' => $id],
+            [
             'id' => 'required',
-        ]);
+            ]
+        );
 
-        if($validator->fails()){
-
+        if ($validator->fails()) {
             return response()->json($validator->messages(), 400);
         }
 

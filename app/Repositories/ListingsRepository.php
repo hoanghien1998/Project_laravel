@@ -39,6 +39,7 @@ class ListingsRepository extends Repository
      * Get the specific listing
      *
      * @param $id
+     *
      * @return mixed
      */
     public function getListing($id)

@@ -8,4 +8,3 @@ class BaseTransformer extends BaseTransformerFromSaritasa
 {
 
 }
-
