@@ -1,0 +1,4 @@
+type: string
+description: Description
+maxLength: 1000000
+example: Description
