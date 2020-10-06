@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Requests\PaginationCarMakeRequest;
+use App\Http\Requests\PaginationCarModelRequest;
 use App\Http\Transformers\CarsTransformer;
 use App\Services\CarService;
 use Dingo\Api\Http\Response;
@@ -44,5 +45,18 @@ class CarController extends BaseApiController
     {
         $carMakes = $this->carService->carMakes($request->getCreateCarDto());
         return $this->response->paginator($carMakes, new CarsTransformer());
+    }
+
+    /**
+     * Get all list cars models
+     *
+     * @param PaginationCarModelRequest $request
+     *
+     * @return Response
+     */
+    public function carModels(PaginationCarModelRequest $request): Response
+    {
+        $carModels = $this->carService->carModels($request->getPaginateCarModels());
+        return $this->response->paginator($carModels, new CarsTransformer());
     }
 }
