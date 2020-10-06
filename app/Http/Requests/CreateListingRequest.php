@@ -30,7 +30,7 @@ class CreateListingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            CreateListingDto::CAR_TRIM_ID => 'required|int|min:1',
+            CreateListingDto::CAR_TRIM_ID => 'required|int|min:1|exists:car_trims,id',
             CreateListingDto::YEAR => 'required|int|min:1900',
             CreateListingDto::PRICE => 'required|int',
             CreateListingDto::DESCRIPTION => 'string|max:1000000',

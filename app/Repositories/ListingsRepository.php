@@ -26,34 +26,35 @@ class ListingsRepository extends Repository
     /**
      * Get listing pagination.
      *
-     * @param integer $perpage per_page
+     * @param int $perpage per_page
      *
-     * @param integer $model_id model_id
-     * @param integer $make_id make_id
+     * @param int|null $model_id model_id
+     * @param int|null $make_id make_id
+     *
      * @return Listing[]|Collection
      */
-    public function getAllListings($perpage, $model_id, $make_id)
+    public function getAllListings(int $perpage, ?int $model_id, ?int $make_id)
     {
-        if($model_id == null && $make_id == null)
-        {
+        if ($model_id == null && $make_id == null) {
             return Listing::paginate($perpage);
         }
 
         $relations = Listing::join("car_models", 'car_models.id', '=', 'listings.car_model_id');
 
         return $relations->orWhere(['car_model_id' => $model_id])
-                        ->orWhere(['make_id' => $make_id])
-                        ->paginate($perpage);
+            ->orWhere(['make_id' => $make_id])
+            ->select('listings.*', 'car_models.make_id')
+            ->paginate($perpage);
     }
 
     /**
      * Get the specific listing
      *
-     * @param integer $id Id of listing
+     * @param int|null $id Id of listing
      *
      * @return mixed
      */
-    public function getListing(int $id)
+    public function getListing(?int $id)
     {
         return Listing::findOrFail($id);
     }
@@ -62,11 +63,11 @@ class ListingsRepository extends Repository
      * Update the specific listing
      *
      * @param CreateListingDto $createListingDto Create Listing Dto
-     * @param integer $id Id of listing
+     * @param int|null $id Id of listing
      *
      * @return mixed
      */
-    public function updateListing(CreateListingDto $createListingDto, $id)
+    public function updateListing(CreateListingDto $createListingDto, ?int $id)
     {
         Listing::where('id', $id)
             ->update([
@@ -82,10 +83,11 @@ class ListingsRepository extends Repository
     /**
      * Get Model id between Listing and CarModel relationship
      *
-     * @param integer $car_trim_id Car trim id
+     * @param int|null $car_trim_id Car trim id
+     *
      * @return mixed
      */
-    public function getModelId($car_trim_id)
+    public function getModelId(?int $car_trim_id)
     {
         $article = Listing::where(["car_trim_id" => $car_trim_id])->with('carTrim')->first();
         return $article->carTrim->model_id;

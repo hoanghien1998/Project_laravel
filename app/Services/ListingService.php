@@ -58,7 +58,7 @@ class ListingService
      *
      * @throws RepositoryException
      */
-    public function createListing(CreateListingDto $createListingDto, $user_id): Listing
+    public function createListing(CreateListingDto $createListingDto, int $user_id): Listing
     {
 
         $data_tmp = $createListingDto->toArray();
@@ -95,7 +95,7 @@ class ListingService
      *
      * @return Listing
      */
-    public function getListing($id): Listing
+    public function getListing(int $id): Listing
     {
         return $this->listingsRepository->getListing($id);
     }
@@ -108,7 +108,7 @@ class ListingService
      *
      * @return Listing
      */
-    public function updateListing(CreateListingDto $createListingDto, $id): Listing
+    public function updateListing(CreateListingDto $createListingDto, int $id): Listing
     {
         return $this->listingsRepository->updateListing($createListingDto, $id);
     }
