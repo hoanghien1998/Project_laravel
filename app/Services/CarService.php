@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Dto\Cars\CreateCarDto;
-use App\Dto\Cars\PaginateCarModels;
-use App\Dto\Cars\PaginationCarTrims;
+use App\Dto\Cars\PaginateCarMakeDto;
+use App\Dto\Cars\PaginateCarModelsDto;
+use App\Dto\Cars\PaginationCarTrimsDto;
 use App\Models\CarMake;
 use App\Models\CarModel;
 use App\Models\CarTrim;
@@ -57,11 +57,11 @@ class CarService
     /**
      * Get all list carMakes
      *
-     * @param CreateCarDto $createCarDto save param
+     * @param PaginateCarMakeDto $createCarDto save param
      *
      * @return CarMake|CarMake[]|Collection
      */
-    public function carMakes(CreateCarDto $createCarDto)
+    public function carMakes(PaginateCarMakeDto $createCarDto)
     {
         return $this->carsRepository->getAllCarMakes($createCarDto->per_page);
     }
@@ -69,11 +69,11 @@ class CarService
     /**
      * Get all list carModels
      *
-     * @param PaginateCarModels $paginateCarModels save param
+     * @param PaginateCarModelsDto $paginateCarModels save param
      *
      * @return CarModel[]|Collection
      */
-    public function carModels(PaginateCarModels $paginateCarModels)
+    public function carModels(PaginateCarModelsDto $paginateCarModels)
     {
         $per_page = $paginateCarModels->per_page;
         $make_id = $paginateCarModels->make_id;
@@ -83,11 +83,11 @@ class CarService
     /**
      * Get all list carTrims
      *
-     * @param PaginationCarTrims $paginationCarTrims save param
+     * @param PaginationCarTrimsDto $paginationCarTrims save param
      *
      * @return CarTrim[]|Collection
      */
-    public function carTrims(PaginationCarTrims $paginationCarTrims)
+    public function carTrims(PaginationCarTrimsDto $paginationCarTrims)
     {
         $per_page = $paginationCarTrims->per_page;
         $model_id = $paginationCarTrims->model_id;

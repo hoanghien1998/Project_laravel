@@ -4,11 +4,11 @@ namespace App\Dto\Cars;
 
 use Saritasa\Dto;
 
-class PaginationCarTrims extends Dto
+class PaginateCarModelsDto extends Dto
 {
     public const PER_PAGE = 'per_page';
     public const PAGE = 'page';
-    public const MODEL_ID = 'model_id';
+    public const MAKE_ID = 'make_id';
 
     /**
      * Cars per page
@@ -25,9 +25,9 @@ class PaginationCarTrims extends Dto
     public $page;
 
     /**
-     * Car model id in table car_trims
+     * Cars make id in table car_models
      *
      * @var integer
      */
-    public $model_id;
+    public $make_id;
 }

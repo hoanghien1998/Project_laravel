@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Dto\Cars\PaginateCarModels;
+use App\Dto\Cars\PaginateCarModelsDto;
 
 /**
  * Class PaginationCarMakeRequest
@@ -29,9 +29,9 @@ class PaginationCarModelRequest extends Request
     public function rules(): array
     {
         return [
-            PaginateCarModels::PER_PAGE => 'integer|min:1',
-            PaginateCarModels::PAGE => 'integer|min:1',
-            PaginateCarModels::MAKE_ID => 'integer|min:1',
+            PaginateCarModelsDto::PER_PAGE => 'integer|min:1',
+            PaginateCarModelsDto::PAGE => 'integer|min:1',
+            PaginateCarModelsDto::MAKE_ID => 'integer|min:1',
 
         ];
     }
@@ -39,18 +39,18 @@ class PaginationCarModelRequest extends Request
     /**
      * Returns car models data from request.
      *
-     * @return PaginateCarModels
+     * @return PaginateCarModelsDto
      */
-    public function getPaginateCarModels(): PaginateCarModels
+    public function getPaginateCarModels(): PaginateCarModelsDto
     {
         $param = $this->only([
-            PaginateCarModels::PER_PAGE,
-            PaginateCarModels::PAGE,
-            PaginateCarModels::MAKE_ID,
+            PaginateCarModelsDto::PER_PAGE,
+            PaginateCarModelsDto::PAGE,
+            PaginateCarModelsDto::MAKE_ID,
         ]);
-        $param[PaginateCarModels::PER_PAGE] = $param[PaginateCarModels::PER_PAGE] ?? 30;
-        $param[PaginateCarModels::PAGE] = $param[PaginateCarModels::PAGE] ?? 1;
+        $param[PaginateCarModelsDto::PER_PAGE] = $param[PaginateCarModelsDto::PER_PAGE] ?? 30;
+        $param[PaginateCarModelsDto::PAGE] = $param[PaginateCarModelsDto::PAGE] ?? 1;
 
-        return new PaginateCarModels($param);
+        return new PaginateCarModelsDto($param);
     }
 }

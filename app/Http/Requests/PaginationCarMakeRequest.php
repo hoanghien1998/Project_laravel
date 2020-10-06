@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Dto\Cars\CreateCarDto;
+use App\Dto\Cars\PaginateCarMakeDto;
 
 /**
  * Class PaginationCarMakeRequest
@@ -29,8 +29,8 @@ class PaginationCarMakeRequest extends Request
     public function rules(): array
     {
         return [
-            CreateCarDto::PER_PAGE => 'integer|min:1',
-            CreateCarDto::PAGE => 'integer|min:1',
+            PaginateCarMakeDto::PER_PAGE => 'integer|min:1',
+            PaginateCarMakeDto::PAGE => 'integer|min:1',
 
         ];
     }
@@ -38,17 +38,17 @@ class PaginationCarMakeRequest extends Request
     /**
      * Returns car makes data from request.
      *
-     * @return CreateCarDto
+     * @return PaginateCarMakeDto
      */
-    public function getCreateCarDto(): CreateCarDto
+    public function getCreateCarDto(): PaginateCarMakeDto
     {
         $param = $this->only([
-            CreateCarDto::PER_PAGE,
-            CreateCarDto::PAGE,
+            PaginateCarMakeDto::PER_PAGE,
+            PaginateCarMakeDto::PAGE,
         ]);
-        $param[CreateCarDto::PER_PAGE] = $param[CreateCarDto::PER_PAGE] ?? 30;
-        $param[CreateCarDto::PAGE] = $param[CreateCarDto::PAGE] ?? 1;
+        $param[PaginateCarMakeDto::PER_PAGE] = $param[PaginateCarMakeDto::PER_PAGE] ?? 30;
+        $param[PaginateCarMakeDto::PAGE] = $param[PaginateCarMakeDto::PAGE] ?? 1;
 
-        return new CreateCarDto($param);
+        return new PaginateCarMakeDto($param);
     }
 }

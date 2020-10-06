@@ -4,11 +4,18 @@ namespace App\Dto\Cars;
 
 use Saritasa\Dto;
 
-class PaginateCarModels extends Dto
+/**
+ * Class CreateCarDto Data transfer object with car make profile information
+ *
+ * @package App\Dto\Cars
+ *
+ * @property int $per_page
+ * @property int $page
+ */
+class PaginateCarMakeDto extends Dto
 {
     public const PER_PAGE = 'per_page';
     public const PAGE = 'page';
-    public const MAKE_ID = 'make_id';
 
     /**
      * Cars per page
@@ -23,11 +30,4 @@ class PaginateCarModels extends Dto
      * @var integer
      */
     public $page;
-
-    /**
-     * Cars make id in table car_models
-     *
-     * @var integer
-     */
-    public $make_id;
 }
