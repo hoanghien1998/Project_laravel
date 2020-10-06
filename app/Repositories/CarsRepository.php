@@ -40,14 +40,16 @@ class CarsRepository extends Repository
     /**
      * Get all carModels pagination.
      *
-     * @param integer $per_page save param
-     *
-     * @param integer $make_id get value from field in table car_models
+     * @param int $per_page save param
+     * @param int|null $make_id get value from field in table car_models
      *
      * @return CarModel[]|Collection
      */
-    public function getAllCarModels(int $per_page, int $make_id)
+    public function getAllCarModels(int $per_page, ?int $make_id)
     {
+        if ($make_id == null) {
+            return CarModel::paginate($per_page);
+        }
         return CarModel::where('make_id', $make_id)->paginate($per_page);
     }
 
@@ -55,12 +57,15 @@ class CarsRepository extends Repository
      * Get all carTrims pagination
      *
      * @param integer $per_page save param
-     * @param integer $model_id get value param
+     * @param int|null $model_id get value param
      *
      * @return CarTrim[]|Collection
      */
-    public function getAllCarTrims(int $per_page, int $model_id)
+    public function getAllCarTrims(int $per_page, ?int $model_id)
     {
+        if ($model_id == null) {
+            return CarModel::paginate($per_page);
+        }
         return CarTrim::where('model_id', $model_id)->paginate($per_page);
     }
 }

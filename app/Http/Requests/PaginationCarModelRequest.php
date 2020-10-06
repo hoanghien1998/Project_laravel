@@ -50,7 +50,6 @@ class PaginationCarModelRequest extends Request
         ]);
         $param[PaginateCarModels::PER_PAGE] = $param[PaginateCarModels::PER_PAGE] ?? 30;
         $param[PaginateCarModels::PAGE] = $param[PaginateCarModels::PAGE] ?? 1;
-        $param[PaginateCarModels::MAKE_ID] = $param[PaginateCarModels::MAKE_ID] ?? 241;
 
         return new PaginateCarModels($param);
     }

@@ -49,7 +49,6 @@ class PaginationCarTrimRequest extends Request
         ]);
         $param[PaginationCarTrims::PER_PAGE] = $param[PaginationCarTrims::PER_PAGE] ?? 30;
         $param[PaginationCarTrims::PAGE] = $param[PaginationCarTrims::PAGE] ?? 1;
-        $param[PaginationCarTrims::MODEL_ID] = $param[PaginationCarTrims::MODEL_ID] ?? 15;
 
         return new PaginationCarTrims($param);
     }
