@@ -29,8 +29,8 @@ class PaginationCarMakeRequest extends Request
     public function rules(): array
     {
         return [
-            CreateCarDto::PER_PAGE => 'required|integer|min:1',
-            CreateCarDto::PAGE => 'required|integer|min:1',
+            CreateCarDto::PER_PAGE => 'integer|min:1',
+            CreateCarDto::PAGE => 'integer|min:1',
 
         ];
     }

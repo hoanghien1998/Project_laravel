@@ -22,13 +22,13 @@ class CarsRepository extends Repository
     }
 
     /**
-     * Get all carMakes
+     * Get all carMakes pagination
      *
      * @param $per_page
      *
-     * @return CarMake
+     * @return CarMake[]|Collection
      */
-    public function getAllCarMakes($per_page): CarMake
+    public function getAllCarMakes($per_page)
     {
         return CarMake::paginate($per_page);
     }
