@@ -34,6 +34,11 @@ class ListingsRepository extends Repository
      */
     public function getAllListings($perpage, $model_id, $make_id)
     {
+        if($model_id == null && $make_id == null)
+        {
+            return Listing::paginate($perpage);
+        }
+
         $relations = Listing::join("car_models", 'car_models.id', '=', 'listings.car_model_id');
 
         return $relations->orWhere(['car_model_id' => $model_id])

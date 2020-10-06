@@ -52,8 +52,6 @@ class PaginatedListingRequest extends FormRequest
         ]);
         $param[PaginatedListingDto::PER_PAGE] = $param[PaginatedListingDto::PER_PAGE] ?? 30;
         $param[PaginatedListingDto::PAGE] = $param[PaginatedListingDto::PAGE] ?? 1;
-        $param[PaginatedListingDto::MAKE_ID] = $param[PaginatedListingDto::MAKE_ID] ?? 241;
-        $param[PaginatedListingDto::MODEL_ID] = $param[PaginatedListingDto::MODEL_ID] ?? 15;
 
         return new PaginatedListingDto($param);
     }

@@ -84,6 +84,7 @@ class ListingService
         $per_page = $paginatedListingDto->per_page;
         $model_id = $paginatedListingDto->model_id;
         $make_id = $paginatedListingDto->make_id;
+
         return $this->listingsRepository->getAllListings($per_page, $model_id, $make_id);
     }
 
