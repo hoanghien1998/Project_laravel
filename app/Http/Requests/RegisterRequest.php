@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return int[]
      */
     public function rules(): array
     {

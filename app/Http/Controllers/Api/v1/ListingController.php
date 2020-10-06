@@ -38,7 +38,7 @@ class ListingController extends BaseApiController
      * ListingController constructor.
      *
      * @param ListingService $listingService Listing business-logic service.
-     * @param JWTAuth $jwtAuth
+     * @param JWTAuth $jwtAuth authentication
      */
     public function __construct(ListingService $listingService, JWTAuth $jwtAuth)
     {
@@ -50,7 +50,7 @@ class ListingController extends BaseApiController
     /**
      * Create new listing
      *
-     * @param CreateListingRequest $request
+     * @param CreateListingRequest $request Validate form create
      *
      * @return Response
      *
@@ -68,7 +68,7 @@ class ListingController extends BaseApiController
     /**
      * Get all listing pagination
      *
-     * @param PaginatedListingRequest $request
+     * @param PaginatedListingRequest $request Validate params pagination
      *
      * @return Response
      */
@@ -81,11 +81,11 @@ class ListingController extends BaseApiController
     /**
      * Get the specific listing
      *
-     * @param $id
+     * @param integer $id Id of listing
      *
      * @return Response|JsonResponse
      */
-    public function getListing($id)
+    public function getListing(int $id)
     {
         $validator = Validator::make(
             ['id' => $id],
@@ -106,11 +106,12 @@ class ListingController extends BaseApiController
     /**
      * Update the specific listing
      *
-     * @param $id
-     * @param CreateListingRequest $request
+     * @param integer $id Id of listing
+     * @param CreateListingRequest $request Validate form update
+     *
      * @return Response|JsonResponse
      */
-    public function updateListing($id, CreateListingRequest $request)
+    public function updateListing(int $id, CreateListingRequest $request)
     {
         $validator = Validator::make(
             ['id' => $id],

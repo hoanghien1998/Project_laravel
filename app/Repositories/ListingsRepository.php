@@ -26,11 +26,11 @@ class ListingsRepository extends Repository
     /**
      * Get listing pagination.
      *
-     * @param $perpage
+     * @param integer $perpage per_page
      *
      * @return Listing[]|Collection
      */
-    public function getAllListings($perpage)
+    public function getAllListings(int $perpage)
     {
         return Listing::paginate($perpage);
     }
@@ -38,16 +38,24 @@ class ListingsRepository extends Repository
     /**
      * Get the specific listing
      *
-     * @param $id
+     * @param integer $id Id of listing
      *
      * @return mixed
      */
-    public function getListing($id)
+    public function getListing(int $id)
     {
         return Listing::findOrFail($id);
     }
 
-    public function updateListing(CreateListingDto $createListingDto, $id)
+    /**
+     * Update the specific listing
+     *
+     * @param CreateListingDto $createListingDto Create Listing Dto
+     * @param integer $id Id of listing
+     *
+     * @return mixed
+     */
+    public function updateListing(CreateListingDto $createListingDto, int $id)
     {
         Listing::where('id', $id)
             ->update([

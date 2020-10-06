@@ -51,14 +51,14 @@ class ListingService
      * Create user and fill user's profile.
      *
      * @param CreateListingDto $createListingDto Create listing dto
-     * @param $user_id
+     * @param integer $user_id user id
      * return Model
      *
      * @return Listing
      *
      * @throws RepositoryException
      */
-    public function listings(CreateListingDto $createListingDto, $user_id): Listing
+    public function listings(CreateListingDto $createListingDto, int $user_id): Listing
     {
         $data_tmp = $createListingDto->toArray();
 
@@ -86,11 +86,11 @@ class ListingService
     /**
      * Get the specific listing.
      *
-     * @param $id
+     * @param integer $id id of listing
      *
      * @return Listing
      */
-    public function getListing($id): Listing
+    public function getListing(int $id): Listing
     {
         return $this->listingsRepository->getListing($id);
     }
@@ -99,11 +99,11 @@ class ListingService
      * Update the specific listing
      *
      * @param CreateListingDto $createListingDto provide value to update listing
-     * @param $id int listing_id
+     * @param integer $id listing_id
      *
      * @return Listing
      */
-    public function updateListing(CreateListingDto $createListingDto, $id): Listing
+    public function updateListing(CreateListingDto $createListingDto, int $id): Listing
     {
         return $this->listingsRepository->updateListing($createListingDto, $id);
     }
