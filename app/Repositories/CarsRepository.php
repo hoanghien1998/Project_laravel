@@ -28,7 +28,7 @@ class CarsRepository extends Repository
     /**
      * Get all carMakes pagination
      *
-     * @param integer $per_page set param default
+     * @param integer $per_page save param
      *
      * @return CarMake[]|Collection
      */
@@ -38,26 +38,29 @@ class CarsRepository extends Repository
     }
 
     /**
-     * Get all carModels pagination
+     * Get all carModels pagination.
      *
-     * @param integer $per_page set param default
+     * @param integer $per_page save param
+     *
+     * @param integer $make_id get value from field in table car_models
      *
      * @return CarModel[]|Collection
      */
-    public function getAllCarModels(int $per_page)
+    public function getAllCarModels(int $per_page, int $make_id)
     {
-        return CarModel::paginate($per_page);
+        return CarModel::where('make_id', $make_id)->paginate($per_page);
     }
 
     /**
      * Get all carTrims pagination
      *
-     * @param integer $per_page set param default
+     * @param integer $per_page save param
+     * @param integer $model_id get value param
      *
      * @return CarTrim[]|Collection
      */
-    public function getAllCarTrims(int $per_page)
+    public function getAllCarTrims(int $per_page, int $model_id)
     {
-        return CarTrim::paginate($per_page);
+        return CarTrim::where('model_id', $model_id)->paginate($per_page);
     }
 }

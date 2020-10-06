@@ -75,7 +75,9 @@ class CarService
      */
     public function carModels(PaginateCarModels $paginateCarModels)
     {
-        return $this->carsRepository->getAllCarModels($paginateCarModels->per_page);
+        $per_page = $paginateCarModels->per_page;
+        $make_id = $paginateCarModels->make_id;
+        return $this->carsRepository->getAllCarModels($per_page, $make_id);
     }
 
     /**
@@ -87,6 +89,8 @@ class CarService
      */
     public function carTrims(PaginationCarTrims $paginationCarTrims)
     {
-        return $this->carsRepository->getAllCarTrims($paginationCarTrims->per_page);
+        $per_page = $paginationCarTrims->per_page;
+        $model_id = $paginationCarTrims->model_id;
+        return $this->carsRepository->getAllCarTrims($per_page, $model_id);
     }
 }
