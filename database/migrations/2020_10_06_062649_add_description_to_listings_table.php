@@ -14,7 +14,7 @@ class AddDescriptionToListingsTable extends Migration
     public function up()
     {
         Schema::table('listings', function (Blueprint $table) {
-            $table->string('descripton')->after("price");
+            $table->string('description')->after("price");
         });
     }
 

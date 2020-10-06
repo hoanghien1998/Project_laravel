@@ -9,24 +9,17 @@ use Saritasa\Dto;
  *
  * @package App\Dto\Listings
  *
- * @property int $car_model_id
  * @property int $car_trim_id
  * @property int $year
  * @property int $price
+ * @property string $description
  */
 class CreateListingDto extends Dto
 {
-    public const CAR_MODEL_ID = 'car_model_id';
     public const CAR_TRIM_ID = 'car_trim_id';
     public const YEAR = 'year';
     public const PRICE = 'price';
-
-    /**
-     * Listing car model id.
-     *
-     * @var int
-     */
-    public $car_model_id;
+    public const DESCRIPTION = 'description';
 
     /**
      * Listing car trim id.
@@ -48,4 +41,11 @@ class CreateListingDto extends Dto
      * @var int
      */
     public $price;
+
+    /**
+     * Listing description.
+     *
+     * @var string
+     */
+    public $description;
 }

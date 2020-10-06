@@ -28,11 +28,17 @@ class ListingsRepository extends Repository
      *
      * @param integer $perpage per_page
      *
+     * @param integer $model_id model_id
+     * @param integer $make_id make_id
      * @return Listing[]|Collection
      */
-    public function getAllListings(int $perpage)
+    public function getAllListings($perpage, $model_id, $make_id)
     {
-        return Listing::paginate($perpage);
+        $relations = Listing::join("car_models", 'car_models.id', '=', 'listings.car_model_id');
+
+        return $relations->orWhere(['car_model_id' => $model_id])
+                        ->orWhere(['make_id' => $make_id])
+                        ->paginate($perpage);
     }
 
     /**
@@ -55,16 +61,28 @@ class ListingsRepository extends Repository
      *
      * @return mixed
      */
-    public function updateListing(CreateListingDto $createListingDto, int $id)
+    public function updateListing(CreateListingDto $createListingDto, $id)
     {
         Listing::where('id', $id)
             ->update([
-                CreateListingDto::CAR_MODEL_ID => $createListingDto->car_model_id,
                 CreateListingDto::CAR_TRIM_ID => $createListingDto->car_trim_id,
                 CreateListingDto::YEAR => $createListingDto->year,
                 CreateListingDto::PRICE => $createListingDto->price,
+                CreateListingDto::DESCRIPTION => $createListingDto->description,
                 ]);
 
         return Listing::findOrFail($id);
+    }
+
+    /**
+     * Get Model id between Listing and CarModel relationship
+     *
+     * @param integer $car_trim_id Car trim id
+     * @return mixed
+     */
+    public function getModelId($car_trim_id)
+    {
+        $article = Listing::where(["car_trim_id" => $car_trim_id])->with('carTrim')->first();
+        return $article->carTrim->model_id;
     }
 }

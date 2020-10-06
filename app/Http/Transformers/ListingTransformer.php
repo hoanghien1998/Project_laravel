@@ -21,6 +21,7 @@ class ListingTransformer extends BaseTransformer
             'car_trim_id' => $model->car_trim_id,
             'year' => $model->year,
             'price' => $model->price,
+            'description' => $model->description,
             'created_by' => $model->created_by,
         ];
     }

@@ -58,13 +58,15 @@ class ListingService
      *
      * @throws RepositoryException
      */
-    public function createListing(CreateListingDto $createListingDto, int $user_id): Listing
+    public function createListing(CreateListingDto $createListingDto, $user_id): Listing
     {
-        $data_tmp = $createListingDto->toArray();
 
+        $data_tmp = $createListingDto->toArray();
+        $modelId = $this->listingsRepository->getModelId($createListingDto->car_trim_id);
         $data = array_merge(
             $data_tmp,
-            ['created_by' => $user_id]
+            ['created_by' => $user_id],
+            ['car_model_id' => $modelId]
         );
 
         return $this->repository->create(new Listing($data));
@@ -80,7 +82,9 @@ class ListingService
     public function paginatedListing(PaginatedListingDto $paginatedListingDto)
     {
         $per_page = $paginatedListingDto->per_page;
-        return $this->listingsRepository->getAllListings($per_page);
+        $model_id = $paginatedListingDto->model_id;
+        $make_id = $paginatedListingDto->make_id;
+        return $this->listingsRepository->getAllListings($per_page, $model_id, $make_id);
     }
 
     /**
@@ -90,7 +94,7 @@ class ListingService
      *
      * @return Listing
      */
-    public function getListing(int $id): Listing
+    public function getListing($id): Listing
     {
         return $this->listingsRepository->getListing($id);
     }
@@ -103,7 +107,7 @@ class ListingService
      *
      * @return Listing
      */
-    public function updateListing(CreateListingDto $createListingDto, int $id): Listing
+    public function updateListing(CreateListingDto $createListingDto, $id): Listing
     {
         return $this->listingsRepository->updateListing($createListingDto, $id);
     }
