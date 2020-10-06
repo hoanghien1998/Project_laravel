@@ -41,6 +41,7 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
         $registrar->delete('auth', JWTAuthApiController::class, 'logout');
         $registrar->get('cars/makes', CarController::class, 'carMakes');
         $registrar->get('cars/models', CarController::class, 'carModels');
+        $registrar->get('cars/trims', CarController::class, 'carTrims');
     });
 
     $registrar->post('/register', AuthController::class,'register');

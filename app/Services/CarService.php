@@ -4,8 +4,10 @@ namespace App\Services;
 
 use App\Dto\Cars\CreateCarDto;
 use App\Dto\Cars\PaginateCarModels;
+use App\Dto\Cars\PaginationCarTrims;
 use App\Models\CarMake;
 use App\Models\CarModel;
+use App\Models\CarTrim;
 use App\Repositories\CarsRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
@@ -48,6 +50,7 @@ class CarService
     {
         $this->repository = $repositoryFactory->getRepository(CarMake::class);
         $this->repository = $repositoryFactory->getRepository(CarModel::class);
+        $this->repository = $repositoryFactory->getRepository(CarTrim::class);
         $this->carsRepository = $carsRepository;
     }
 
@@ -68,10 +71,22 @@ class CarService
      *
      * @param PaginateCarModels $paginateCarModels save param
      *
-     * @return CarModel[]|\App\Repositories\Collection
+     * @return CarModel[]|Collection
      */
     public function carModels(PaginateCarModels $paginateCarModels)
     {
         return $this->carsRepository->getAllCarModels($paginateCarModels->per_page);
+    }
+
+    /**
+     * Get all list carTrims
+     *
+     * @param PaginationCarTrims $paginationCarTrims save param
+     *
+     * @return CarTrim[]|Collection
+     */
+    public function carTrims(PaginationCarTrims $paginationCarTrims)
+    {
+        return $this->carsRepository->getAllCarTrims($paginationCarTrims->per_page);
     }
 }

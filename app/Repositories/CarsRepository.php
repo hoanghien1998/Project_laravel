@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\CarMake;
 use App\Models\CarModel;
+use App\Models\CarTrim;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
 use Saritasa\LaravelRepositories\Repositories\Repository;
 
@@ -21,16 +22,17 @@ class CarsRepository extends Repository
     {
         parent::__construct(CarMake::class);
         parent::__construct(CarModel::class);
+        parent::__construct(CarTrim::class);
     }
 
     /**
      * Get all carMakes pagination
      *
-     * @param $per_page
+     * @param integer $per_page set param default
      *
      * @return CarMake[]|Collection
      */
-    public function getAllCarMakes($per_page)
+    public function getAllCarMakes(int $per_page)
     {
         return CarMake::paginate($per_page);
     }
@@ -38,12 +40,24 @@ class CarsRepository extends Repository
     /**
      * Get all carModels pagination
      *
-     * @param $per_page
+     * @param integer $per_page set param default
      *
      * @return CarModel[]|Collection
      */
-    public function getAllCarModels($per_page)
+    public function getAllCarModels(int $per_page)
     {
         return CarModel::paginate($per_page);
+    }
+
+    /**
+     * Get all carTrims pagination
+     *
+     * @param integer $per_page set param default
+     *
+     * @return CarTrim[]|Collection
+     */
+    public function getAllCarTrims(int $per_page)
+    {
+        return CarTrim::paginate($per_page);
     }
 }

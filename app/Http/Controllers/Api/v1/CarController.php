@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Requests\PaginationCarMakeRequest;
 use App\Http\Requests\PaginationCarModelRequest;
+use App\Http\Requests\PaginationCarTrimRequest;
 use App\Http\Transformers\CarsTransformer;
 use App\Services\CarService;
 use Dingo\Api\Http\Response;
@@ -50,7 +51,7 @@ class CarController extends BaseApiController
     /**
      * Get all list cars models
      *
-     * @param PaginationCarModelRequest $request
+     * @param PaginationCarModelRequest $request get request validate
      *
      * @return Response
      */
@@ -58,5 +59,18 @@ class CarController extends BaseApiController
     {
         $carModels = $this->carService->carModels($request->getPaginateCarModels());
         return $this->response->paginator($carModels, new CarsTransformer());
+    }
+
+    /**
+     * Get all list cars models
+     *
+     * @param PaginationCarTrimRequest $request get request validate
+     *
+     * @return Response
+     */
+    public function carTrims(PaginationCarTrimRequest $request): Response
+    {
+        $carTrims = $this->carService->carTrims($request->getPaginationCarTrims());
+        return $this->response->paginator($carTrims, new CarsTransformer());
     }
 }
