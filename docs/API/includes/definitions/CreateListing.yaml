@@ -1,14 +1,10 @@
 type: object
 description: Model for listing creating
 required:
-- car_model_id
 - car_trim_id
 - year
 - price
 properties:
-
-  car_model_id:
-    $ref: 'utils/Identifier.yaml'
 
   car_trim_id:
     $ref: 'utils/Identifier.yaml'
@@ -18,3 +14,11 @@ properties:
 
   price:
     $ref: 'utils/Money.yaml'
+
+  description:
+    $ref: 'utils/Description.yaml'
+
+  medias:
+    items:
+      $ref: 'utils/ImageURL.yaml'
+
