@@ -60,7 +60,7 @@ class ListingController extends BaseApiController
     {
         $user_id = $this->jwtAuth->user()->id;
 
-        $listing = $this->listingService->listings($request->getCreateListingDto(), $user_id);
+        $listing = $this->listingService->createListing($request->getCreateListingDto(), $user_id);
 
         return $this->json($listing, new ListingTransformer());
     }
