@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\CarMake;
 use App\Models\CarModel;
 use App\Models\CarTrim;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
 use Saritasa\LaravelRepositories\Repositories\Repository;
 
@@ -28,11 +29,11 @@ class CarsRepository extends Repository
     /**
      * Get all carMakes pagination
      *
-     * @param integer $per_page save param
+     * @param int|null $per_page save param
      *
      * @return CarMake[]|Collection
      */
-    public function getAllCarMakes(int $per_page)
+    public function getAllCarMakes(?int $per_page)
     {
         return CarMake::paginate($per_page);
     }
@@ -40,32 +41,34 @@ class CarsRepository extends Repository
     /**
      * Get all carModels pagination.
      *
-     * @param int $per_page save param
+     * @param int|null $per_page save param
      * @param int|null $make_id get value from field in table car_models
      *
-     * @return CarModel[]|Collection
+     * @return LengthAwarePaginator
      */
-    public function getAllCarModels(int $per_page, ?int $make_id)
+    public function getAllCarModels(?int $per_page, ?int $make_id): LengthAwarePaginator
     {
-        if ($make_id == null) {
-            return CarModel::paginate($per_page);
+        $builder = CarModel::query();
+        if (!empty($make_id)) {
+            $builder->where('make_id', $make_id);
         }
-        return CarModel::where('make_id', $make_id)->paginate($per_page);
+        return $builder->paginate($per_page);
     }
 
     /**
      * Get all carTrims pagination
      *
-     * @param integer $per_page save param
+     * @param int|null $per_page save param
      * @param int|null $model_id get value param
      *
-     * @return CarTrim[]|Collection
+     * @return LengthAwarePaginator
      */
-    public function getAllCarTrims(int $per_page, ?int $model_id)
+    public function getAllCarTrims(?int $per_page, ?int $model_id): LengthAwarePaginator
     {
-        if ($model_id == null) {
-            return CarModel::paginate($per_page);
+        $builder = CarTrim::query();
+        if (!empty($model_id)) {
+            $builder->where('model_id', $model_id);
         }
-        return CarTrim::where('model_id', $model_id)->paginate($per_page);
+        return $builder->paginate($per_page);
     }
 }

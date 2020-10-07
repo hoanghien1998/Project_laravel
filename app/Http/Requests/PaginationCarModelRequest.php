@@ -9,18 +9,8 @@ use App\Dto\Cars\PaginateCarModelsDto;
  *
  * @package App\Http\Requests
  */
-class PaginationCarModelRequest extends Request
+class PaginationCarModelRequest extends PaginationCarMakeRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return boolean
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -29,10 +19,7 @@ class PaginationCarModelRequest extends Request
     public function rules(): array
     {
         return [
-            PaginateCarModelsDto::PER_PAGE => 'integer|min:1',
-            PaginateCarModelsDto::PAGE => 'integer|min:1',
             PaginateCarModelsDto::MAKE_ID => 'integer|min:1',
-
         ];
     }
 
@@ -43,14 +30,9 @@ class PaginationCarModelRequest extends Request
      */
     public function getPaginateCarModels(): PaginateCarModelsDto
     {
-        $param = $this->only([
-            PaginateCarModelsDto::PER_PAGE,
-            PaginateCarModelsDto::PAGE,
+        $param = $this->all([
             PaginateCarModelsDto::MAKE_ID,
         ]);
-        $param[PaginateCarModelsDto::PER_PAGE] = $param[PaginateCarModelsDto::PER_PAGE] ?? 30;
-        $param[PaginateCarModelsDto::PAGE] = $param[PaginateCarModelsDto::PAGE] ?? 1;
-
         return new PaginateCarModelsDto($param);
     }
 }

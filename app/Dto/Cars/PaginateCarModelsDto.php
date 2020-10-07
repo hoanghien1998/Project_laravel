@@ -2,27 +2,11 @@
 
 namespace App\Dto\Cars;
 
-use Saritasa\Dto;
+use App\Dto\Cars\PaginateCarDto;
 
-class PaginateCarModelsDto extends Dto
+class PaginateCarModelsDto extends PaginateCarDto
 {
-    public const PER_PAGE = 'per_page';
-    public const PAGE = 'page';
     public const MAKE_ID = 'make_id';
-
-    /**
-     * Cars per page
-     *
-     * @var integer
-     */
-    public $per_page;
-
-    /**
-     * Cars page
-     *
-     * @var integer
-     */
-    public $page;
 
     /**
      * Cars make id in table car_models

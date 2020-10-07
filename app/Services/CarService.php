@@ -10,6 +10,7 @@ use App\Models\CarModel;
 use App\Models\CarTrim;
 use App\Repositories\CarsRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Saritasa\LaravelRepositories\Contracts\IRepository;
 use Saritasa\LaravelRepositories\Contracts\IRepositoryFactory;
@@ -71,9 +72,9 @@ class CarService
      *
      * @param PaginateCarModelsDto $paginateCarModels save param
      *
-     * @return CarModel[]|Collection
+     * @return LengthAwarePaginator
      */
-    public function carModels(PaginateCarModelsDto $paginateCarModels)
+    public function carModels(PaginateCarModelsDto $paginateCarModels): LengthAwarePaginator
     {
         $per_page = $paginateCarModels->per_page;
         $make_id = $paginateCarModels->make_id;
@@ -85,9 +86,9 @@ class CarService
      *
      * @param PaginationCarTrimsDto $paginationCarTrims save param
      *
-     * @return CarTrim[]|Collection
+     * @return LengthAwarePaginator
      */
-    public function carTrims(PaginationCarTrimsDto $paginationCarTrims)
+    public function carTrims(PaginationCarTrimsDto $paginationCarTrims): LengthAwarePaginator
     {
         $per_page = $paginationCarTrims->per_page;
         $model_id = $paginationCarTrims->model_id;
