@@ -3,8 +3,9 @@
 namespace App\Repositories;
 
 use App\Dto\Listings\CreateListingDto;
+use App\Models\CarModel;
 use App\Models\Listing;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
 use Saritasa\LaravelRepositories\Repositories\Repository;
 
@@ -31,19 +32,24 @@ class ListingsRepository extends Repository
      * @param int|null $model_id model_id
      * @param int|null $make_id make_id
      *
-     * @return Listing[]|Collection
+     * @return LengthAwarePaginator
      */
-    public function getAllListings(int $perpage, ?int $model_id, ?int $make_id)
+    public function getAllListings(int $perpage, ?int $model_id, ?int $make_id): LengthAwarePaginator
     {
         if ($model_id == null && $make_id == null) {
             return Listing::paginate($perpage);
         }
 
-        $relations = Listing::join("car_models", 'car_models.id', '=', 'listings.car_model_id');
+        $relations = Listing::join(
+            CarModel::TABLE_NAME,
+            CarModel::TABLE_NAME.'.'.CarModel::ID,
+            '=',
+            Listing::TABLE_NAME.'.'.Listing::CAR_MODEL_ID
+        );
 
-        return $relations->orWhere(['car_model_id' => $model_id])
-            ->orWhere(['make_id' => $make_id])
-            ->select('listings.*', 'car_models.make_id')
+        return $relations->orWhere([Listing::CAR_MODEL_ID => $model_id])
+            ->orWhere([CarModel::MAKE_ID => $make_id])
+            ->select(Listing::TABLE_NAME.'.*', CarModel::TABLE_NAME.'.'.CarModel::MAKE_ID)
             ->paginate($perpage);
     }
 

@@ -26,7 +26,7 @@ class AddDescriptionToListingsTable extends Migration
     public function down()
     {
         Schema::table('listings', function (Blueprint $table) {
-            //
+            $table->dropColumn('description');
         });
     }
 }

@@ -65,7 +65,6 @@ class Listing extends Model
         self::CAR_TRIM_ID => 'int',
         self::YEAR => 'int',
         self::PRICE => 'int',
-        self::DESCRIPTION => 'string',
         self::CREATED_BY => 'int',
     ];
 
