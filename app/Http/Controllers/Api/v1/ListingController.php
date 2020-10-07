@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Requests\CreateListingRequest;
-use App\Http\Requests\PaginatedListingRequest;
+use App\Http\Requests\Listings\CreateListingRequest;
+use App\Http\Requests\Listings\PaginatedListingRequest;
 use App\Http\Transformers\ListingTransformer;
 use App\Services\ListingService;
 use Dingo\Api\Http\Response;
@@ -14,7 +14,7 @@ use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
 use Tymon\JWTAuth\JWTAuth;
 
 /**
- * Class ListingController Listing information of cars controller.
+ * Class ListingController Listing information of cars.
  *
  * @package App\Http\Controllers\Api\v1
  */

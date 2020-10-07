@@ -7,7 +7,7 @@ use App\Dto\Listings\PaginatedListingDto;
 use App\Models\Listing;
 use App\Repositories\ListingsRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Saritasa\LaravelRepositories\Contracts\IRepository;
 use Saritasa\LaravelRepositories\Contracts\IRepositoryFactory;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
@@ -77,9 +77,9 @@ class ListingService
      *
      * @param PaginatedListingDto $paginatedListingDto Paginated listing dto
      *
-     * @return Listing[]|Collection
+     * @return LengthAwarePaginator
      */
-    public function paginatedListing(PaginatedListingDto $paginatedListingDto)
+    public function paginatedListing(PaginatedListingDto $paginatedListingDto): LengthAwarePaginator
     {
         $per_page = $paginatedListingDto->per_page;
         $model_id = $paginatedListingDto->model_id;

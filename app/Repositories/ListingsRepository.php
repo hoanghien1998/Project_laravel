@@ -15,7 +15,7 @@ use Saritasa\LaravelRepositories\Repositories\Repository;
 class ListingsRepository extends Repository
 {
     /**
-     * RolesRepository constructor.
+     * ListingsRepository constructor.
      *
      * @throws RepositoryException
      */

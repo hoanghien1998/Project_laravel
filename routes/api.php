@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\v1\CommentController;
 use App\Http\Controllers\Api\v1\ListingController;
 use Dingo\Api\Routing\Router;
 use Saritasa\LaravelControllers\Api\ApiResourceRegistrar;
@@ -28,25 +29,38 @@ $api = app(Router::class);
 $api->version(config('api.version'), ['middleware' => 'bindings'], function (Router $api) {
     $registrar = new ApiResourceRegistrar($api);
 
-    $registrar->post('auth', JWTAuthApiController::class, 'login');
-    $registrar->put('auth', JWTAuthApiController::class, 'refreshToken');
-
-    $registrar->post('auth/password/reset', ForgotPasswordApiController::class, 'sendResetLinkEmail');
-    $registrar->put('auth/password/reset', ResetPasswordApiController::class, 'reset');
-
     // Group of routes that require authentication
     $api->group(['middleware' => ['jwt.auth']], function (Router $api) {
-        $registrar = new ApiResourceRegistrar($api);
 
-        $registrar->delete('auth', JWTAuthApiController::class, 'logout');
+        $api->group(['prefix' => 'auth'], function (Router $api): void {
+            $registrar = new ApiResourceRegistrar($api);
 
-        $registrar->post('/listings', ListingController::class,'createListing');
-        $registrar->get('/listings', ListingController::class,'paginatedListing');
-        $registrar->get('/listings/{id}', ListingController::class,'getListing');
-        $registrar->put('/listings/{id}', ListingController::class,'updateListing');
+            $registrar->put('', JWTAuthApiController::class, 'refreshToken');
+            $registrar->post('password/reset', ForgotPasswordApiController::class, 'sendResetLinkEmail');
+            $registrar->put('password/reset', ResetPasswordApiController::class, 'reset');
+        });
+
+        $api->group(['prefix' => 'listings'], function (Router $api): void {
+            $registrar = new ApiResourceRegistrar($api);
+
+            $registrar->post('', ListingController::class,'createListing');
+            $registrar->get('', ListingController::class,'paginatedListing');
+            $registrar->get('{id}', ListingController::class,'getListing');
+            $registrar->put('{id}', ListingController::class,'updateListing');
+
+        });
+
+        $api->group(['prefix' => 'comments'], function (Router $api): void {
+            $registrar = new ApiResourceRegistrar($api);
+
+            $registrar->get('/', CommentController::class,'paginatedComment');
+
+        });
     });
 
     $registrar->post('/register', AuthController::class,'register');
+    $registrar->post('auth', JWTAuthApiController::class, 'login');
+    $registrar->post('/comments', CommentController::class,'createComment');
 
 });
 

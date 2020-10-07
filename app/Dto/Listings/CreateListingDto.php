@@ -5,7 +5,7 @@ namespace App\Dto\Listings;
 use Saritasa\Dto;
 
 /**
- * Class CreateListingDto Data transfer object with user profile information.
+ * Class CreateListingDto Data transfer object with listing information.
  *
  * @package App\Dto\Listings
  *
