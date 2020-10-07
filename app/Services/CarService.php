@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\Dto\Cars\PaginateCarMakeDto;
-use App\Dto\Cars\PaginateCarModelsDto;
-use App\Dto\Cars\PaginationCarTrimsDto;
+use App\Http\Requests\Cars\CarModelFilter;
+use App\Http\Requests\Cars\CarTrimFilter;
 use App\Models\CarMake;
 use App\Models\CarModel;
 use App\Models\CarTrim;
@@ -12,6 +11,7 @@ use App\Repositories\CarsRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Saritasa\DingoApi\Paging\PagingInfo;
 use Saritasa\LaravelRepositories\Contracts\IRepository;
 use Saritasa\LaravelRepositories\Contracts\IRepositoryFactory;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
@@ -58,40 +58,42 @@ class CarService
     /**
      * Get all list carMakes
      *
-     * @param PaginateCarMakeDto $createCarDto save param
+     * @param PagingInfo $pagingInfo param per page and page
      *
      * @return CarMake|CarMake[]|Collection
      */
-    public function carMakes(PaginateCarMakeDto $createCarDto)
+    public function carMakes(PagingInfo $pagingInfo)
     {
-        return $this->carsRepository->getAllCarMakes($createCarDto->per_page);
+        return $this->carsRepository->getAllCarMakes($pagingInfo->pageSize);
     }
 
     /**
      * Get all list carModels
      *
-     * @param PaginateCarModelsDto $paginateCarModels save param
+     * @param PagingInfo $pagingInfo param per page and page
+     * @param CarModelFilter $carModelFilter filter param make id
      *
      * @return LengthAwarePaginator
      */
-    public function carModels(PaginateCarModelsDto $paginateCarModels): LengthAwarePaginator
+    public function carModels(PagingInfo $pagingInfo, CarModelFilter $carModelFilter): LengthAwarePaginator
     {
-        $per_page = $paginateCarModels->per_page;
-        $make_id = $paginateCarModels->make_id;
+        $per_page = $pagingInfo->pageSize;
+        $make_id = $carModelFilter->make_id;
         return $this->carsRepository->getAllCarModels($per_page, $make_id);
     }
 
     /**
      * Get all list carTrims
      *
-     * @param PaginationCarTrimsDto $paginationCarTrims save param
+     * @param PagingInfo $pagingInfo param per page and page
+     * @param CarTrimFilter $carTrimFilter filter param model id
      *
      * @return LengthAwarePaginator
      */
-    public function carTrims(PaginationCarTrimsDto $paginationCarTrims): LengthAwarePaginator
+    public function carTrims(PagingInfo $pagingInfo, CarTrimFilter $carTrimFilter): LengthAwarePaginator
     {
-        $per_page = $paginationCarTrims->per_page;
-        $model_id = $paginationCarTrims->model_id;
+        $per_page = $pagingInfo->pageSize;
+        $model_id = $carTrimFilter->model_id;
         return $this->carsRepository->getAllCarTrims($per_page, $model_id);
     }
 }

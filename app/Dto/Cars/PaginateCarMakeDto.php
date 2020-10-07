@@ -2,7 +2,7 @@
 
 namespace App\Dto\Cars;
 
-class PaginateCarMakeDto extends PaginateCarDto
+class PaginateCarMakeDto extends PaginateInfo
 {
 
 }

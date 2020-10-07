@@ -2,7 +2,7 @@
 
 namespace App\Dto\Cars;
 
-class PaginationCarTrimsDto extends PaginateCarDto
+class PaginationInfo extends PaginateInfo
 {
     public const MODEL_ID = 'model_id';
 

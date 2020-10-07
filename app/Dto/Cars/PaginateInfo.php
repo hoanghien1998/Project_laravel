@@ -12,7 +12,7 @@ use Saritasa\Dto;
  * @property int $per_page
  * @property int $page
  */
-class PaginateCarDto extends Dto
+class PaginateInfo extends Dto
 {
     public const PER_PAGE = 'per_page';
     public const PAGE = 'page';

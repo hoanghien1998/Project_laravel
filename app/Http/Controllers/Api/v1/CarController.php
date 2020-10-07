@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Requests\PaginationCarMakeRequest;
-use App\Http\Requests\PaginationCarModelRequest;
-use App\Http\Requests\PaginationCarTrimRequest;
-use App\Http\Transformers\CarsTransformer;
+use App\Http\Requests\Cars\PaginationCarMakeRequest;
+use App\Http\Requests\Cars\PaginationCarModelRequest;
+use App\Http\Requests\Cars\PaginationCarTrimRequest;
 use App\Services\CarService;
 use Dingo\Api\Http\Response;
 use Saritasa\LaravelControllers\Api\BaseApiController;
@@ -36,41 +35,44 @@ class CarController extends BaseApiController
     }
 
     /**
-     * Get all list cars makes
+     * Get car make list.
      *
-     * @param PaginationCarMakeRequest $request get request validate
+     * @param PaginationCarMakeRequest $request Car make list request
      *
      * @return Response
      */
     public function carMakes(PaginationCarMakeRequest $request): Response
     {
-        $carMakes = $this->carService->carMakes($request->getCreateCarDto());
-        return $this->response->paginator($carMakes, new CarsTransformer());
+        return $this->json($this->carService->carMakes($request->getPagingInfo()));
     }
 
     /**
-     * Get all list cars models
+     * Get car model list.
      *
-     * @param PaginationCarModelRequest $request get request validate
+     * @param PaginationCarModelRequest $request Car model list request
      *
      * @return Response
      */
+
     public function carModels(PaginationCarModelRequest $request): Response
     {
-        $carModels = $this->carService->carModels($request->getPaginateCarModels());
-        return $this->response->paginator($carModels, new CarsTransformer());
+        $list = $this->carService->carModels($request->getPagingInfo(), $request->getCarModelFilters());
+
+        return $this->json($list);
     }
 
     /**
-     * Get all list cars models
+     * Get car trim list.
      *
-     * @param PaginationCarTrimRequest $request get request validate
+     * @param PaginationCarTrimRequest $request Car trim list request
      *
      * @return Response
      */
+
     public function carTrims(PaginationCarTrimRequest $request): Response
     {
-        $carTrims = $this->carService->carTrims($request->getPaginationCarTrims());
-        return $this->response->paginator($carTrims, new CarsTransformer());
+        $list = $this->carService->carTrims($request->getPagingInfo(), $request->getCarTrimFilters());
+
+        return $this->json($list);
     }
 }

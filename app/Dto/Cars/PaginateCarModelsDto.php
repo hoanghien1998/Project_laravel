@@ -2,9 +2,9 @@
 
 namespace App\Dto\Cars;
 
-use App\Dto\Cars\PaginateCarDto;
+use App\Dto\Cars\PaginateInfo;
 
-class PaginateCarModelsDto extends PaginateCarDto
+class PaginateCarModelsDto extends PaginateInfo
 {
     public const MAKE_ID = 'make_id';
 
