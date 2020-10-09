@@ -35,7 +35,7 @@ class CommentController extends BaseApiController
      * CommentController constructor.
      *
      * @param CommentService $commentService Comment business-logic service.
-     * @param JWTAuth $jwtAuth
+     * @param JWTAuth $jwtAuth JWTAuth package
      */
     public function __construct(CommentService $commentService, JWTAuth $jwtAuth)
     {

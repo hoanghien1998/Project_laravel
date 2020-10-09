@@ -14,6 +14,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\v1\CommentController;
 use App\Http\Controllers\Api\v1\ListingController;
+use App\Http\Controllers\Api\v1\UploadController;
 use Dingo\Api\Routing\Router;
 use Saritasa\LaravelControllers\Api\ApiResourceRegistrar;
 use Saritasa\LaravelControllers\Api\JWTAuthApiController;
@@ -61,6 +62,7 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
     $registrar->post('/register', AuthController::class,'register');
     $registrar->post('auth', JWTAuthApiController::class, 'login');
     $registrar->post('/comments', CommentController::class,'createComment');
+    $registrar->post('/uploads/tmp', UploadController::class,'store');
 
 });
 

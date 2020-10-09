@@ -66,7 +66,7 @@ class CommentService
     /**
      * Get listing pagination.
      *
-     * @param PaginatedCommentDto $paginatedCommentDto
+     * @param PaginatedCommentDto $paginatedCommentDto Paginated Comment Dto
      *
      * @return LengthAwarePaginator
      */
