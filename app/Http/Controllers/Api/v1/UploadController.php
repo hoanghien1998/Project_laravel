@@ -24,9 +24,7 @@ class UploadController extends BaseApiController
      */
     public function store(Request $request): JsonResponse
     {
-        $file = $request->file('uploadedfile');
-        $filename = $file->getClientOriginalName();
-        $filename = time(). '.' . $filename;
+        $fileName = $request->fileName;
 
         $s3 = Storage::disk('s3');
         $client = $s3->getDriver()->getAdapter()->getClient();
@@ -34,7 +32,7 @@ class UploadController extends BaseApiController
 
         $command = $client->getCommand('GetObject', [
             'Bucket' => Config::get('filesystems.disks.s3.bucket'),
-            'Key'    => $filename,
+            'Key'    => $fileName,
         ]);
 
         $request = $client->createPresignedRequest($command, $expiry);
