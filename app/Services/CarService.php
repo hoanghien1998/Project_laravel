@@ -7,7 +7,9 @@ use App\Http\Requests\Cars\CarTrimFilter;
 use App\Models\CarMake;
 use App\Models\CarModel;
 use App\Models\CarTrim;
-use App\Repositories\CarsRepository;
+use App\Repositories\CarsMakeRepository;
+use App\Repositories\CarsModelRepository;
+use App\Repositories\CarsTrimRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -31,28 +33,47 @@ class CarService
     private $repository;
 
     /**
-     * Role repository
+     * Role repository car makes
      *
-     * @var CarsRepository
+     * @var CarsMakeRepository
      */
-    private $carsRepository;
+    private $carsMakeRepository;
 
+    /**
+     * Role repository cars model
+     *
+     * @var CarsModelRepository
+     */
+    private $carsModelRepository;
+
+    /**
+     * Role repository cars trim
+     *
+     * @var CarsTrimRepository
+     */
+    private $carsTrimRepository;
 
     /**
      * CarService constructor.
      *
      * @param IRepositoryFactory $repositoryFactory Service factory
-     * @param CarsRepository $carsRepository Service for cars
+     * @param CarsMakeRepository $carsMakeRepository cars make repository
+     * @param CarsModelRepository $carsModelRepository cars model repository
+     * @param CarsTrimRepository $carsTrimRepository cars trim repository
      *
      * @throws BindingResolutionException
      * @throws RepositoryException
      */
-    public function __construct(IRepositoryFactory $repositoryFactory, CarsRepository $carsRepository)
+    public function __construct(IRepositoryFactory $repositoryFactory, CarsMakeRepository $carsMakeRepository, CarsModelRepository $carsModelRepository, CarsTrimRepository $carsTrimRepository)
     {
         $this->repository = $repositoryFactory->getRepository(CarMake::class);
+        $this->carsMakeRepository = $carsMakeRepository;
+
         $this->repository = $repositoryFactory->getRepository(CarModel::class);
+        $this->carsModelRepository = $carsModelRepository;
+
         $this->repository = $repositoryFactory->getRepository(CarTrim::class);
-        $this->carsRepository = $carsRepository;
+        $this->carsTrimRepository= $carsTrimRepository;
     }
 
     /**
@@ -64,7 +85,7 @@ class CarService
      */
     public function carMakes(PagingInfo $pagingInfo)
     {
-        return $this->carsRepository->getAllCarMakes($pagingInfo->pageSize);
+        return $this->carsMakeRepository->getAllCarMakes($pagingInfo->pageSize);
     }
 
     /**
@@ -79,7 +100,7 @@ class CarService
     {
         $per_page = $pagingInfo->pageSize;
         $make_id = $carModelFilter->make_id;
-        return $this->carsRepository->getAllCarModels($per_page, $make_id);
+        return $this->carsModelRepository->getAllCarModels($per_page, $make_id);
     }
 
     /**
@@ -94,6 +115,6 @@ class CarService
     {
         $per_page = $pagingInfo->pageSize;
         $model_id = $carTrimFilter->model_id;
-        return $this->carsRepository->getAllCarTrims($per_page, $model_id);
+        return $this->carsTrimRepository->getAllCarTrims($per_page, $model_id);
     }
 }
