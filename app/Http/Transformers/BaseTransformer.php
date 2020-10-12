@@ -1,11 +1,10 @@
 <?php
 
-
 namespace App\Http\Transformers;
 
-use Saritasa\Transformers\BaseTransformer as SaritasaBaseTransformer;
+use Saritasa\Transformers\BaseTransformer as BaseTransformerFromSaritasa;
 
-class BaseTransformer extends SaritasaBaseTransformer
+class BaseTransformer extends BaseTransformerFromSaritasa
 {
 
 }

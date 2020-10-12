@@ -7,6 +7,8 @@ required:
 - year
 - price
 - created_by
+- description
+- medias
 properties:
 
   id:
@@ -26,3 +28,10 @@ properties:
 
   created_by:
     $ref: 'utils/Identifier.yaml'
+
+  description:
+    $ref: 'utils/Description.yaml'
+
+  medias:
+    items:
+      $ref: 'Media.yaml'
