@@ -74,7 +74,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
   data() {
@@ -91,10 +90,8 @@ export default {
   },
   methods: {
     login() {
-      axios.post('/api/auth', this.credentials)
-        // eslint-disable-next-line no-unused-vars
-        .then(res => {
-          this.$store.commit('setToken', res.data.token);
+      this.$store.dispatch('loginUsers/loginUser', this.credentials)
+        .then(() => {
           this.$router.push('/');
         })
         .catch(err => {
