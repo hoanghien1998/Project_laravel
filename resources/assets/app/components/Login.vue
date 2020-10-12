@@ -10,29 +10,35 @@
           </div>
         </div>
         <div class="d-flex justify-content-center form_container">
-          <form>
+          <form autocomplete="off"
+                method="post"
+                @submit.prevent="login">
             <b-form-group class="mb-3">
               <b-input-group>
                 <b-input-group-prepend>
                   <span class="input-group-text">
-                    <font-awesome-icon icon="user" />
+                    <font-awesome-icon icon="user"/>
                   </span>
                 </b-input-group-prepend>
-                <b-form-input placeholder="username"
+                <b-form-input v-model="credentials.email"
+                              placeholder="user@example.com"
                               class="input_user"/>
               </b-input-group>
+              <strong>{{ errors.email[0] }}</strong>
             </b-form-group>
             <b-form-group class="mb-2">
               <b-input-group>
                 <b-input-group-prepend>
                   <span class="input-group-text">
-                    <font-awesome-icon icon="key" />
+                    <font-awesome-icon icon="key"/>
                   </span>
                 </b-input-group-prepend>
-                <b-form-input type="password"
+                <b-form-input v-model="credentials.password"
+                              type="password"
                               placeholder="password"
                               class="input_user"/>
               </b-input-group>
+              <strong>{{ errors.password[0] }}</strong>
             </b-form-group>
             <b-form-checkbox
               id="checkbox-1"
@@ -43,7 +49,9 @@
               Remember me
             </b-form-checkbox>
             <b-button variant="danger"
-                      class="mt-3">Login</b-button>
+                      class="mt-3"
+                      type="submit">Login
+            </b-button>
           </form>
         </div>
 
@@ -51,11 +59,13 @@
           <div class="d-flex justify-content-center links">
             Don't have an account?
             <router-link to="/signup"
-                         class="ml-2">Signup</router-link>
+                         class="ml-2">Signup
+            </router-link>
           </div>
           <div class="d-flex justify-content-center links">
             <router-link to="/forgot-password"
-                         class="ml-2">Forgot your password?</router-link>
+                         class="ml-2">Forgot your password?
+            </router-link>
           </div>
         </div>
       </div>
@@ -64,13 +74,46 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
-    return {};
+    return {
+      credentials: {
+        email:    '',
+        password: '',
+      },
+      errors: {
+        email:    [],
+        password: [],
+      },
+    };
+  },
+  methods: {
+    login() {
+      axios.post('/api/auth', this.credentials)
+        // eslint-disable-next-line no-unused-vars
+        .then(res => {
+          this.$store.commit('setToken', res.data.token);
+          this.$router.push('/');
+        })
+        .catch(err => {
+          let e = [];
+          const self = this;
+
+          e = err.response.data.errors;
+          console.log(e);
+          Object.values(e).forEach(item => {
+            self.errors[item.field] = item.messages;
+          });
+        });
+    },
   },
 };
 </script>
 
 <style>
-
+strong {
+  color: red;
+}
 </style>
