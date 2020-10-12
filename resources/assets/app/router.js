@@ -6,6 +6,7 @@ import Signup from './views/Signup.vue';
 import ForgotPassword from './views/ForgotPassword.vue';
 import About from './views/About.vue';
 import Home from './views/Home.vue';
+import Listing from './views/Listing.vue';
 
 Vue.use(Router);
 
@@ -21,6 +22,11 @@ export default new Router({
       path:      '/about',
       name:      'about',
       component: About,
+    },
+    {
+      path:      '/listings',
+      name:      'listing',
+      component: Listing,
     },
     {
       path:      '/auth',

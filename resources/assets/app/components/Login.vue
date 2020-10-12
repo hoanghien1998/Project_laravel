@@ -95,14 +95,13 @@ export default {
         // eslint-disable-next-line no-unused-vars
         .then(res => {
           this.$store.commit('setToken', res.data.token);
-          this.$router.push('/');
+          this.$router.push('/listings');
         })
         .catch(err => {
           let e = [];
           const self = this;
 
           e = err.response.data.errors;
-          console.log(e);
           Object.values(e).forEach(item => {
             self.errors[item.field] = item.messages;
           });

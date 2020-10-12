@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import router from './router';
 import App from './App.vue';
-import { store } from './store';
+
+import { store } from './store/store';
 
 library.add(faUser);
 library.add(faKey);
