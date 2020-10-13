@@ -86,24 +86,24 @@ export default {
         email:    [],
         password: [],
       },
+      message: '',
     };
   },
   methods: {
-    login() {
-      this.$store.dispatch('loginUser/loginUser', this.credentials)
-        .then(() => {
-          this.$router.push('/');
-        })
-        .catch(err => {
-          let e = [];
-          const self = this;
+    async login() {
+      const data = await this.$store.dispatch('loginUser/loginUser', this.credentials);
 
-          e = err.response.data.errors;
-          console.log(e);
-          Object.values(e).forEach(item => {
-            self.errors[item.field] = item.messages;
-          });
-        });
+
+      console.log(data.errors);
+
+      let e = [];
+      const self = this;
+
+      e = data.errors;
+      console.log(e);
+      Object.values(e).forEach(item => {
+        self.errors[item.field] = item.messages;
+      });
     },
   },
 };
