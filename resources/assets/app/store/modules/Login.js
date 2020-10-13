@@ -1,9 +1,14 @@
 import axios from 'axios';
 
 const state = {
-  token: localStorage.getItem('auth') || '',
+  token:  localStorage.getItem('auth') || '',
+  status: '',
 };
 
+const getters = {
+  isAuthenticated: state => !!state.token,
+  authStatus:      state => state.status,
+};
 const actions = {
   // eslint-disable-next-line no-unused-vars
   loginUser({ commit }, token) {
@@ -33,5 +38,6 @@ export default {
   state,
   actions,
   mutations,
+  getters,
 };
 

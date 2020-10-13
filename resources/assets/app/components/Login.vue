@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch('loginUsers/loginUser', this.credentials)
+      this.$store.dispatch('loginUser/loginUser', this.credentials)
         .then(() => {
           this.$router.push('/');
         })
