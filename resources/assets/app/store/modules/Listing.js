@@ -7,12 +7,9 @@ const state = {
 
 const actions = {
   async showAllListings({ commit }, paginated) {
-    const data = await axios.get(`/api/listings?per_page=${paginated.per_page}&page=${paginated.page}`, {
+    const data = await axios.get(`/api/listings?per_page=${paginated.per_page}&page=${paginated.page}&model_id=${paginated.model_id}&make_id=${paginated.make_id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('auth')}`,
-      },
-      params: {
-        paginated,
       },
     })
       .then(res => {

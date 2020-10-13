@@ -36,6 +36,8 @@ export default {
       total:    0,
       page:     0,
       perPage:  0,
+      model_id: 0,
+      make_id:  0,
       selected: 30,
       per_page: [
         { value: 30, text: 30 },
@@ -55,6 +57,11 @@ export default {
   async created() {
     this.page = this.$route.query.page || 1;
     this.perPage = this.$route.query.per_page || 30;
+    if (this.$route.query.model_id) {
+      this.model_id = this.$route.query.model_id;
+    }
+
+    this.make_id = this.$route.query.make_id;
     this.selected = this.perPage;
     console.log(this.perPage);
     await this.initPage();
@@ -73,6 +80,8 @@ export default {
       const data = await this.showAllListings({
         page:     this.page,
         per_page: this.perPage,
+        model_id: this.model_id,
+        make_id:  this.make_id,
       });
 
       this.total = data.pagination.total;
@@ -99,6 +108,8 @@ export default {
       await this.showAllListings({
         page:     this.page,
         per_page: this.perPage,
+        model_id: this.model_id,
+        make_id:  this.make_id,
       });
     },
   },
