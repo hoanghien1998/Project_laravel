@@ -6,9 +6,8 @@ const state = {
 };
 
 const actions = {
-  showAllListings({ commit }, paginated) {
-    console.log(paginated);
-    axios.get(`/api/listings?per_page=${paginated.per_page}&page=${paginated.page}`, {
+  async showAllListings({ commit }, paginated) {
+    const data = await axios.get(`/api/listings?per_page=${paginated.per_page}&page=${paginated.page}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('auth')}`,
       },
@@ -20,10 +19,14 @@ const actions = {
         const listings = res.data;
 
         commit('SET_LISTING', listings);
+
+        return listings;
       })
       .catch(error => {
         commit('GET_ERROR', error.response.data.errors);
       });
+
+    return data;
   },
 };
 

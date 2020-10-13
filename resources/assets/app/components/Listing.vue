@@ -1,79 +1,89 @@
 <template>
   <div class="container">
-    <b-table :items="getListings"
-             :current-page="currentPage"
+    <b-table id="my-table"
+             ref="table"
+             :items="items"
              hover
              bordered/>
-    <b-pagination v-model="currentPage"
+    <b-pagination v-if="total > 0"
+                  v-model="page"
                   :total-rows="total"
-                  :per-page="paginated.per_page"
+                  :per-page="perPage"
                   prev-text="Prev"
                   next-text="Next"
                   @change="handlePageChange"
+
     />
+
+    <!--    <b-form-select v-model="selected"-->
+    <!--                   :options="options"-->
+    <!--                   class="per-page"/>-->
+
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex';
+
+const { mapGetters, mapActions } = createNamespacedHelpers('listings');
+
 export default {
+  name: 'ListingComponent',
   data() {
     return {
-      total:     0,
-      paginated: {
-        page:     10,
-        per_page: 30,
-      },
-      currentPage: '2',
+      total:    0,
+      page:     1,
+      perPage:  30,
+      selected: 30,
+      options:  [
+        { value: 30, text: 30 },
+        { value: 'a', text: 'This is First option' },
+        { value: 'b', text: 'Selected Option' },
+        { value: { C: '3PO' }, text: 'This is an option with object value' },
+        { value: 'd', text: 'This one is disabled', disabled: true },
+      ],
+      pagination: null,
     };
   },
   computed: {
-    getListings() {
-      const listings = this.$store.getters['listings/getListings'];
-
-      if (listings.pagination && listings.pagination.total) {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.total = listings.pagination.total;
-      }
-
-      return listings.results;
+    ...mapGetters([
+      'getListings',
+    ]),
+    items() {
+      return this.getListings.results;
     },
-
-    // currentPage: {
-    //   get() {
-    //     return this.$route.query.page || 1;
-    //   },
-    //   set(newPage) {
-    //     // You could alternatively call your API here if you have serverside pagination
-    //
-    //     this.$router
-    //       .push({ query: { ...this.$route.query, page: newPage } })
-    //       .catch(() => {});
-    //   },
-    // },
   },
-  created() {
-    this.showListings();
+  async created() {
+    this.page = this.$route.query.page || 1;
+    await this.initPage();
   },
   methods: {
-    showListings() {
-      console.log(this.paginated);
-      this.paginated.page = this.$route.query.page || 1;
-      console.log(this.paginated);
-
-      const paginationObj = {
-        page:     this.$route.query.page,
-        per_page: 6,
-      };
-
-      this.$store
-        .dispatch('listings/showAllListings', paginationObj).finally(() => {
-          this.$router
-            .push({ query: { ...this.$route.query, page: paginationObj.page } })
-            .catch(() => {});
-        });
+    ...mapActions(['showAllListings']),
+    async handlePageChange(value) {
+      await this.replaceUrl(value);
+      await this.showAllListings({
+        page:     this.page,
+        per_page: this.perPage,
+      });
+      await this.$refs.table.refresh();
     },
-    handlePageChange() {
-      // this.showListings();
+    async initPage() {
+      const data = await this.showAllListings({
+        page:     this.page,
+        per_page: this.perPage,
+      });
+
+      this.total = data.pagination.total;
+      this.page = data.pagination.current_page;
+    },
+    getPage() {
+      return this.$route.query.page || 1;
+    },
+    replaceUrl(value) {
+      this.page = value;
+      this.$router
+        .push({ query: { ...this.$route.query, page: this.page } })
+        .catch(() => {});
     },
   },
 
@@ -81,5 +91,7 @@ export default {
 </script>
 
 <style>
-
+.per-page {
+  width: 1%;
+}
 </style>
