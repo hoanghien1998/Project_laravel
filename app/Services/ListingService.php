@@ -112,4 +112,15 @@ class ListingService
     {
         return $this->listingsRepository->updateListing($createListingDto, $id);
     }
+
+    /**
+     * Update status approve or not
+     *
+     * @param int $id Id of the listing
+     * @return Listing
+     */
+    public function approveListing(int $id)
+    {
+        return $this->listingsRepository->approveListing($id);
+    }
 }

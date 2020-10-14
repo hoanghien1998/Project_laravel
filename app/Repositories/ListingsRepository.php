@@ -98,4 +98,19 @@ class ListingsRepository extends Repository
         $article = Listing::where(["car_trim_id" => $car_trim_id])->with('carTrim')->first();
         return $article->carTrim->model_id;
     }
+
+    /**
+     * Update status approve or not
+     *
+     * @param int $id Id of the listing
+     * @return mixed
+     */
+    public function approveListing(int $id)
+    {
+        $approve = Listing::where('id', $id)->select(Listing::TABLE_NAME.'.'.Listing::APPROVE)->get();
+        return Listing::where('id', $id)
+            ->update([
+                'approve' => ! $approve,
+            ]);
+    }
 }
