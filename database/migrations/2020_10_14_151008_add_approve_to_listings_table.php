@@ -14,7 +14,7 @@ class AddApproveToListingsTable extends Migration
     public function up()
     {
         Schema::table('listings', function (Blueprint $table) {
-            $table->string('approve')->after("created_by");
+            $table->boolean('approve')->default(false)->after("created_by");
         });
     }
 
