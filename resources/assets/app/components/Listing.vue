@@ -5,11 +5,18 @@
       :options="per_page"
       class="per_page"
       @change="handlePerpageChange"/>
-    <b-table id="my-table"
-             ref="table"
-             :items="items"
-             hover
-             bordered />
+    <b-table
+      :items="items"
+      :fields="fields"
+      hover
+      bordered >
+      <template v-slot:cell(action)="row">
+        <b-button size="sm"
+                  class="mr-2">
+          Details
+        </b-button>
+      </template>
+    </b-table>
     <b-pagination v-if="total > 0"
                   v-model="paginatied.page"
                   :total-rows="total"
@@ -40,6 +47,7 @@ export default {
         model_id: 0,
         make_id:  0,
       },
+      fields:   [ 'id', 'car_model_id', 'car_trim_id', 'year', 'price', 'description', 'created_by', 'action' ],
       per_page: [
         { value: 30, text: 30 },
         { value: 60, text: 60 },
