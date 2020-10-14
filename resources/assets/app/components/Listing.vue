@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <b-form-select
-      v-model="selected"
+      v-model="paginatied.per_page"
       :options="per_page"
       class="per_page"
       @change="handlePerpageChange"/>
@@ -11,9 +11,9 @@
              hover
              bordered />
     <b-pagination v-if="total > 0"
-                  v-model="page"
+                  v-model="paginatied.page"
                   :total-rows="total"
-                  :per-page="perPage"
+                  :per-page="paginatied.per_page"
                   align="center"
                   prev-text="Prev"
                   next-text="Next"
@@ -33,12 +33,13 @@ export default {
   name: 'ListingComponent',
   data() {
     return {
-      total:    0,
-      page:     0,
-      perPage:  0,
-      model_id: 0,
-      make_id:  0,
-      selected: 30,
+      total:      0,
+      paginatied: {
+        page:     0,
+        per_page: 0,
+        model_id: 0,
+        make_id:  0,
+      },
       per_page: [
         { value: 30, text: 30 },
         { value: 60, text: 60 },
@@ -55,15 +56,11 @@ export default {
     },
   },
   async created() {
-    this.page = this.$route.query.page || 1;
-    this.perPage = this.$route.query.per_page || 30;
-    if (this.$route.query.model_id) {
-      this.model_id = this.$route.query.model_id;
-    }
-
-    this.make_id = this.$route.query.make_id;
-    this.selected = this.perPage;
-    console.log(this.perPage);
+    this.paginatied.page = this.$route.query.page || 1;
+    this.paginatied.per_page = this.$route.query.per_page || 30;
+    this.paginatied.model_id = this.$route.query.model_id;
+    this.paginatied.make_id = this.$route.query.make_id;
+    console.log(this.paginatied);
     await this.initPage();
   },
   methods: {
@@ -77,40 +74,30 @@ export default {
       await this.$refs.table.refresh();
     },
     async initPage() {
-      const data = await this.showAllListings({
-        page:     this.page,
-        per_page: this.perPage,
-        model_id: this.model_id,
-        make_id:  this.make_id,
-      });
+      const data = await this.showAllListings(this.paginatied);
 
       this.total = data.pagination.total;
-      this.page = data.pagination.current_page;
+      this.paginatied.page = data.pagination.current_page;
     },
     getPage() {
       return this.$route.query.page || 1;
     },
     async replaceUrl(value, type) {
       if (type === 'page') {
-        this.page = value;
+        this.paginatied.page = value;
         this.$router
           .push({ query: { ...this.$route.query, page: this.page } })
           .catch(() => {});
       }
 
       if (type === 'per_page') {
-        this.perPage = value;
+        this.paginatied.perPage = value;
         this.$router
           .push({ query: { ...this.$route.query, per_page: this.perPage } })
           .catch(() => {});
       }
 
-      await this.showAllListings({
-        page:     this.page,
-        per_page: this.perPage,
-        model_id: this.model_id,
-        make_id:  this.make_id,
-      });
+      await this.showAllListings(this.paginatied);
     },
   },
 
