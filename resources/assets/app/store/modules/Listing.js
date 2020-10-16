@@ -1,4 +1,5 @@
 import axios from 'axios';
+import loginModule from '../modules/Login';
 
 const state = {
   listings: [],
@@ -9,14 +10,9 @@ const actions = {
   async showAllListings({ commit }, paginated) {
     const data = await axios.get('/api/listings', {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('auth')}`,
+        Authorization: `Bearer ${loginModule.state.token}`,
       },
-      params: {
-        per_page: paginated.per_page,
-        page:     paginated.page,
-        model_id: paginated.model_id,
-        make_id:  paginated.make_id,
-      },
+      params: paginated,
     })
       .then(res => {
         const listings = res.data;
@@ -30,6 +26,22 @@ const actions = {
       });
 
     return data;
+  },
+
+  async updateApproveListing({ commit }, id) {
+    await axios.post(`/api/listings/${id}/approve`, {}, {
+      headers: {
+        Authorization: `Bearer ${loginModule.state.token}`,
+      },
+    })
+      .then(res => {
+        // const listings = res.data;
+
+        console.log(res.data);
+      })
+      .catch(error => {
+        commit('GET_ERROR', error.response.data.errors);
+      });
   },
 };
 

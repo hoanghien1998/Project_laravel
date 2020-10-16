@@ -131,12 +131,11 @@ class ListingController extends BaseApiController
 
     /**
      * @param int $id Id of the listing
-     * @return Response
+     * @return Response|JsonResponse
      */
-    public function approveListing(int $id)
+    public function approveListing( int $id)
     {
         $approveListing = $this->listingService->approveListing($id);
-
-        return $this->json($approveListing, new ListingTransformer());
+        return response()->json($approveListing, 204);
     }
 }

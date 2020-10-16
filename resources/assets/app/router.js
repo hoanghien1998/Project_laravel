@@ -24,7 +24,7 @@ export default new Router({
       component: About,
     },
     {
-      path:      '/listings',
+      path:      '/admin/listings',
       name:      'listing',
       component: Listing,
     },

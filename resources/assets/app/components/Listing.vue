@@ -10,10 +10,20 @@
       :fields="fields"
       hover
       bordered >
-      <template v-slot:cell(action)="row">
-        <b-button size="sm"
-                  class="mr-2">
-          Details
+      <template v-slot:cell(action)="data">
+        <b-button v-if="data.item.approve"
+                  size="sm"
+                  class="mr-2"
+                  variant="success"
+                  @click="approveListing(data.item)">
+          approved
+        </b-button>
+        <b-button v-if="!data.item.approve"
+                  size="sm"
+                  class="mr-2"
+                  variant="danger"
+                  @click="approveListing(data.item)">
+          unapproved
         </b-button>
       </template>
     </b-table>
@@ -40,8 +50,9 @@ export default {
   name: 'ListingComponent',
   data() {
     return {
-      total:      0,
-      paginatied: {
+      editedIndex: -1,
+      total:       0,
+      paginatied:  {
         page:     0,
         per_page: 0,
         model_id: 0,
@@ -68,11 +79,10 @@ export default {
     this.paginatied.per_page = this.$route.query.per_page || 30;
     this.paginatied.model_id = this.$route.query.model_id;
     this.paginatied.make_id = this.$route.query.make_id;
-    console.log(this.paginatied);
     await this.initPage();
   },
   methods: {
-    ...mapActions(['showAllListings']),
+    ...mapActions([ 'showAllListings', 'updateApproveListing' ]),
     async handlePageChange(value) {
       await this.replaceUrl(value, 'page');
       await this.$refs.table.refresh();
@@ -105,6 +115,16 @@ export default {
           .catch(() => {});
       }
 
+      await this.showAllListings(this.paginatied);
+    },
+
+    async approveListing(item) {
+      this.editedIndex = this.items.indexOf(item);
+
+      // eslint-disable-next-line prefer-destructuring
+      const id = this.items[this.editedIndex].id;
+
+      await this.updateApproveListing(id);
       await this.showAllListings(this.paginatied);
     },
   },

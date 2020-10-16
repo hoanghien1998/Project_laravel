@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import listings from './modules/Listing';
+import loginUser from './modules/Login';
 
 Vue.use(Vuex);
 
@@ -9,18 +10,6 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   modules: {
     listings,
-  },
-  state: {
-    token: localStorage.getItem('auth') || '',
-  },
-  mutations: {
-    setToken(state, token) {
-      localStorage.setItem('auth', token);
-      state.token = token;
-    },
-    clearToken(state) {
-      localStorage.removeItem('auth');
-      state.token = '';
-    },
+    loginUser,
   },
 });

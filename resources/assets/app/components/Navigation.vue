@@ -4,7 +4,7 @@
     <router-link to="/about">About</router-link> |
     <router-link to="/auth">Login</router-link> |
     <router-link to="/signup">Signup</router-link> |
-    <router-link to="/listings">Listing</router-link>
+    <router-link to="/admin/listings">Listing</router-link>
   </nav>
 </template>
 

@@ -74,7 +74,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
   data() {
@@ -87,25 +86,24 @@ export default {
         email:    [],
         password: [],
       },
+      message: '',
     };
   },
   methods: {
-    login() {
-      axios.post('/api/auth', this.credentials)
-        // eslint-disable-next-line no-unused-vars
-        .then(res => {
-          this.$store.commit('setToken', res.data.token);
-          this.$router.push('/listings');
-        })
-        .catch(err => {
-          let e = [];
-          const self = this;
+    async login() {
+      const data = await this.$store.dispatch('loginUser/loginUser', this.credentials);
 
-          e = err.response.data.errors;
-          Object.values(e).forEach(item => {
-            self.errors[item.field] = item.messages;
-          });
-        });
+
+      console.log(data.errors);
+
+      let e = [];
+      const self = this;
+
+      e = data.errors;
+      console.log(e);
+      Object.values(e).forEach(item => {
+        self.errors[item.field] = item.messages;
+      });
     },
   },
 };

@@ -107,10 +107,13 @@ class ListingsRepository extends Repository
      */
     public function approveListing(int $id)
     {
-        $approve = Listing::where('id', $id)->select(Listing::TABLE_NAME.'.'.Listing::APPROVE)->get();
-        return Listing::where('id', $id)
+        $approve = Listing::where('id', $id)->first()->approve;
+
+        Listing::where('id', $id)
             ->update([
                 'approve' => ! $approve,
             ]);
+
+        return Listing::where('id', $id)->get();
     }
 }
