@@ -85,10 +85,12 @@ export default {
     ...mapActions([ 'showAllListings', 'updateApproveListing' ]),
     async handlePageChange(value) {
       await this.replaceUrl(value, 'page');
+      await this.showAllListings(this.paginatied);
       await this.$refs.table.refresh();
     },
     async handlePerpageChange(value) {
       await this.replaceUrl(value, 'per_page');
+      await this.showAllListings(this.paginatied);
       await this.$refs.table.refresh();
     },
     async initPage() {
@@ -104,18 +106,16 @@ export default {
       if (type === 'page') {
         this.paginatied.page = value;
         this.$router
-          .push({ query: { ...this.$route.query, page: this.page } })
+          .push({ query: { ...this.$route.query, page: this.paginatied.page } })
           .catch(() => {});
       }
 
       if (type === 'per_page') {
         this.paginatied.perPage = value;
         this.$router
-          .push({ query: { ...this.$route.query, per_page: this.perPage } })
+          .push({ query: { ...this.$route.query, per_page: this.paginatied.per_page } })
           .catch(() => {});
       }
-
-      await this.showAllListings(this.paginatied);
     },
 
     async approveListing(item) {
