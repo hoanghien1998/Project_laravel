@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\v1\CarController;
 use App\Http\Controllers\Api\v1\CommentController;
 use App\Http\Controllers\Api\v1\ListingController;
+use App\Http\Controllers\Api\v1\UserController;
 use Dingo\Api\Routing\Router;
 use Saritasa\LaravelControllers\Api\ApiResourceRegistrar;
 use Saritasa\LaravelControllers\Api\ForgotPasswordApiController;
@@ -62,6 +63,11 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
             $registrar->get('makes', CarController::class, 'carMakes');
             $registrar->get('models', CarController::class, 'carModels');
             $registrar->get('trims', CarController::class, 'carTrims');
+        });
+
+        $api->group(['prefix' => 'users'], function (Router $api): void {
+            $registrar = new ApiResourceRegistrar($api);
+            $registrar->get('me', UserController::class, 'userProfile');
         });
     });
 

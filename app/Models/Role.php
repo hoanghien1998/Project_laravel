@@ -7,8 +7,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Query\Builder;
+use Saritasa\Roles\Models\Role as BaseRoleModel;
 
 /**
  * Class Role
@@ -19,34 +20,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property Collection|User[] $users
  *
+ * @method static Builder|Role whereId($value)
+ * @method static Builder whereSlug($value)
+ *
  * @package App\Models
  */
-class Role extends Model
+
+class Role extends BaseRoleModel
 {
-    /**
-     * Table name.
-     *
-     * @var string
-     */
-    protected $table = 'roles';
-
-    /**
-     * Timestamp.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
-     * Fill able fields.
-     *
-     * @var string[]
-     */
-    protected $fillable = [
-        'name',
-        'slug',
-    ];
-
     /**
      * Get all users.
      *
