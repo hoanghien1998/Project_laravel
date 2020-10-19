@@ -128,4 +128,17 @@ class ListingController extends BaseApiController
 
         return $this->json($updatedListing, new ListingTransformer());
     }
+
+    /**
+     * Function approve Listing showed in user's ui
+     *
+     * @param int $id Id of the listing
+     *
+     * @return Response|JsonResponse
+     */
+    public function approveListing(int $id)
+    {
+        $approveListing = $this->listingService->approveListing($id);
+        return response()->json($approveListing, 204);
+    }
 }

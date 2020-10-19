@@ -11,8 +11,11 @@ use Saritasa\Transformers\BaseTransformer;
 class ListingTransformer extends BaseTransformer
 {
     /**
+     * Transform data listings
+     *
      * @param Arrayable $model Model
-     * @return array
+     *
+     * @return array array
      */
     public function transform(Arrayable $model): array
     {

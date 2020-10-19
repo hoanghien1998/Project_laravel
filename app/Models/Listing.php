@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $car_trim_id
  * @property int $year
  * @property int $created_by
+ * @property boolean $approve
  * @property string $description
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -42,6 +43,7 @@ class Listing extends Model
     public const CAR_TRIM_ID = 'car_trim_id';
     public const YEAR = 'year';
     public const PRICE = 'price';
+    public const APPROVE = 'approve';
     public const DESCRIPTION = 'description';
     public const CREATED_AT = 'created_at';
     public const CREATED_BY = 'created_by';

@@ -50,6 +50,7 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
             $registrar->get('', ListingController::class, 'paginatedListing');
             $registrar->get('{id}', ListingController::class, 'getListing');
             $registrar->put('{id}', ListingController::class, 'updateListing');
+            $registrar->post('{id}/approve', ListingController::class, 'approveListing');
         });
 
         $api->group(['prefix' => 'comments'], function (Router $api): void {

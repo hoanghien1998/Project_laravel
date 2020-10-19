@@ -32,8 +32,8 @@ class PaginatedListingRequest extends FormRequest
         return [
             PaginatedListingDto::PER_PAGE => 'int|min:1',
             PaginatedListingDto::PAGE => 'int|min:1',
-            PaginatedListingDto::MAKE_ID => 'int|min:1',
-            PaginatedListingDto::MODEL_ID => 'int|min:1',
+            PaginatedListingDto::MAKE_ID => 'int',
+            PaginatedListingDto::MODEL_ID => 'int',
         ];
     }
 
