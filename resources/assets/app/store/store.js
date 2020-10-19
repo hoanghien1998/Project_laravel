@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import loginUser from './modules/Login';
+import users from './modules/User';
 
 Vue.use(Vuex);
 
@@ -9,5 +10,6 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   modules: {
     loginUser,
+    users,
   },
 });

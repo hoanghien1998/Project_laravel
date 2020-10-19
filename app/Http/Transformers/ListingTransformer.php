@@ -11,7 +11,8 @@ use Saritasa\Transformers\BaseTransformer;
 class ListingTransformer extends BaseTransformer
 {
     /**
-     * {@inheritdoc}
+     * @param Arrayable $model Model
+     * @return array
      */
     public function transform(Arrayable $model): array
     {

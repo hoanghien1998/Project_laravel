@@ -40,6 +40,6 @@ class AuthController extends BaseApiController
 
         return response()->json([
             "token" => $this->jwtAuth->attempt($credentials),
-        ], 404);
+        ], 200);
     }
 }

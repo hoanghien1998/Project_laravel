@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\DataTable;
 
-;
-
 use Saritasa\Transformers\DtoModel;
 
 /**

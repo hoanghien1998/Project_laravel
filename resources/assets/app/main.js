@@ -20,14 +20,12 @@ Vue.use(IconsPlugin);
 // Vue Router
 Vue.use(VueRouter);
 
-
 Vue.config.productionTip = false;
-
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue({
   el:         '#app',
-  router,
   components: { App },
+  router,
   store,
 });

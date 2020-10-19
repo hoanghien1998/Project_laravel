@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Saritasa\Database\Eloquent\Models\User as BaseUserModel;
@@ -42,7 +42,7 @@ class User extends BaseUserModel implements JWTSubject
     /**
      * Fill able fields.
      *
-     * @var array
+     * @var array array
      */
     protected $visible = [
         self::ID,
@@ -56,7 +56,7 @@ class User extends BaseUserModel implements JWTSubject
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array array
      */
     protected $fillable = [
         self::ID,
