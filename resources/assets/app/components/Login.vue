@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     async login() {
-      const data = await this.$store.dispatch('loginUser/loginUser', this.credentials);
+      const data = await this.$store.dispatch('users/loginUser', this.credentials);
 
 
       console.log(data.errors);

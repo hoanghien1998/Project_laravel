@@ -1,5 +1,5 @@
 import axios from 'axios';
-import loginModule from '../modules/Login';
+import loginModule from '../modules/User';
 
 const state = {
   listings: [],
