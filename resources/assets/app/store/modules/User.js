@@ -46,6 +46,7 @@ const actions = {
 const mutations = {
   ADD_USER(state, { user, token }) {
     state.users.push(user);
+    localStorage.setItem('auth', token);
     state.token = token;
   },
   GET_ERROR(state, errors) {
