@@ -120,7 +120,7 @@ class ListingService
      *
      * @return Listing
      */
-    public function approveListing(int $id)
+    public function approveListing(int $id): Listing
     {
         return $this->listingsRepository->approveListing($id);
     }
