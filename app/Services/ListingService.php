@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Dto\Listings\CreateListingDto;
 use App\Dto\Listings\PaginatedListingDto;
+use App\Http\Requests\Listings\ListingFilter;
 use App\Models\Listing;
 use App\Repositories\ListingsRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Saritasa\DingoApi\Paging\PagingInfo;
 use Saritasa\LaravelRepositories\Contracts\IRepository;
 use Saritasa\LaravelRepositories\Contracts\IRepositoryFactory;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
@@ -75,15 +77,15 @@ class ListingService
     /**
      * Get listing pagination.
      *
-     * @param PaginatedListingDto $paginatedListingDto Paginated listing dto
-     *
+     * @param PagingInfo $pagingInfo param per page and page
+     * @param ListingFilter $listingFilter filter param make id and model id
      * @return LengthAwarePaginator
      */
-    public function paginatedListing(PaginatedListingDto $paginatedListingDto): LengthAwarePaginator
+    public function paginatedListing(PagingInfo $pagingInfo, ListingFilter $listingFilter): LengthAwarePaginator
     {
-        $per_page = $paginatedListingDto->per_page;
-        $model_id = $paginatedListingDto->model_id;
-        $make_id = $paginatedListingDto->make_id;
+        $per_page = $pagingInfo->pageSize;
+        $model_id = $listingFilter->model_id;
+        $make_id = $listingFilter->make_id;
 
         return $this->listingsRepository->getAllListings($per_page, $model_id, $make_id);
     }

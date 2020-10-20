@@ -2,57 +2,20 @@
 
 namespace App\Http\Requests\Listings;
 
-use App\Dto\Listings\PaginatedListingDto;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\DataTable\DataTableRequest;
 
 /**
- * Class PaginatedListingRequest Validate paginated listing request
- *
- * @package App\Http\Requests
+ * Get Listing request.
  */
-class PaginatedListingRequest extends FormRequest
+class PaginatedListingRequest extends DataTableRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Get Listing model and make filters.
      *
-     * @return boolean
+     * @return ListingFilter
      */
-    public function authorize(): bool
+    public function getListingFilters(): ListingFilter
     {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return int[]
-     */
-    public function rules(): array
-    {
-        return [
-            PaginatedListingDto::PER_PAGE => 'int|min:1',
-            PaginatedListingDto::PAGE => 'int|min:1',
-            PaginatedListingDto::MAKE_ID => 'int',
-            PaginatedListingDto::MODEL_ID => 'int',
-        ];
-    }
-
-    /**
-     * Returns listing data from request.
-     *
-     * @return PaginatedListingDto
-     */
-    public function getPaginateListingDto(): PaginatedListingDto
-    {
-        $param = $this->only([
-            PaginatedListingDto::PER_PAGE,
-            PaginatedListingDto::PAGE,
-            PaginatedListingDto::MAKE_ID,
-            PaginatedListingDto::MODEL_ID,
-        ]);
-        $param[PaginatedListingDto::PER_PAGE] = $param[PaginatedListingDto::PER_PAGE] ?? 30;
-        $param[PaginatedListingDto::PAGE] = $param[PaginatedListingDto::PAGE] ?? 1;
-
-        return new PaginatedListingDto($param);
+        return new ListingFilter($this->only([ListingFilter::MODEL_ID, ListingFilter::MAKE_ID]));
     }
 }
