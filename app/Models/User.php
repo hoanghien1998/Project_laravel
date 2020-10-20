@@ -63,6 +63,7 @@ class User extends BaseUserModel implements JWTSubject
         self::EMAIL,
         self::FIRST_NAME,
         self::LAST_NAME,
+        self::PWD_FIELD,
         self::CREATED_AT,
         self::ROLE_ID,
         self::AVATAR_URL,
