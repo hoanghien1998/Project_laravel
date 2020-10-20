@@ -5,18 +5,13 @@ namespace App\Services;
 use App\Http\Requests\Cars\CarModelFilter;
 use App\Http\Requests\Cars\CarTrimFilter;
 use App\Models\CarMake;
-use App\Models\CarModel;
-use App\Models\CarTrim;
 use App\Repositories\CarsMakeRepository;
 use App\Repositories\CarsModelRepository;
 use App\Repositories\CarsTrimRepository;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Saritasa\DingoApi\Paging\PagingInfo;
 use Saritasa\LaravelRepositories\Contracts\IRepository;
-use Saritasa\LaravelRepositories\Contracts\IRepositoryFactory;
-use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
 
 /**
  * Class CarService business-logic service
@@ -56,23 +51,14 @@ class CarService
     /**
      * CarService constructor.
      *
-     * @param IRepositoryFactory $repositoryFactory Service factory
      * @param CarsMakeRepository $carsMakeRepository cars make repository
      * @param CarsModelRepository $carsModelRepository cars model repository
      * @param CarsTrimRepository $carsTrimRepository cars trim repository
-     *
-     * @throws BindingResolutionException
-     * @throws RepositoryException
      */
-    public function __construct(IRepositoryFactory $repositoryFactory, CarsMakeRepository $carsMakeRepository, CarsModelRepository $carsModelRepository, CarsTrimRepository $carsTrimRepository)
+    public function __construct(CarsMakeRepository $carsMakeRepository, CarsModelRepository $carsModelRepository, CarsTrimRepository $carsTrimRepository)
     {
-        $this->repository = $repositoryFactory->getRepository(CarMake::class);
         $this->carsMakeRepository = $carsMakeRepository;
-
-        $this->repository = $repositoryFactory->getRepository(CarModel::class);
         $this->carsModelRepository = $carsModelRepository;
-
-        $this->repository = $repositoryFactory->getRepository(CarTrim::class);
         $this->carsTrimRepository= $carsTrimRepository;
     }
 
