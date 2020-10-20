@@ -61,7 +61,7 @@ class CommentController extends BaseApiController
 
     public function paginatedComment(PaginatedCommentRequest $request): Response
     {
-        $comments = $this->commentService->paginatedComment($request->getPaginateCommentDto());
-        return $this->response->paginator($comments, new CommentTransformer());
+        $comments = $this->commentService->paginatedComment($request->getPagingInfo(), $request->getCommentFilters());
+        return $this->json($comments);
     }
 }

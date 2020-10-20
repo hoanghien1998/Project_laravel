@@ -3,11 +3,12 @@
 namespace App\Services;
 
 use App\Dto\Comments\CreateCommentDto;
-use App\Dto\Comments\PaginatedCommentDto;
+use App\Http\Requests\Comments\CommentFilter;
 use App\Models\Comment;
 use App\Repositories\CommentsRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Saritasa\DingoApi\Paging\PagingInfo;
 use Saritasa\LaravelRepositories\Contracts\IRepository;
 use Saritasa\LaravelRepositories\Contracts\IRepositoryFactory;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
@@ -66,14 +67,15 @@ class CommentService
     /**
      * Get listing pagination.
      *
-     * @param PaginatedCommentDto $paginatedCommentDto paginate page comment
+     * @param PagingInfo $pagingInfo pagination class
+     * @param CommentFilter $commentFilter comment filter
      *
      * @return LengthAwarePaginator
      */
-    public function paginatedComment(PaginatedCommentDto $paginatedCommentDto): LengthAwarePaginator
+    public function paginatedComment(PagingInfo $pagingInfo, CommentFilter $commentFilter): LengthAwarePaginator
     {
-        $per_page = $paginatedCommentDto->per_page;
-        $object_name = $paginatedCommentDto->object_name;
+        $per_page = $pagingInfo->pageSize;
+        $object_name = $commentFilter->object_name;
 
         return $this->commentsRepository->getAllComments($per_page, $object_name);
     }

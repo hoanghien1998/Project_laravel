@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Dto\Listings\CreateListingDto;
-use App\Dto\Listings\PaginatedListingDto;
 use App\Http\Requests\Listings\ListingFilter;
 use App\Models\Listing;
 use App\Repositories\ListingsRepository;
@@ -67,8 +66,8 @@ class ListingService
         $modelId = $this->listingsRepository->getModelId($createListingDto->car_trim_id);
         $data = array_merge(
             $data_tmp,
-            ['created_by' => $user_id],
-            ['car_model_id' => $modelId]
+            [Listing::CREATED_BY => $user_id],
+            [Listing::CAR_MODEL_ID => $modelId]
         );
 
         return $this->repository->create(new Listing($data));
@@ -79,6 +78,7 @@ class ListingService
      *
      * @param PagingInfo $pagingInfo param per page and page
      * @param ListingFilter $listingFilter filter param make id and model id
+     *
      * @return LengthAwarePaginator
      */
     public function paginatedListing(PagingInfo $pagingInfo, ListingFilter $listingFilter): LengthAwarePaginator
@@ -107,10 +107,8 @@ class ListingService
      *
      * @param CreateListingDto $createListingDto provide value to update listing
      * @param integer $id listing_id
-     *
-     * @return Listing
      */
-    public function updateListing(CreateListingDto $createListingDto, int $id): Listing
+    public function updateListing(CreateListingDto $createListingDto, int $id):Listing
     {
         return $this->listingsRepository->updateListing($createListingDto, $id);
     }

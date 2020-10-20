@@ -6,6 +6,7 @@ use Saritasa\Transformers\DtoModel;
 
 /**
  * Class ListingFilter
+ *
  * @package App\Http\Requests\Listings
  */
 class ListingFilter extends DtoModel

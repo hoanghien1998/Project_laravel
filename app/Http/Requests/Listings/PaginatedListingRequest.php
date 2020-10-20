@@ -10,6 +10,21 @@ use App\Http\Requests\DataTable\DataTableRequest;
 class PaginatedListingRequest extends DataTableRequest
 {
     /**
+     * PaginatedListingRequest validate.
+     *
+     * @param array $rules
+     *
+     * @return array
+     */
+    public function rules(array $rules = []): array
+    {
+        return parent::rules([
+            ListingFilter::MODEL_ID => 'int',
+            ListingFilter::MAKE_ID => 'int',
+        ]);
+    }
+
+    /**
      * Get Listing model and make filters.
      *
      * @return ListingFilter
