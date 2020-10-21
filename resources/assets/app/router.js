@@ -1,14 +1,34 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import store from './store';
 
 import Login from './views/Login.vue';
 import Signup from './views/Signup.vue';
 import ForgotPassword from './views/ForgotPassword.vue';
 import About from './views/About.vue';
 import Home from './views/Home.vue';
-import Listing from './views/Listing.vue';
+import Listing from './views/admin/Listing.vue';
 
 Vue.use(Router);
+
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.isAuthenticated) {
+    next();
+
+    return;
+  }
+  next('/');
+};
+
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    next();
+
+    return;
+  }
+
+  next('/auth');
+};
 
 export default new Router({
   mode:   'history',
@@ -24,17 +44,13 @@ export default new Router({
       component: About,
     },
     {
-      path:      '/admin/listings',
-      name:      'listing',
-      component: Listing,
-    },
-    {
       path:      '/auth',
       name:      'auth',
       component: Login,
       meta:      {
         layout: 'auth',
       },
+      beforeEnter: ifNotAuthenticated,
     },
     {
       path:      '/signup',
@@ -43,6 +59,7 @@ export default new Router({
       meta:      {
         layout: 'auth',
       },
+      beforeEnter: ifNotAuthenticated,
     },
     {
       path:      '/forgot-password',
@@ -51,6 +68,13 @@ export default new Router({
       meta:      {
         layout: 'auth',
       },
+      beforeEnter: ifNotAuthenticated,
+    },
+    {
+      path:        '/admin/listings',
+      name:        'admin-listing',
+      component:   Listing,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '*',

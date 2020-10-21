@@ -12,16 +12,16 @@ class PaginatedListingRequest extends DataTableRequest
     /**
      * PaginatedListingRequest validate.
      *
-     * @param array $rules
+     * @param mixed[] $rules Validation rules
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(array $rules = []): array
     {
-        return parent::rules([
+        return parent::rules(array_merge([
             ListingFilter::MODEL_ID => 'int',
             ListingFilter::MAKE_ID => 'int',
-        ]);
+        ], $rules));
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Http\Transformers;
 
-use Illuminate\Contracts\Support\Arrayable;
 use Saritasa\Transformers\BaseTransformer;
 
 /**
@@ -10,15 +9,4 @@ use Saritasa\Transformers\BaseTransformer;
  */
 class ListingTransformer extends BaseTransformer
 {
-    /**
-     * Transform data listings
-     *
-     * @param Arrayable $model Model
-     *
-     * @return array array
-     */
-    public function transform(Arrayable $model): array
-    {
-        return parent::transform($model);
-    }
 }

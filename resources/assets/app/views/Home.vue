@@ -1,29 +1,16 @@
 <template>
   <div class="home">
-    <b>{{ count }}</b>
-    <img alt="Vue logo"
-         src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Listing />
   </div>
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld.vue';
+import Listing from '../components/Listing.vue';
 
 export default {
   name:       'Home',
   components: {
-    HelloWorld,
-  },
-  data() {
-    return {
-      count: 0,
-    };
-  },
-  mounted() {
-    setInterval(() => {
-      ++this.count;
-    }, 1000);
+    Listing,
   },
 };
 </script>

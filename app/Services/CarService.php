@@ -55,8 +55,11 @@ class CarService
      * @param CarsModelRepository $carsModelRepository cars model repository
      * @param CarsTrimRepository $carsTrimRepository cars trim repository
      */
-    public function __construct(CarsMakeRepository $carsMakeRepository, CarsModelRepository $carsModelRepository, CarsTrimRepository $carsTrimRepository)
-    {
+    public function __construct(
+        CarsMakeRepository $carsMakeRepository,
+        CarsModelRepository $carsModelRepository,
+        CarsTrimRepository $carsTrimRepository
+    ) {
         $this->carsMakeRepository = $carsMakeRepository;
         $this->carsModelRepository = $carsModelRepository;
         $this->carsTrimRepository= $carsTrimRepository;

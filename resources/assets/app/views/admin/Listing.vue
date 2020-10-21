@@ -1,16 +1,16 @@
 <template>
   <div class="listing">
-    <ListingCom />
+    <ListingAdmin />
   </div>
 </template>
 
 <script>
-import ListingCom from '../components/Listing.vue';
+import ListingAdmin from '../../components/ListingAdmin.vue';
 
 export default {
   name:       'Listing',
   components: {
-    ListingCom,
+    ListingAdmin,
   },
 };
 </script>

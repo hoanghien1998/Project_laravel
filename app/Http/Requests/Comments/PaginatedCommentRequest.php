@@ -14,15 +14,15 @@ class PaginatedCommentRequest extends DataTableRequest
     /**
      * PaginatedCommentRequest validate.
      *
-     * @param array $rules
+     * @param mixed[] $rules Validation rules
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(array $rules = []): array
     {
-        return parent::rules([
+        return parent::rules(array_merge([
             CommentFilter::OBJECT_NAME => 'required|in:listing,comment',
-        ]);
+        ], $rules));
     }
     /**
      * Get Comment object name filters.

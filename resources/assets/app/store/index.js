@@ -6,10 +6,13 @@ import users from './modules/User';
 
 Vue.use(Vuex);
 
+const debug = process.env.NODE_ENV !== 'production';
+
 // eslint-disable-next-line import/prefer-default-export
-export const store = new Vuex.Store({
+export default new Vuex.Store({
   modules: {
     users,
     listings,
   },
+  strict: debug,
 });

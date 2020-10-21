@@ -43,7 +43,7 @@ class User extends BaseUserModel implements JWTSubject
     /**
      * Fill able fields.
      *
-     * @var array array
+     * @var mixed[] array
      */
     protected $visible = [
         self::ID,
@@ -57,7 +57,7 @@ class User extends BaseUserModel implements JWTSubject
     /**
      * The attributes that are mass assignable.
      *
-     * @var array array
+     * @var mixed[] array
      */
     protected $fillable = [
         self::ID,
