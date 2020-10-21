@@ -62,7 +62,7 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
     $registrar->post('/register', AuthController::class,'register');
     $registrar->post('auth', JWTAuthApiController::class, 'login');
     $registrar->post('/comments', CommentController::class,'createComment');
-    $registrar->post('/uploads/tmp', UploadController::class,'store');
+    $registrar->post('/uploads/tmp', UploadController::class,'tmpFileUploadUrl');
 
 });
 

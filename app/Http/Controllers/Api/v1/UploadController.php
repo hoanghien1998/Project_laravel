@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use Config;
-use Illuminate\Http\JsonResponse;
+use App\Services\S3UploadsService;
+use Dingo\Api\Http\Response;
+use Exception;
 use Illuminate\Http\Request;
 use Saritasa\LaravelControllers\Api\BaseApiController;
-use Storage;
 
 /**
  * Class UploadController Upload file to s3
@@ -16,27 +16,34 @@ use Storage;
 class UploadController extends BaseApiController
 {
     /**
+     * Manages uploads to S3
+     *
+     * @var S3UploadsService
+     */
+    private $uploadsService;
+
+    /**
+     * Controller for handling uploading file.
+     *
+     * @param S3UploadsService $uploadsService Manages uploads to S3
+     */
+    public function __construct(S3UploadsService $uploadsService)
+    {
+        parent::__construct();
+        $this->uploadsService = $uploadsService;
+    }
+
+    /**
      * Receive file's signed url from s3
      *
      * @param Request $request File
      *
-     * @return JsonResponse
+     * @return Response
+     *
+     * @throws Exception
      */
-    public function store(Request $request): JsonResponse
+    public function tmpFileUploadUrl(Request $request): Response
     {
-        $fileName = $request->fileName;
-
-        $s3 = Storage::disk('s3');
-        $client = $s3->getDriver()->getAdapter()->getClient();
-        $expiry = "+10 minutes";
-
-        $command = $client->getCommand('GetObject', [
-            'Bucket' => Config::get('filesystems.disks.s3.bucket'),
-            'Key'    => $fileName,
-        ]);
-
-        $request = $client->createPresignedRequest($command, $expiry);
-
-        return response()->json(['uploadUrl' => (string) $request->getUri(), ], 200);
+        return $this->json($this->uploadsService->getUploadTmpFileToS3Data($request->fileName));
     }
 }
