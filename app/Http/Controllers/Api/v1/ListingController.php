@@ -75,7 +75,7 @@ class ListingController extends BaseApiController
     public function paginatedListing(PaginatedListingRequest $request): Response
     {
         $listings = $this->listingService->paginatedListing($request->getPagingInfo(), $request->getListingFilters());
-        return $this->json($listings);
+        return $this->json($listings, new ListingTransformer());
     }
 
     /**

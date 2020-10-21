@@ -2,6 +2,7 @@
 
 namespace App\Http\Transformers;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Saritasa\Transformers\BaseTransformer;
 
 /**
@@ -9,4 +10,26 @@ use Saritasa\Transformers\BaseTransformer;
  */
 class ListingTransformer extends BaseTransformer
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function transform(Arrayable $model): array
+    {
+        $data = parent::transform($model);
+        $documents =$model->documents()->get();
+        $data['thumbnail']=[];
+        $data['full']=[];
+        foreach ($documents as $document) {
+            $data['thumbnail'][] = $document->thumbnail;
+            $data['full'][] = $document->full;
+        }
+        $car_models = $model->carModel()->get();
+        $data['name'] = [];
+        foreach ($car_models as $car_model) {
+            $data['name'][] = $car_model->name;
+        }
+
+
+        return $data;
+    }
 }

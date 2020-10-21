@@ -1,32 +1,17 @@
 <template>
   <div class="container">
-    <b-form-select
-      v-model="paginatied.per_page"
-      :options="per_page"
-      class="per_page"
-      @change="handlePerpageChange"/>
-    <b-table
-      :items="items"
-      :fields="fields"
-      hover
-      bordered >
-      <template v-slot:cell(action)="data">
-        <b-button v-if="data.item.approve"
-                  size="sm"
-                  class="mr-2"
-                  variant="success"
-                  @click="approveListing(data.item)">
-          approved
-        </b-button>
-        <b-button v-if="!data.item.approve"
-                  size="sm"
-                  class="mr-2"
-                  variant="danger"
-                  @click="approveListing(data.item)">
-          unapproved
-        </b-button>
-      </template>
-    </b-table>
+    <div v-for="item in items"
+         :key="item.id"
+         class="row">
+      <div class="col-md-3">
+        <img :src="item.thumbnail[0]"
+             class="image" >
+      </div>
+      <div class="col-md-3">
+        <h3 class="mt-0">{{ item.name[0] }}, {{ item.year }}</h3>
+        <h4> ${{ item.price }}</h4>
+      </div>
+    </div>
     <b-pagination v-if="total > 0"
                   v-model="paginatied.page"
                   :total-rows="total"
@@ -37,7 +22,6 @@
                   @change="handlePageChange"
 
     />
-
   </div>
 </template>
 
@@ -58,12 +42,7 @@ export default {
         model_id: 0,
         make_id:  0,
       },
-      fields:   [ 'id', 'car_model_id', 'car_trim_id', 'year', 'price', 'description', 'created_by', 'action' ],
-      per_page: [
-        { value: 30, text: 30 },
-        { value: 60, text: 60 },
-        { value: 90, text: 90 },
-      ],
+      fields: [ 'id', 'car_model_id', 'car_trim_id', 'year', 'price', 'description', 'created_by' ],
     };
   },
   computed: {
@@ -132,8 +111,19 @@ export default {
 };
 </script>
 
-<style>
-.per_page{
-  width: 10%;
+<style lang="scss" scoped>
+.image {
+  width: 250px;
+  height: 250px;
+  border: 1px solid #ddd;
+}
+ul {
+  list-style: none;
+}
+.row {
+  margin-top: 5px;
+}
+.home {
+  margin: 0 auto;
 }
 </style>

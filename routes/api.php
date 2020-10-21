@@ -31,6 +31,12 @@ $api = app(Router::class);
 $api->version(config('api.version'), ['middleware' => 'bindings'], function (Router $api): void {
     $registrar = new ApiResourceRegistrar($api);
 
+    $api->group(['prefix' => 'listings'], function (Router $api): void {
+        $registrar = new ApiResourceRegistrar($api);
+        $registrar->get('', ListingController::class, 'paginatedListing');
+
+    });
+
     // Group of routes that require authentication
     $api->group(['middleware' => ['jwt.auth']], function (Router $api): void {
 
@@ -47,7 +53,6 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
             $registrar = new ApiResourceRegistrar($api);
 
             $registrar->post('', ListingController::class, 'createListing');
-            $registrar->get('', ListingController::class, 'paginatedListing');
             $registrar->get('{id}', ListingController::class, 'getListing');
             $registrar->put('{id}', ListingController::class, 'updateListing');
             $registrar->post('{id}/approve', ListingController::class, 'approveListing');

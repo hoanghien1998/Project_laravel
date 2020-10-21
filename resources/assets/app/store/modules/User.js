@@ -16,7 +16,7 @@ const actions = {
         const token = res.data.token;
 
         commit('ADD_USER', { user, token });
-        router.push('/');
+        router.push('/admin/listings');
       })
       .catch(error => {
         commit('GET_ERROR', error.response.data.errors);
@@ -30,7 +30,7 @@ const actions = {
         const token = res.data.token;
 
         commit('setToken', token);
-        router.push('/');
+        router.push('/admin/listings');
 
         return token;
       }).catch(error => {
