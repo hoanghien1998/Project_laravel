@@ -29,7 +29,11 @@ class ListingTransformer extends BaseTransformer
             $data['name'][] = $car_model->name;
         }
 
-
+        $car_tríms = $model->carTrim()->get();
+        $data['name_trim'] = [];
+        foreach ($car_tríms as $car_trím) {
+            $data['name_trim'][] = $car_trím->name;
+        }
         return $data;
     }
 }

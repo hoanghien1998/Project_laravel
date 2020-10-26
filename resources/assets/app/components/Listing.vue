@@ -7,9 +7,10 @@
         <img :src="item.thumbnail[0]"
              class="image" >
       </div>
-      <div class="col-md-3">
-        <h3 class="mt-0">{{ item.name[0] }}, {{ item.year }}</h3>
-        <h4> ${{ item.price }}</h4>
+      <div class="col-md-4">
+        <h2 class="mt-0">{{ item.name[0] }}, {{ item.year }}</h2>
+        <h4>{{ item.name_trim[0] }}</h4>
+        <h2> ${{ item.price }}</h2>
       </div>
     </div>
     <b-pagination v-if="total > 0"
