@@ -4,21 +4,31 @@
       <div class="row"
            style=" margin-bottom: 10px; margin-top: 15px">
         <div class="col-md-4">
-          <select v-model="car_make">
+          <select v-model="car_make"
+                  class="form-control"
+                  @change="getCarModels()"
+          >
+            <option value="0" >Select car make</option>
             <option v-for="carMake in carMakes"
                     :key="carMake.id"
                     :value="carMake.id">{{ carMake.name }}</option>
           </select>
         </div>
         <div class="col-md-4">
-          <select v-model="car_model">
+          <select v-model="car_model"
+                  class="form-control"
+                  @change="getCarTrims()">
+            <option value="0" >Select car model</option>
             <option v-for="carModel in carModels"
                     :key="carModel.id"
-                    :value="carModel.id">{{ carModel.name }}</option>
+                    :value="carModel.id"
+                    selected="false">{{ carModel.name }}</option>
           </select>
         </div>
         <div class="col-md-4">
-          <select v-model="car_trim">
+          <select v-model="car_trim"
+                  class="form-control">
+            <option value="0" >Select car trim</option>
             <option v-for="carTrim in carTrims"
                     :key="carTrim.id"
                     :value="carTrim.id">{{ carTrim.name }}</option>
@@ -69,19 +79,17 @@ export default {
   data() {
     return {
       carMakes:   [],
-      car_make:   '',
+      car_make:   0,
       carModels:  [],
-      car_model:  '',
+      car_model:  0,
       carTrims:   [],
-      car_trim:   '',
+      car_trim:   0,
       year_start: '',
       year_now:   '',
     };
   },
   beforeMount() {
     this.getCarMakes();
-    this.getCarModels();
-    this.getCarTrims();
   },
   methods: {
     getCarMakes() {
@@ -91,13 +99,21 @@ export default {
     },
 
     getCarModels() {
-      axios.get('/api/cars/models').then(response => {
+      axios.get('/api/cars/models', {
+        params: {
+          make_id: this.car_make,
+        },
+      }).then(response => {
         this.carModels = response.data.results;
       });
     },
 
     getCarTrims() {
-      axios.get('/api/cars/trims').then(response => {
+      axios.get('/api/cars/trims', {
+        params: {
+          model_id: this.car_model,
+        },
+      }).then(response => {
         this.carTrims = response.data.results;
       });
     },
