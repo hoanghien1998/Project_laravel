@@ -4,23 +4,16 @@ const state = {
   carMakes: [],
 };
 
+const getters = {
+
+};
+
 const actions = {
-  async loadCarMakes({ commit }) {
-    const res = await axios.get('/api/cars/makes');
-
-    console.log(res.data);
-
-    const carMakes = res.data;
-
-    carMakes.forEach(c => {
-      // eslint-disable-next-line no-param-reassign
-      c.state_ids = c.states.map(p => p.id);
-    });
-    commit('SET_CAR_MAKES', carMakes);
-
-    console.log(res.data);
-
-    return res;
+  loadCarMakes({ commit }) {
+    return axios.get('api/cars/makes')
+      .then(res => {
+        commit('SET_CAR_MAKES', res.data.results);
+      });
   },
 };
 
@@ -36,4 +29,5 @@ export default {
   state,
   actions,
   mutations,
+  getters,
 };

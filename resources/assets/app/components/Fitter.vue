@@ -5,9 +5,9 @@
            style=" margin-bottom: 10px; margin-top: 15px">
         <div class="col-md-4">
           <select v-model="car_make">
-            <option v-for="result in results"
-                    :key="result.id"
-                    :value="result.id">{{ result.name }}</option>
+            <option v-for="carMake in carMakes"
+                    :key="carMake.id"
+                    :value="carMake.id">{{ carMake.name }}</option>
           </select>
         </div>
         <div class="col-md-4">
@@ -68,7 +68,7 @@ export default {
   name: 'Fitter',
   data() {
     return {
-      results:    [],
+      carMakes:   [],
       car_make:   '',
       carModels:  [],
       car_model:  '',
@@ -86,7 +86,7 @@ export default {
   methods: {
     getCarMakes() {
       axios.get('/api/cars/makes').then(response => {
-        this.results = response.data.results;
+        this.carMakes = response.data.results;
       });
     },
 
