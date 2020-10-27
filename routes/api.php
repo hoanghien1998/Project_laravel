@@ -37,6 +37,13 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
 
     });
 
+    $api->group(['prefix' => 'cars'], function (Router $api): void {
+        $registrar = new ApiResourceRegistrar($api);
+        $registrar->get('makes', CarController::class, 'carMakes');
+        $registrar->get('models', CarController::class, 'carModels');
+        $registrar->get('trims', CarController::class, 'carTrims');
+    });
+
     // Group of routes that require authentication
     $api->group(['middleware' => ['jwt.auth']], function (Router $api): void {
 
@@ -64,12 +71,7 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
             $registrar->get('/', CommentController::class, 'paginatedComment');
         });
 
-        $api->group(['prefix' => 'cars'], function (Router $api): void {
-            $registrar = new ApiResourceRegistrar($api);
-            $registrar->get('makes', CarController::class, 'carMakes');
-            $registrar->get('models', CarController::class, 'carModels');
-            $registrar->get('trims', CarController::class, 'carTrims');
-        });
+
 
         $api->group(['prefix' => 'users'], function (Router $api): void {
             $registrar = new ApiResourceRegistrar($api);

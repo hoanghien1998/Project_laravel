@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import listings from './modules/Listing';
 import users from './modules/User';
+import fitter from './modules/Fitter';
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
   modules: {
     users,
     listings,
+    fitter,
   },
   strict: debug,
 });
