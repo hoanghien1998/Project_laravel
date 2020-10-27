@@ -60,13 +60,39 @@
         </div>
       </div>
     </div>
+
+    <b-form-file
+      v-model="file"
+      :state="Boolean(file)"
+      placeholder="choose file..."
+      drop-placeholder="drop file..."
+      @change="chooseFile"
+    />
+    <p>{{ file ? file.name : '' }}</p>
   </div>
 </template>
 
 <script>
+import uploadService from '../services/uploadService';
+
+
 export default {
   data() {
-    return {};
+    return {
+      file: null,
+    };
+  },
+  methods: {
+    chooseFile(e) {
+      const filename = e.target.files[0].name;
+
+      const file = e.target.files[0];
+
+
+      const uploadRequest = uploadService.uploadTmp(filename, file);
+
+      console.log(uploadRequest);
+    },
   },
 };
 </script>

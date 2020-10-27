@@ -49,7 +49,7 @@ export default {
    * @return {UploadFileToS3Data}
    */
   async preSignTmpUpload(fileName) {
-    const uploadFileToS3Data = (await axios.post('/api/v3/uploads/tmp', { fileName })).data;
+    const uploadFileToS3Data = (await axios.post('/api/uploads/tmp', { fileName })).data;
 
     if (!uploadFileToS3Data.upload_url || !uploadFileToS3Data.url) {
       throw new Error('Could not get presigned URL for image upload');
