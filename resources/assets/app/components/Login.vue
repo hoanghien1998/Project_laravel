@@ -89,18 +89,18 @@ export default {
       message: '',
     };
   },
+
   methods: {
     async login() {
       const data = await this.$store.dispatch('users/loginUser', this.credentials);
 
+      console.log(this.$store.getters['users/getToken']);
 
-      console.log(data.errors);
 
       let e = [];
       const self = this;
 
       e = data.errors;
-      console.log(e);
       Object.values(e).forEach(item => {
         self.errors[item.field] = item.messages;
       });

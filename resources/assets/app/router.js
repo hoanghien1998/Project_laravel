@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import store from './store';
 
 import Login from './views/Login.vue';
 import Signup from './views/Signup.vue';
@@ -12,7 +11,7 @@ import Listing from './views/admin/Listing.vue';
 Vue.use(Router);
 
 const ifNotAuthenticated = (to, from, next) => {
-  if (!store.getters.isAuthenticated) {
+  if (!localStorage.getItem('auth')) {
     next();
 
     return;
@@ -21,7 +20,7 @@ const ifNotAuthenticated = (to, from, next) => {
 };
 
 const ifAuthenticated = (to, from, next) => {
-  if (store.getters.isAuthenticated) {
+  if (localStorage.getItem('auth')) {
     next();
 
     return;
