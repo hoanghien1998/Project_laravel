@@ -45,13 +45,44 @@ const actions = {
       },
     })
       .then(res => {
-        // const listings = res.data;
-
         console.log(res.data);
       })
       .catch(error => {
         commit('GET_ERROR', error.response.data.errors);
       });
+  },
+  async addCommentListing({ commit }, comments) {
+    const data = await axios.post('/api/comments', comments, {
+      headers: {
+        Authorization: `Bearer ${loginModule.state.token}`,
+      },
+    })
+      .then(res => {
+        // const listings = res.data;
+
+        console.log(res.data);
+
+        return res.data;
+      })
+      .catch(error => {
+        commit('GET_ERROR', error.response.data.errors);
+      });
+
+    return data;
+  },
+
+  async getCommentsListing({ commit }, id) {
+    const data = await axios.get(`/api/listings/${id}/comments`, {
+      headers: {
+        Authorization: `Bearer ${loginModule.state.token}`,
+      },
+    })
+      .then(res => res.data.comments)
+      .catch(error => {
+        commit('GET_ERROR', error.response.data.errors);
+      });
+
+    return data;
   },
 };
 

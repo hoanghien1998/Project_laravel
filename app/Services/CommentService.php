@@ -56,10 +56,14 @@ class CommentService
      *
      * @throws RepositoryException
      */
-    public function createComment(CreateCommentDto $createCommentDto): Comment
+    public function createComment(CreateCommentDto $createCommentDto, $user_id): Comment
     {
 
-        $data = $createCommentDto->toArray();
+        $data_tmp = $createCommentDto->toArray();
+        $data = array_merge(
+            $data_tmp,
+            [Comment::USER_ID => $user_id]
+        );
 
         return $this->repository->create(new Comment($data));
     }
@@ -78,5 +82,16 @@ class CommentService
         $object_name = $commentFilter->object_name;
 
         return $this->commentsRepository->getAllComments($per_page, $object_name);
+    }
+
+    /**
+     * Get all comment by the specific listing
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getCommentsListing($id)
+    {
+        return $this->commentsRepository->getCommentsListing($id);
     }
 }

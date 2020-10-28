@@ -7,9 +7,10 @@ use App\Http\Requests\Comments\PaginatedCommentRequest;
 use App\Http\Transformers\CommentTransformer;
 use App\Services\CommentService;
 use Dingo\Api\Http\Response;
+use Illuminate\Http\JsonResponse;
 use Saritasa\LaravelControllers\Api\BaseApiController;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\JWTAuth;
 
 /**
  * Class CommentController Contains all of function relate to comments
@@ -55,13 +56,26 @@ class CommentController extends BaseApiController
      */
     public function createComment(CreateCommentRequest $request): Response
     {
-        $comment = $this->commentService->createComment($request->getCreateCommentDto());
-        return $this->json($comment, new CommentTransformer());
+        $user_id = $this->jwtAuth->user()->id;
+        $comment = $this->commentService->createComment($request->getCreateCommentDto(), $user_id);
+        return $this->json($comment);
     }
 
     public function paginatedComment(PaginatedCommentRequest $request): Response
     {
         $comments = $this->commentService->paginatedComment($request->getPagingInfo(), $request->getCommentFilters());
         return $this->json($comments);
+    }
+
+    /**
+     * Get all comment by the specific listing
+     *
+     * @param int $id listing id
+     * @return Response|JsonResponse
+     */
+    public function getCommentsListing($id)
+    {
+        $comments = $this->commentService->getCommentsListing($id);
+        return $this->json($comments, new CommentTransformer());
     }
 }

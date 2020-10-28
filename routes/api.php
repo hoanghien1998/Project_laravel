@@ -48,6 +48,7 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
 
             $registrar->post('', ListingController::class, 'createListing');
             $registrar->get('', ListingController::class, 'paginatedListing');
+            $registrar->get('{id}/comments', CommentController::class, 'getCommentsListing');
 
             $registrar->put('{id}', ListingController::class, 'updateListing');
             $registrar->post('{id}/approve', ListingController::class, 'approveListing');
@@ -55,8 +56,8 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
 
         $api->group(['prefix' => 'comments'], function (Router $api): void {
             $registrar = new ApiResourceRegistrar($api);
-
-            $registrar->get('/', CommentController::class, 'paginatedComment');
+            $registrar->post('', CommentController::class, 'createComment');
+            $registrar->get('', CommentController::class, 'paginatedComment');
         });
 
         $api->group(['prefix' => 'cars'], function (Router $api): void {
@@ -74,6 +75,6 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
 
     $registrar->post('/register', AuthController::class, 'register');
     $registrar->post('auth', JWTAuthApiController::class, 'login');
-    $registrar->post('/comments', CommentController::class, 'createComment');
+
     $registrar->get('/listings/{id}', ListingController::class, 'getListing');
 });
