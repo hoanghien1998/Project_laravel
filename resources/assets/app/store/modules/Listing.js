@@ -28,6 +28,23 @@ const actions = {
     return data;
   },
 
+  async detailListing({ commit }, id) {
+    const data = await axios.get(`/api/listings/${id}`)
+      .then(res => {
+        const listing = res.data;
+
+        console.log(listing);
+        // commit('SET_LISTING', listings);
+
+        return listing;
+      })
+      .catch(error => {
+        commit('GET_ERROR', error.response.data.errors);
+      });
+
+    return data;
+  },
+
   async updateApproveListing({ commit }, id) {
     await axios.post(`/api/listings/${id}/approve`, {}, {
       headers: {

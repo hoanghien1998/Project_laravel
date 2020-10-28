@@ -6,6 +6,7 @@ import Signup from './views/Signup.vue';
 import ForgotPassword from './views/ForgotPassword.vue';
 import About from './views/About.vue';
 import Home from './views/Home.vue';
+import DetailListing from './views/DetailListing.vue';
 import Listing from './views/admin/Listing.vue';
 
 Vue.use(Router);
@@ -81,6 +82,11 @@ export default new Router({
       meta: {
         layout: 'error',
       },
+    },
+    {
+      path:      '/detail-listing',
+      name:      'detailListing',
+      component: DetailListing,
     },
   ],
 });
