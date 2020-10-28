@@ -24,6 +24,10 @@ class ListingTransformer extends BaseTransformer
                 'full' => $document->full,
             ];
         });
+        $data['carTrim'] = $model->carTrim->name;
+        $data['carModel'] = $model->carModel;
+        $data['carMake'] = $model->carModel->carMake;
+
         return $data;
     }
 }

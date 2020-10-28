@@ -2,43 +2,31 @@
   <div>
     <div class="container">
       <h1>
-        Audi A6 Allroad, <span>2016</span>
+        {{ listing.carMake.name }}
+        {{ listing.carModel.name }}
+        {{ listing.carTrim.name }}, <span>{{ listing.year }}</span>
       </h1>
       <div class="description">
-        Lorem Ipsum is simply dummy text of the printing and <br>
-        typesetting industry. Lorem Ipsum has been the industry's
+        {{ listing.description }}
       </div>
-      <div>Price: <span class="price">$10.500</span></div>
+      <div>Price: <span class="price">${{ listing.price }}</span></div>
     </div>
 
     <div class="container">
       <b-row>
         <b-col>
-          <b-img-lazy rounded
-                      src="https://picsum.photos/800/600/?image=80"
+          <b-img-lazy :src="main_img"
+                      width="800px"
+                      rounded
                       alt="Image 1"/>
         </b-col>
         <b-col>
-          <b-img center
+          <b-img v-for="image in listing.medias"
+                 :key="image"
+                 :src="image.full"
+                 center
                  thumbnail
                  style="margin-bottom: 10px"
-                 src="https://picsum.photos/125/125/?image=58"
-                 alt="Center image"/>
-          <b-img center
-                 style="margin-bottom: 10px"
-                 src="https://picsum.photos/125/125/?image=58"
-                 alt="Center image"/>
-          <b-img center
-                 style="margin-bottom: 10px"
-                 src="https://picsum.photos/125/125/?image=58"
-                 alt="Center image"/>
-          <b-img center
-                 style="margin-bottom: 10px"
-                 src="https://picsum.photos/125/125/?image=58"
-                 alt="Center image"/>
-          <b-img center
-                 style="margin-bottom: 10px"
-                 src="https://picsum.photos/125/125/?image=58"
                  alt="Center image"/>
         </b-col>
       </b-row>
@@ -56,6 +44,8 @@ const { mapActions } = createNamespacedHelpers('listings');
 export default {
   data() {
     return {
+      listing:  {},
+      main_img: '',
     };
   },
   async created() {
@@ -65,6 +55,9 @@ export default {
     ...mapActions(['detailListing']),
     async initPage() {
       const data = await this.detailListing(1);
+
+      this.listing = data;
+      this.main_img = this.listing.medias[0].full;
     },
   },
 };
@@ -77,5 +70,6 @@ export default {
 }
 .container {
   font-size: 18pt;
+  margin-top: 10px;
 }
 </style>
