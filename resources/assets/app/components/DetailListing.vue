@@ -91,6 +91,8 @@ export default {
     },
     async addComment() {
       const data = await this.addCommentListing(this.comments);
+
+      console.log(data);
     },
   },
 };
