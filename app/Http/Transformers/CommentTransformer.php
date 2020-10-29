@@ -15,8 +15,7 @@ class CommentTransformer extends BaseTransformer
      */
     public function transform(Arrayable $model): array
     {
-        $data = parent::transform($model);
-
+        $data = parent::transform($model);dd($model->user);
         $data['first_name'] = $model->user->first_name;
 
         $data['last_name'] = $model->user->last_name;

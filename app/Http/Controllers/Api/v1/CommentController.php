@@ -76,6 +76,6 @@ class CommentController extends BaseApiController
     public function getCommentsListing($id)
     {
         $comments = $this->commentService->getCommentsListing($id);
-        return $this->json($comments, new CommentTransformer());
+        return $this->response->collection($comments, new CommentTransformer() ) ;
     }
 }
