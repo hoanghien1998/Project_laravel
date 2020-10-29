@@ -10,6 +10,7 @@
     "dingo/api": "^2.4",
     "laravel/framework": "^6.0",
     "laravel/horizon": "^3.0",
+    "league/flysystem-aws-s3-v3": "~1.0",
     "predis/predis": "^1.1",
     "reliese/laravel": "^0.0.16",
     "saritasa/dingo-api-custom": "^2.2",

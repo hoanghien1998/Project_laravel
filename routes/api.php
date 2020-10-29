@@ -75,6 +75,11 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
 
     $registrar->post('/register', AuthController::class, 'register');
     $registrar->post('auth', JWTAuthApiController::class, 'login');
+    $registrar->post('/uploads/tmp', UploadController::class,'tmpFileUploadUrl');
 
     $registrar->get('/listings/{id}', ListingController::class, 'getListing');
 });
+
+
+
+

@@ -141,7 +141,4 @@ class ListingController extends BaseApiController
         $approveListing = $this->listingService->approveListing($id);
         return response()->json($approveListing, 204);
     }
-
-
-
 }

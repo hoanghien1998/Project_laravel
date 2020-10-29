@@ -46,10 +46,11 @@ class CommentsRepository extends Repository
     /**
      * Get all comment by the specific listing
      *
-     * @param $id
+     * @param int $id id listing
+     *
      * @return mixed
      */
-    public function getCommentsListing($id)
+    public function getCommentsListing(int $id)
     {
         return Comment::query()->where(Comment::OBJECT_NAME, 'listing')
             ->where(Comment::OBJECT_ID, $id)->get();

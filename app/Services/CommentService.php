@@ -52,11 +52,13 @@ class CommentService
      *
      * @param CreateCommentDto $createCommentDto Comment dto
      *
+     * @param int $user_id user id
+     *
      * @return Comment
      *
      * @throws RepositoryException
      */
-    public function createComment(CreateCommentDto $createCommentDto, $user_id): Comment
+    public function createComment(CreateCommentDto $createCommentDto, int $user_id): Comment
     {
 
         $data_tmp = $createCommentDto->toArray();
@@ -87,10 +89,11 @@ class CommentService
     /**
      * Get all comment by the specific listing
      *
-     * @param $id
+     * @param int $id id listing
+     *
      * @return mixed
      */
-    public function getCommentsListing($id)
+    public function getCommentsListing(int $id)
     {
         return $this->commentsRepository->getCommentsListing($id);
     }

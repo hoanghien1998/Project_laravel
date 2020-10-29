@@ -61,6 +61,8 @@ return [
             'secret' => env('AWS_SECRET'),
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
+            'use_path_style_endpoint' => true,
+            'expires' => '+50 minutes',
         ],
 
     ],

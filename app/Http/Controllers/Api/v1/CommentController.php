@@ -71,11 +71,12 @@ class CommentController extends BaseApiController
      * Get all comment by the specific listing
      *
      * @param int $id listing id
+     *
      * @return Response|JsonResponse
      */
-    public function getCommentsListing($id)
+    public function getCommentsListing(int $id)
     {
         $comments = $this->commentService->getCommentsListing($id);
-        return $this->response->collection($comments, new CommentTransformer() ) ;
+        return $this->response->collection($comments, new CommentTransformer()) ;
     }
 }
