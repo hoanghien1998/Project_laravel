@@ -34,7 +34,7 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
     $api->group(['prefix' => 'listings'], function (Router $api): void {
         $registrar = new ApiResourceRegistrar($api);
         $registrar->get('', ListingController::class, 'paginatedListing');
-
+        $registrar->post('search', ListingController::class, 'paginatedListing');
     });
 
     $api->group(['prefix' => 'cars'], function (Router $api): void {

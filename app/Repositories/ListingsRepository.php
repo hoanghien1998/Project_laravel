@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Dto\Listings\CreateListingDto;
 use App\Models\CarModel;
+use App\Models\CarTrim;
 use App\Models\Listing;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Saritasa\LaravelRepositories\Exceptions\RepositoryException;
@@ -28,29 +29,54 @@ class ListingsRepository extends Repository
      * Get listing pagination.
      *
      * @param int $perpage per_page
-     *
      * @param int|null $model_id model_id
      * @param int|null $make_id make_id
+     * @param int|null $trim_id trim id
+     * @param int|null $year_start year start
+     * @param int|null $year_end year end
      *
      * @return LengthAwarePaginator
      */
-    public function getAllListings(int $perpage, ?int $model_id, ?int $make_id): LengthAwarePaginator
+    public function getAllListings(int $perpage, ?int $model_id, ?int $make_id, ?int $trim_id, ?int $year_start, ?int $year_end): LengthAwarePaginator
     {
-        if ($model_id == null && $make_id == null) {
+        if ($trim_id==null && $model_id == null && $make_id == null && $year_start == null && $year_end == null) {
             return Listing::paginate($perpage);
+        } else {
+            $relations = new Listing();
+            if (!empty($make_id) && empty($model_id) && empty($trim_id)) {
+                $car_models = CarModel::where('make_id', $make_id);
+                if ($car_models->count()>0) {
+                    $car_models = $car_models->get();
+                    $car_trims =CarTrim::where('model_id');
+                    if ($car_trims->count()>0) {
+                        $car_trims = $car_trims->get();
+                    }
+                }
+                if ($car_models->count()>0) {
+                    $car_model_ids = [];
+                    foreach ($car_models as $car_model) {
+                        $car_model_ids[]=$car_model->id;
+                    }
+                    $relations = $relations->whereIn('car_model_id', $car_model_ids);
+                }
+                if ($car_trims->count()>0) {
+                    $car_trim_ids = [];
+                    foreach ($car_trims as $car_trim) {
+                        $car_trim_ids[]=$car_trim->id;
+                    }
+                    $relations = $relations->whereIn('car_trim_id', $car_trim_ids);
+                }
+            }
+            if (!empty($model_id)) {
+                $relations = $relations->where('car_model_id', $model_id);
+            }
+            if (!empty($trim_id)) {
+                $relations = $relations->where('car_trim_id', $trim_id);
+            }
+
         }
 
-        $relations = Listing::join(
-            CarModel::TABLE_NAME,
-            CarModel::TABLE_NAME.'.'.CarModel::ID,
-            '=',
-            Listing::TABLE_NAME.'.'.Listing::CAR_MODEL_ID
-        );
-
-        return $relations->orWhere([Listing::CAR_MODEL_ID => $model_id])
-            ->orWhere([CarModel::MAKE_ID => $make_id])
-            ->select(Listing::TABLE_NAME.'.*', CarModel::TABLE_NAME.'.'.CarModel::MAKE_ID)
-            ->paginate($perpage);
+        return  $relations->paginate($perpage);
     }
 
     /**

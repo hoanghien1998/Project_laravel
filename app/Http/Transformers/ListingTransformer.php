@@ -16,6 +16,7 @@ class ListingTransformer extends BaseTransformer
     public function transform(Arrayable $model): array
     {
         $data = parent::transform($model);
+
         $documents =$model->documents()->get();
         $data['thumbnail']=[];
         $data['full']=[];
@@ -23,17 +24,12 @@ class ListingTransformer extends BaseTransformer
             $data['thumbnail'][] = $document->thumbnail;
             $data['full'][] = $document->full;
         }
-        $car_models = $model->carModel()->get();
-        $data['name'] = [];
-        foreach ($car_models as $car_model) {
-            $data['name'][] = $car_model->name;
-        }
 
-        $car_tríms = $model->carTrim()->get();
-        $data['name_trim'] = [];
-        foreach ($car_tríms as $car_trím) {
-            $data['name_trim'][] = $car_trím->name;
-        }
+        $data['carTrim'] = $model->carTrim->name;
+        $data['carModel'] = $model->carModel->name;
+
+        $data['carMake'] = $model->carModel->carMake->name;
+
         return $data;
     }
 }

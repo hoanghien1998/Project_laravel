@@ -86,8 +86,10 @@ class ListingService
         $per_page = $pagingInfo->pageSize;
         $model_id = $listingFilter->model_id;
         $make_id = $listingFilter->make_id;
-
-        return $this->listingsRepository->getAllListings($per_page, $model_id, $make_id);
+        $trim_id = $listingFilter->trim_id;
+        $year_start = $listingFilter->year_start;
+        $year_end = $listingFilter->year_end;
+        return $this->listingsRepository->getAllListings($per_page, $model_id, $make_id, $trim_id, $year_start, $year_end);
     }
 
     /**
