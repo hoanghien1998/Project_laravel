@@ -77,7 +77,7 @@ const actions = {
         Authorization: `Bearer ${loginModule.state.token}`,
       },
     })
-      .then(res => res.data.comments)
+      .then(res => res.data.results)
       .catch(error => {
         commit('GET_ERROR', error.response.data.errors);
       });

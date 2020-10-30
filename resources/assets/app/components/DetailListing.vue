@@ -46,8 +46,8 @@
 
     <div class="container">
       <b-media v-for="comment in show_comments"
-               :key="comment">
-        <p class="mt-0 name">{{ comment.id }}</p>
+               :key="comment.id">
+        <p class="mt-0 name">{{ comment.first_name }} {{ comment.last_name }}</p>
         <p>
           {{ comment.message }}
         </p>
@@ -67,7 +67,7 @@ export default {
       listing:  {},
       main_img: '',
       comments: {
-        object_name: 'comment',
+        object_name: 'listing',
         object_id:   1,
         message:     '',
       },
@@ -85,7 +85,7 @@ export default {
       this.listing = data;
       this.main_img = this.listing.medias[0].full;
 
-      const comments = await this.getCommentsListing(5);
+      const comments = await this.getCommentsListing(1);
 
       this.show_comments = comments;
     },
@@ -93,6 +93,10 @@ export default {
       const data = await this.addCommentListing(this.comments);
 
       console.log(data);
+
+      const comments = await this.getCommentsListing(1);
+
+      this.show_comments = comments;
     },
   },
 };
